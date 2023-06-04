@@ -28,10 +28,12 @@ class ConfirmationEmailController extends AbstractController
          */
         $user = $this->getUser();
 
-        if($user->getId() !== (int)$id)
+        if($user->getId() !== (int)$id) {
             throw new \Exception('You are not allowed to send a confirmation email.');
-        if($user->isActivated())
+        }
+        if($user->isActivated()) {
             throw new \Exception('Your account is already activated.');
+        }
 
         $user->setConfirmationCode(substr(str_shuffle(str_repeat('0123456789', 6)), 0, 6));
         $this->em->flush();

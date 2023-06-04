@@ -40,13 +40,13 @@ use Symfony\Component\Validator\Constraints as Assert; // Symfony's built-in con
         ),
         new Put(
             denormalizationContext: ['groups' => ['item:put:user']],
-            processor: UserPasswordHasher::class,
-            security: "is_granted('ROLE_ADMIN') or object == user"
+            security: "is_granted('ROLE_ADMIN') or object == user",
+            processor: UserPasswordHasher::class
         ),
         new Patch(
             denormalizationContext: ['groups' => ['item:patch:user']],
-            processor: UserPasswordHasher::class,
-            security: "is_granted('ROLE_ADMIN') or object == user"
+            security: "is_granted('ROLE_ADMIN') or object == user",
+            processor: UserPasswordHasher::class
         ),
         new Delete(
             security: "is_granted('ROLE_ADMIN')"
@@ -60,8 +60,8 @@ use Symfony\Component\Validator\Constraints as Assert; // Symfony's built-in con
                     'content' => [],
                 ],
             ],
-            output: false,
-            security: "object == user"
+            security: "object == user",
+            output: false
         ),
         new Post(
             uriTemplate: '/users/{id}/validate_account',
@@ -81,8 +81,8 @@ use Symfony\Component\Validator\Constraints as Assert; // Symfony's built-in con
                     ],
                 ],
             ],
-            output: false,
-            security: "object == user"
+            security: "object == user",
+            output: false
         ),
         new Post(
             uriTemplate: '/users/recovery_account',
@@ -190,11 +190,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?DateTimeImmutable $verifiedAt = null;
 
-    #[Assert\NotBlank(groups: ['item:post:user'])]
-    #[Groups(['collection:get:user', 'item:get:user', 'item:post:user', 'item:put:user', 'item:patch:user'])]
-    #[ORM\Column(type: 'json')]
-    private array $coordinates;
-
     #[Groups(['collection:get:user', 'item:get:user'])]
     #[ORM\Column]
     private DateTimeImmutable $createdAt;
@@ -203,33 +198,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable', nullable: true, options: ['default' => null])]
     private ?DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'orderer', targetEntity: Order::class)]
-    private Collection $orders;
-
-    #[ORM\OneToMany(mappedBy: 'recoverer', targetEntity: Recovery::class)]
-    private Collection $recoveries;
-
-    #[Groups(['collection:get:user', 'item:get:user', 'item:post:user', 'item:put:user', 'item:patch:user'])]
-    #[ORM\Column(length: 60, nullable: true)]
-    private ?string $address = null;
-
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $phone = null;
-
-    #[ORM\OneToMany(mappedBy: 'associateUser', targetEntity: GarageSchudleEvent::class, orphanRemoval: true)]
-    private Collection $garageSchudleEvents;
-
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Garage::class)]
-    private Collection $garages;
-
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
-        $this->recoveries = new ArrayCollection();
-        $this->haveRecoverToken = false;
         $this->roles = ['ROLE_USER'];
-        $this->garageSchudleEvents = new ArrayCollection();
-        $this->garages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -354,7 +325,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
@@ -393,17 +364,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCoordinates(): array
-    {
-        return $this->coordinates;
-    }
-
-    public function setCoordinates(array $coordinates): self
-    {
-        $this->coordinates = $coordinates;
-        return $this;
-    }
-
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
@@ -424,148 +384,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Order>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->setOrderer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getOrderer() === $this) {
-                $order->setOrderer(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Recovery>
-     */
-    public function getRecoveries(): Collection
-    {
-        return $this->recoveries;
-    }
-
-    public function addRecovery(Recovery $recovery): self
-    {
-        if (!$this->recoveries->contains($recovery)) {
-            $this->recoveries->add($recovery);
-            $recovery->setRecover($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecovery(Recovery $recovery): self
-    {
-        // set the owning side to null (unless already changed)
-        if ($this->recoveries->removeElement($recovery) && $recovery->getRecover() === $this) {
-            $recovery->setRecover(null);
-        }
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, GarageSchudleEvent>
-     */
-    public function getGarageSchudleEvents(): Collection
-    {
-        return $this->garageSchudleEvents;
-    }
-
-    public function addGarageSchudleEvent(GarageSchudleEvent $garageSchudleEvent): self
-    {
-        if (!$this->garageSchudleEvents->contains($garageSchudleEvent)) {
-            $this->garageSchudleEvents->add($garageSchudleEvent);
-            $garageSchudleEvent->setAssociateUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGarageSchudleEvent(GarageSchudleEvent $garageSchudleEvent): self
-    {
-        if ($this->garageSchudleEvents->removeElement($garageSchudleEvent)) {
-            // set the owning side to null (unless already changed)
-            if ($garageSchudleEvent->getAssociateUser() === $this) {
-                $garageSchudleEvent->setAssociateUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Garage>
-     */
-    public function getGarages(): Collection
-    {
-        return $this->garages;
-    }
-
-    public function addGarage(Garage $garage): self
-    {
-        if (!$this->garages->contains($garage)) {
-            $this->garages->add($garage);
-            $garage->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGarage(Garage $garage): self
-    {
-        if ($this->garages->removeElement($garage)) {
-            // set the owning side to null (unless already changed)
-            if ($garage->getOwner() === $this) {
-                $garage->setOwner(null);
-            }
-        }
 
         return $this;
     }
