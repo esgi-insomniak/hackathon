@@ -25,8 +25,7 @@ import {
     HiLightBulb,
 } from "react-icons/hi"
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useAuth, useUser } from "@clerk/nextjs";
 
 // profile menu component
 const profileMenuItems = [
@@ -51,7 +50,8 @@ const profileMenuItems = [
 function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const closeMenu = () => setIsMenuOpen(false);
-    const { data: session } = useSession()
+    const { user } = useUser()
+    const { signOut } = useAuth()
     return (
         <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
             <MenuHandler>
@@ -65,7 +65,7 @@ function ProfileMenu() {
                         size="sm"
                         alt="User avatar"
                         className="border border-blue-500 p-0.5"
-                        src={session?.user?.image as string}
+                        src={user?.imageUrl}
                     />
                     <HiChevronDown
                         strokeWidth={2.5}
