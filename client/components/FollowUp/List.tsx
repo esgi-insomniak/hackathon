@@ -1,34 +1,35 @@
 import {
-    List,
-    ListItem,
-    ListItemSuffix,
-    Chip,
-    Card
-  } from "@material-tailwind/react";
-   
-  export default function ListComponent() {
-    return (
-      <Card className="w-96">
-        <List>
-          <ListItem>
-            Inbox
-            <ListItemSuffix>
-              <Chip value="14" variant="ghost" size="sm" className="rounded-full" />
-            </ListItemSuffix>
-          </ListItem>
-          <ListItem>
-            Spam
-            <ListItemSuffix>
-              <Chip value="2" variant="ghost" size="sm" className="rounded-full" />
-            </ListItemSuffix>
-          </ListItem>
-          <ListItem>
-            Trash
-            <ListItemSuffix>
-              <Chip value="40" variant="ghost" size="sm" className="rounded-full" />
-            </ListItemSuffix>
-          </ListItem>
-        </List>
-      </Card>
-    );
-  }
+  List,
+  ListItem,
+  ListItemSuffix,
+  Chip,
+  Card,
+} from "@material-tailwind/react";
+
+type ListComponentProps = {
+    data: string[][];
+}
+
+export default function ListComponent({data}: ListComponentProps) {
+  return (
+    <Card className="w-96">
+      <List>
+        {data.map((item, index) => {
+          return (
+            <ListItem key={index}>
+              {item[0]}
+              <ListItemSuffix>
+                <Chip
+                  value={item[1]}
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full"
+                />
+              </ListItemSuffix>
+            </ListItem>
+          );
+        })}
+      </List>
+    </Card>
+  );
+}

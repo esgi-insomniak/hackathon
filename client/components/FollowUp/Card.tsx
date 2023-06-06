@@ -1,27 +1,32 @@
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
   Button,
 } from "@material-tailwind/react";
 
-export default function CardMission() {
+type CardMissionType = {
+    props: {
+        missionName: string;
+        missionDescription: string;
+        missionDate: string;
+    }
+}
+
+export default function CardMission({props}: CardMissionType) {
   return (
     <Card className="my-6 w-96 mx-auto">
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          UI/UX Review Check
+            {props.missionName}
         </Typography>
         <Typography>
-          The place is close to Barceloneta Beach and bus stop just 2 min by
-          walk and near to &quot;Naviglio&quot; where you can enjoy the main
-          night life in Barcelona.
+            {props.missionDescription}
         </Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <Button>Du 20/20/20 au 20/20/20</Button>
+        <Button className="flex items-center mx-auto">{props.missionDate}</Button>
       </CardFooter>
     </Card>
   );
