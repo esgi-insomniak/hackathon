@@ -1,4 +1,4 @@
-import ComplexNavbar from '@/components/navbar'
+import SideBar from '@/components/navbar'
 import './globals.css'
 import { ClerkProvider, RedirectToSignIn, currentUser } from '@clerk/nextjs'
 
@@ -18,9 +18,11 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="fr">
-        <body className="bg-slate-200 h-screen">
-          {user && (<ComplexNavbar />)}
-          <div className='h-full'>
+        <body className="bg-slate-200 h-screen flex">
+          {user && (
+            <div className=''> <SideBar /></div>
+          )}
+          <div className='h-full w-full'>
             {!user && (
               <RedirectToSignIn />
             )}
