@@ -3,7 +3,7 @@
 list: ## List of all commands available
 	@LC_ALL=C $(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/(^|\n)# Files(\n|$$)/,/(^|\n)# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 build: ## Build the docker images
-	docker compose build --no-cache --force-rm --pull
+	docker compose build --force-rm --pull
 	docker compose run --rm php composer install --no-interaction --no-progress --no-suggest
 	docker compose run --rm php sh -c "chmod +x bin/** && mkdir 'config/jwt' || true"
 	make jwt
