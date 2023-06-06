@@ -18,11 +18,11 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="fr">
-        <body className="bg-slate-200 h-screen flex">
+        <body className="bg-slate-200 h-screen flex justify-end">
           {user && (
             <div className=''> <SideBar /></div>
           )}
-          <div className='h-full w-full'>
+          <div className='h-full w-[calc(100vw-16rem)]'>
             {!user && (
               <RedirectToSignIn />
             )}
