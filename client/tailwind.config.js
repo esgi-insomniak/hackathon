@@ -11,7 +11,15 @@ module.exports = withMT({
     './node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'carbon-black': '#282B2A',
+        'carbon-white': '#FDFDFD',
+        'carbon-red': '#E53F49',
+        'carbon-green': '#00BB7E',
+        'carbon-blue': '#5B98D2',
+      },
+    },
   },
   plugins: [],
 });
