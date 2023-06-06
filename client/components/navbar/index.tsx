@@ -16,17 +16,17 @@ import { BsCalendarEvent } from "react-icons/bs";
 import { MdOutlineDashboard, MdOutlineForum } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { Logo } from "@/helpers/svg/logo";
 
 export default function SideBar() {
     const { user, isLoaded } = useUser()
     const { signOut } = useAuth()
     const router = useRouter()
+
     return (
-        <Card className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+        <Card className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-full max-w-[15rem] shadow-xl shadow-blue-gray-900/5">
             <div className="mb-2 p-4">
-                <Typography variant="h5" color="blue">
-                    Carbon IT
-                </Typography>
+                <Logo />
             </div>
             <hr className="my-2 border-blue-gray-50" />
             <List>
@@ -60,12 +60,12 @@ export default function SideBar() {
                     </ListItemPrefix>
                     {!isLoaded ? "Loading..." : (user?.firstName + " " + user?.lastName)}
                 </ListItem>
-                <div className="absolute bottom-4 right-[5.5rem]">
+                <div className="absolute bottom-4 right-11">
                     <ListItem onClick={() => signOut()}>
                         <ListItemPrefix>
                             <AiOutlinePoweroff className="h-5 w-5 text-red-500" />
                         </ListItemPrefix>
-                        <Typography color="red" variant="span">
+                        <Typography color="red" variant="h6">
                             Déconnexion
                         </Typography>
                     </ListItem>
