@@ -20,14 +20,21 @@ export default async function RootLayout({
       <html lang="fr">
         <body className="bg-slate-200 h-screen flex">
           {user && (
-            <div className=''> <SideBar /></div>
+              <div className="w-full">
+                <div className="w-1/4">
+                  <SideBar />
+                </div>
+                <div className="w-3/4">
+                  {children}
+                </div>
+              </div>
           )}
-          <div className='h-full w-full'>
-            {!user && (
-              <RedirectToSignIn />
-            )}
-            {children}
-          </div>
+          {!user && (
+              <div className='h-full w-full'>
+                <RedirectToSignIn />
+                {children}
+              </div>
+          )}
         </body>
       </html>
     </ClerkProvider>
