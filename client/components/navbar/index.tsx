@@ -24,7 +24,7 @@ export default function SideBar() {
     const router = useRouter()
 
     return (
-        <Card className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-full max-w-[15rem] shadow-xl shadow-blue-gray-900/5">
+        <Card className="w-full p-4 shadow-xl shadow-blue-gray-900/5 h-full">
             <div className="mb-2 p-4">
                 <Logo />
             </div>
@@ -60,16 +60,14 @@ export default function SideBar() {
                     </ListItemPrefix>
                     {!isLoaded ? "Loading..." : (user?.firstName + " " + user?.lastName)}
                 </ListItem>
-                <div className="absolute bottom-4 right-11">
-                    <ListItem onClick={() => signOut()}>
-                        <ListItemPrefix>
-                            <AiOutlinePoweroff className="h-5 w-5 text-red-500" />
-                        </ListItemPrefix>
-                        <Typography color="red" variant="h6">
-                            Déconnexion
-                        </Typography>
-                    </ListItem>
-                </div>
+                <ListItem onClick={() => signOut()}>
+                    <ListItemPrefix>
+                        <AiOutlinePoweroff className="h-5 w-5 text-red-500" />
+                    </ListItemPrefix>
+                    <Typography color="red" variant="h6">
+                        Déconnexion
+                    </Typography>
+                </ListItem>
             </List>
         </Card>
     );
