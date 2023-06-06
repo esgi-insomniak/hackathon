@@ -91,6 +91,12 @@ export default function Page() {
             </div>
           </div>
           <div>
+            <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
+              Badges acquis
+            </h2>
+            <p>Aucun badges acquis pour le moment</p>
+          </div>
+          <div>
             <Button className="mx-auto">Se former sur une formation</Button>
           </div>
         </div>
