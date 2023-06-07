@@ -12,6 +12,8 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -21,13 +23,13 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 #[ApiResource(
     operations: [
         new GetCollection(
-            normalizationContext: ['groups' => ['collection:get:user', 'id']],
+            normalizationContext: ['groups' => ['collection:get:user']],
         ),
         new Post(
             denormalizationContext: ['groups' => ['item:post:user']],
         ),
         new Get(
-            normalizationContext: ['groups' => ['item:get:user', 'id']],
+            normalizationContext: ['groups' => ['item:get:user']],
         ),
         new Put(
             denormalizationContext: ['groups' => ['item:put:user']],
@@ -52,7 +54,7 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 #[UniqueEntity('email')]
 class User implements UserInterface
 {
-    #[Groups(['collection:get:user', 'item:get:user', 'id'])]
+    #[Groups(['collection:get:user', 'item:get:user'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -75,10 +77,19 @@ class User implements UserInterface
     #[ORM\Column(length: 255)]
     private ?string $clerkUserId = null;
 
+    #[Groups(['collection:get:user', 'item:get:user', 'item:put:user', 'item:patch:user'])]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'subordinates')]
+    private ?self $manager = null;
+
+    #[Groups(['collection:get:user', 'item:get:user'])]
+    #[ORM\OneToMany(mappedBy: 'manager', targetEntity: self::class)]
+    private Collection $subordinates;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
         $this->createdAt = new DateTimeImmutable('now');
+        $this->subordinates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,5 +170,47 @@ class User implements UserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->clerkUserId;
+    }
+
+    public function getManager(): ?self
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?self $manager): self
+    {
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getSubordinates(): Collection
+    {
+        return $this->subordinates;
+    }
+
+    public function addSubordinate(self $subordinate): self
+    {
+        if (!$this->subordinates->contains($subordinate)) {
+            $this->subordinates->add($subordinate);
+            $subordinate->setManager($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubordinate(self $subordinate): self
+    {
+        if ($this->subordinates->removeElement($subordinate)) {
+            // set the owning side to null (unless already changed)
+            if ($subordinate->getManager() === $this) {
+                $subordinate->setManager(null);
+            }
+        }
+
+        return $this;
     }
 }
