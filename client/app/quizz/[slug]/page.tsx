@@ -61,15 +61,15 @@ const QUESTIONS = [
 
 export default function Page({ params }) {
     const [questions, setQuestions] = useState(QUESTIONS);
-    const text = useRef('');
+    const questionText = useRef(questions[0].content);
     const [selectedQuestion, setSelectedQuestion] = useState(1);
 
     const handleChange = evt => {
-        text.current = evt.target.value;
+        questionText.current = evt.target.value;
     };
 
     const handleBlur = () => {
-        console.log(text.current);
+        console.log(questionText.current);
     };
 
     const handleAnswerClick = (questionId, answerId) => {
@@ -94,13 +94,33 @@ export default function Page({ params }) {
             answers: []
         }
         setQuestions([...questions, newQuestion]);
-        selectQuestion(newQuestion.id);
+        selectQuestion(newQuestion);
+    }
+
+    const handleDeleteQuestion = (questionId) => {
+        const newQuestions = questions.filter((question) => question.id != questionId);
+        setQuestions(newQuestions);
+        selectQuestion(newQuestions[0]);
+    }
+
+    const handleAddAnswer = (questionId) => {
+        const newQuestions = questions.map((question) => {
+            if (question.id === questionId) {
+                const newAnswer = {
+                    id: question.answers.length + 1,
+                    content: "Nouvelle réponse ?",
+                    isCorrect: false
+                }
+                question.answers.push(newAnswer);
+            }
+            return question;
+        });
+        setQuestions(newQuestions);
     }
 
     const selectQuestion = (question) => {
-        console.log(question);
         setSelectedQuestion(question.id);
-        text.current = question.content;
+        questionText.current = question.content;
     }
 
     return (
@@ -150,7 +170,7 @@ export default function Page({ params }) {
                                 <ListItem ripple={false} className="py-1 truncate max-w-md" key={index} onClick={() => {selectQuestion(question);}}>
                                     {question.content}
                                     <ListItemSuffix>
-                                        <IconButton variant="text" color="blue-gray">
+                                        <IconButton variant="text" color="blue-gray" onClick={() => handleDeleteQuestion(question.id)}>
                                             <TrashIcon className="h-5 w-5" />
                                         </IconButton>
                                     </ListItemSuffix>
@@ -164,14 +184,14 @@ export default function Page({ params }) {
                     <div className="w-2/3">
                         <div className="flex flex-col w-full h-full items-center justify-center">
                             <ContentEditable
-                                html={text.current} // innerHTML of the editable div
+                                html={questionText.current} // innerHTML of the editable div
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 className="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-blue-gray-900"
                             />
 
                             <div className="grid grid-cols-2 gap-4 mt-8">
-                                {questions.find(question => question.id === selectedQuestion).answers.map((answer, index) => (
+                                {questions.find(question => question.id === selectedQuestion)?.answers.map((answer, index) => (
                                     <Button
                                         variant={answer.isCorrect ? "filled" : "outlined"}
                                         color={answer.isCorrect ? "green" : "blue"}
