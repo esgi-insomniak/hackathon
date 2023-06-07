@@ -32,15 +32,6 @@ jobs:
             esac
           done
           exit 1
-      - name: Create JWT keys
-        run: |
-          docker compose exec php sh -c '
-            set -e
-            apk add openssl
-            php bin/console lexik:jwt:generate-keypair
-            setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
-            setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
-          '
       - name: Create test database
         run: |
           docker compose exec php php bin/console doctrine:database:create --if-not-exists --env=test
