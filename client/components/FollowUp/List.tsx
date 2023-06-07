@@ -12,7 +12,7 @@ type ListComponentProps = {
 
 export default function ListComponent({data}: ListComponentProps) {
   return (
-    <Card className="w-96">
+    <Card className="w-96 mx-auto">
       <List>
         {data.map((item, index) => {
           return (
