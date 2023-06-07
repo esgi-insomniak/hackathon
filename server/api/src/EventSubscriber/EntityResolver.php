@@ -5,7 +5,6 @@ namespace App\EventSubscriber;
 use ApiPlatform\Symfony\EventListener\EventPriorities;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -18,8 +17,6 @@ class EntityResolver implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            //KernelEvents::VIEW => ['updateOnChange', EventPriorities::POST_VALIDATE],
-            //KernelEvents::VIEW => ['updateOnCreate', EventPriorities::PRE_WRITE],
             KernelEvents::VIEW => [
                 ['updateOnChange', EventPriorities::POST_VALIDATE],
                 ['updateOnCreate', EventPriorities::PRE_WRITE],

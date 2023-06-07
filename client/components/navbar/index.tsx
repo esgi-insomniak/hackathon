@@ -24,8 +24,8 @@ export default function SideBar() {
     const router = useRouter()
 
     return (
-        <Card className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-full max-w-[15rem]  shadow-xl shadow-blue-gray-900/5">
-            <div className="mb-2 p-4 flex justify-center">
+        <Card className="fixed top-4 left-4 h-[calc(100vh-2rem)] w-full max-w-[15rem] shadow-xl shadow-blue-gray-900/5">
+            <div className="mb-2 p-4">
                 <Logo />
             </div>
             <hr className="my-2 border-blue-gray-50" />
