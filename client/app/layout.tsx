@@ -22,7 +22,7 @@ export default async function RootLayout({
           {user && (
             <div className=''> <SideBar /></div>
           )}
-          <div className='h-full w-[calc(100vw-16rem)]'>
+          <div className={`h-full ${user ? 'w-[calc(100vw-16rem)]' : 'w-full'} `}>
             {!user && (
               <RedirectToSignIn />
             )}
