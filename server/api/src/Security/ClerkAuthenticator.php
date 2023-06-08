@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
@@ -19,6 +18,7 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use UnexpectedValueException;
 
 class ClerkAuthenticator extends AbstractAuthenticator
@@ -31,10 +31,7 @@ class ClerkAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        if ('api_entrypoint' !== $request->attributes->get('_route')) {
-            return true;
-        }
-        return false;
+        return $request->headers->has('Authorization');
     }
 
     public function authenticate(Request $request): Passport
@@ -52,22 +49,22 @@ class ClerkAuthenticator extends AbstractAuthenticator
             // decode the tohen
             $decodedToken = JWT::decode($jwtToken, JWK::parseKeySet($clerkJWKS));
 
-            if (null === $decodedToken->sub) {
+            if (null === $decodedToken->userId) {
                 throw new CustomUserMessageAuthenticationException('Invalid JWT token');
             }
 
             // check if user exists in db
             // if not, create user
-            $user = $this->entityManager->getRepository(User::class)->findOneBy(['clerkUserId' => $decodedToken->sub]);
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(['clerkUserId' => $decodedToken->userId]);
 
             if (!$user) {
                 $user = new User();
-                $user->setClerkUserId($decodedToken->sub);
+                $user->setClerkUserId($decodedToken->userId);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
             }
 
-            return new SelfValidatingPassport(new UserBadge($decodedToken->sub));
+            return new SelfValidatingPassport(new UserBadge($decodedToken->userId));
         } catch (ExpiredException $e) {
             throw new CustomUserMessageAuthenticationException('JWT token expired');
         } catch (UnexpectedValueException $e) {

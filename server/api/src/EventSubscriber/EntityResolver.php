@@ -31,6 +31,10 @@ class EntityResolver implements EventSubscriberInterface
         $request = $event->getRequest();
         $method = $request->getMethod();
 
+        if(!is_object($entity)) {
+            return;
+        }
+
         //if entity as "updatedAt" property
         if(!property_exists($entity, 'updatedAt') && !method_exists($entity, 'setUpdatedAt')) {
             return;
@@ -47,6 +51,10 @@ class EntityResolver implements EventSubscriberInterface
         $entity = $event->getControllerResult();
         $request = $event->getRequest();
         $method = $request->getMethod();
+
+        if(!is_object($entity)) {
+            return;
+        }
 
         //if entity as "createdAt" property
         if(!property_exists($entity, 'createdAt') && !method_exists($entity, 'setCreatedAt')) {

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@api-platform/admin": "^3.4.3",
+    "@api-platform/api-doc-parser": "^0.16.1",
     "@clerk/nextjs": "^4.19.0",
     "@material-tailwind/react": "^2.0.1",
     "@types/node": "20.2.3",
