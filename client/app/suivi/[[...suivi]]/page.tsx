@@ -20,7 +20,8 @@ const data = {
 
 export default function Page() {
   const fullName = `${data.firstname}-${data.name}`;
-
+  console.log("ok");
+  console.log(fullName);
   const data2 = [
     ["Soirée Pizza", "08/06/2023", "afterwork"],
     ["Bienvenue chez CarbonIT", "08/06/2023", "badges"],
@@ -50,36 +51,36 @@ export default function Page() {
   ];
 
   const badgesSkills1 = {
-    color: "yellow",
-    logo: "/badgesImages/goldBlock.png",
+    color: "blue-gray",
+    logo: "/badgesImages/ironBlock.png",
     stack: "Java",
-    level: "Niveau Or",
+    level: "Niveau Fer",
   };
 
   const badgesSkills2 = {
-    color: "gray",
-    logo: "/badgesImages/ironBlock.png",
+    color: "yellow",
+    logo: "/badgesImages/goldBlock.png",
     stack: ".NET",
-    level: "Niveau Fer",
+    level: "Niveau Or",
   };
 
   const badgesSkills3 = {
-    color: "orange",
-    logo: "/badgesImages/copperBlock.png",
+    color: "brown",
+    logo: "/badgesImages/woodBlock.png",
     stack: "C#",
-    level: "Niveau Cuivre",
+    level: "Niveau Bois",
   };
   const badgesSkills4 = {
-    color: "green",
-    logo: "/badgesImages/emeraldBlock.png",
+    color: "blue-gray",
+    logo: "/badgesImages/ironBlock.png",
     stack: "ReactJS",
-    level: "Niveau Emeraude",
+    level: "Niveau Fer",
   };
   const badgesSkills5 = {
     color: "gray",
-    logo: "/badgesImages/ironBlock.png",
+    logo: "/badgesImages/cobbleBlock.png",
     stack: "Angular",
-    level: "Niveau Fer",
+    level: "Niveau Pierre",
   };
   const badgesSkills6 = {
     color: "cyan",
@@ -102,7 +103,7 @@ export default function Page() {
             </div>
             <div>
               <h1 className="block font-sans text-3xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
-                {data.firstname} {data.name}
+                {fullName}
               </h1>
               <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
                 {data.poste}
@@ -183,7 +184,7 @@ export default function Page() {
               Historiques
             </h2>
             <div>
-              <ListComponent data={data2} />
+              <ListComponent data={data2} fullname={fullName} />
             </div>
           </div>
         </div>

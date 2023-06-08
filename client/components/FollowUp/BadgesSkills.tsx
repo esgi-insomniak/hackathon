@@ -17,7 +17,7 @@ export default function BadgesSkills({ props }: BadgesType) {
     <Tooltip content={props.level}>
       <Button
         color={color}
-        className="flex justify-between items-center gap-3 my-2"
+        className="flex justify-around items-center gap-3 my-2"
       >
         {props.stack}
         <Image

@@ -43,6 +43,7 @@ export default function MissionAccordeons({ data }: MissionAccordeonsType) {
         <Accordion
           open={open === index}
           icon={<Icon id={index} open={open} />}
+          key={index}
           className="border border-blue-gray-100 px-4 rounded-lg mb-2"
         >
           <AccordionHeader

@@ -10,43 +10,157 @@ export default function SearchPage() {
       firstname: "Raphaël",
       profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
       poste: "Développeur",
-      skills: ["PHP", "React", "HTML", "CSS", "Javascript"],
+      skills: [
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+      ],
     },
     {
       name: "Cleris",
       firstname: "Loan",
       profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
       poste: "Développeur",
-      skills: ["Java", "React", "Angular"],
+      skills: [
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+      ],
     },
     {
       name: "Jamin",
       firstname: "Mael",
       profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
       poste: "Développeur",
-      skills: ["Java", "React", "Angular"],
+      skills: [
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+      ],
     },
     {
       name: "Cuillandre",
       firstname: "Tom",
       profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
       poste: "Développeur",
-      skills: ["Java", ".NET", "Angular"],
+      skills: [
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+      ],
     },
     {
       name: "Mohamed",
       firstname: "Kassim",
       profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
       poste: "Développeur",
-      skills: ["Java", "C#", "Angular"],
+      skills: [
+        {
+          color: "cyan",
+          logo: "/badgesImages/diamondBlock.png",
+          stack: "PHP",
+          level: "Niveau Diamant",
+        },
+        {
+          color: "yellow",
+          logo: "/badgesImages/goldBlock.png",
+          stack: "JS",
+          level: "Niveau Or",
+        },
+        {
+          color: "blue-gray",
+          logo: "/badgesImages/ironBlock.png",
+          stack: "ReactJS",
+          level: "Niveau Fer",
+        },
+      ],
     },
     {
-        name: "Laurence",
-        firstname: "Yann",
-        profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-        poste: "Marketeur",
-        skills: ["Marketing", "Web", "Design"],
-      },
+      name: "Laurence",
+      firstname: "Yann",
+      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
+      poste: "Marketeur",
+      skills: [
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+        {
+          color: "brown",
+          logo: "/badgesImages/woodBlock.png",
+          stack: "C#",
+          level: "Niveau Bois",
+        },
+      ],
+    },
   ];
 
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -58,11 +172,11 @@ export default function SearchPage() {
   const filteredData = data.filter((item) => {
     const fullName = `${item.firstname} ${item.name}`.toLowerCase();
     const searchTermLower = searchTerm.toLowerCase();
-  
+
     const matchingSkills = item.skills
-      .map((skill) => skill.toLowerCase())
+      .map((skill) => skill.stack.toLowerCase())
       .filter((skill) => skill.includes(searchTermLower));
-  
+
     return fullName.includes(searchTermLower) || matchingSkills.length > 0;
   });
 
