@@ -94,7 +94,7 @@ export default function Page() {
 
   return (
     <React.Fragment>
-      <div className="mx-3">
+      <div className="">
         <div className="flex justify-around items-center my-5">
           <div className="flex items-center my-5">
             <div>
@@ -105,18 +105,18 @@ export default function Page() {
               />
             </div>
             <div>
-              <h1 className="block font-sans text-5xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
+              <h1 className="block font-sans text-3xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
                 {data.firstname} {data.name}
               </h1>
-              <h2 className="block font-sans text-3xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
+              <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
                 {data.poste}
               </h2>
             </div>
           </div>
           <div className="w-2/5">
-            <Card className="mx-auto">
+            <div className="mx-auto">
               <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center my-3">
-                Informations sur le collaborateurs
+                Informations
               </h2>
               <hr />
               <div className="flex justify-between items-center my-3">
@@ -146,15 +146,15 @@ export default function Page() {
                   </p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
         <div className="flex justify-around items-start mt-8">
           <div className="w-1/2">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Compétences du collaborateurs
+              Compétences
             </h2>
-            <div className="mt-8 mx-5 grid grid-cols-5 gap-4">
+            <div className="mt-8 mx-5 grid xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-1 gap-4">
               <BadgesSkills props={badgesSkills1} />
               <BadgesSkills props={badgesSkills2} />
               <BadgesSkills props={badgesSkills3} />
@@ -168,7 +168,7 @@ export default function Page() {
           </div>
           <div className="w-1/3">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Dernières missions du collaborateurs
+              Dernières missions
             </h2>
             <div className="mx-auto w-full flex justify-around flex-wrap mt-8">
               <MissionAccordeons data={missionAccordeons} />
@@ -178,13 +178,13 @@ export default function Page() {
         <div className="flex justify-around items-start mt-8 mb-5">
           <div className="w-1/2">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Mes badges acquis
+              Badges acquis
             </h2>
             <p className="text-center">Aucun badges acquis pour le moment</p>
           </div>
           <div className="w-1/3">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Mes dernières formations
+              Dernières formations
             </h2>
             <div>
               <ListComponent data={data2} />

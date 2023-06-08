@@ -31,8 +31,7 @@ type MissionAccordeonsType = {
 };
 
 export default function MissionAccordeons({ data }: MissionAccordeonsType) {
-  console.log(data);
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState(4);
 
   const handleOpen = (value: number) => {
     setOpen(open === value ? 0 : value);
