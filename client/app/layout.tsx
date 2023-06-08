@@ -19,20 +19,27 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="fr">
-        <AlertProvider>
-          <body className="bg-slate-200 h-screen flex justify-end">
-            {user && (
-              <div className=''> <SideBar /></div>
-            )}
-            <div className={`h-full ${user ? 'w-[calc(100vw-16rem)]' : 'w-full'} `}>
-              {!user && (
+      <AlertProvider>
+        <body className="bg-slate-200 h-screen flex justify-end">
+          {user && (
+              <div className="w-full flex">
+                <div className="w-1/4">
+                  <SideBar />
+                </div>
+                <div className="w-3/4">
+                  {children}
+                </div>
+              </div>
+          )}
+          {!user && (
+              <div className='h-full w-full'>
                 <RedirectToSignIn />
-              )}
-              {children}
-              <AlertInso />
-            </div>
-          </body>
-        </AlertProvider>
+                {children}
+              </div>
+          )}
+          <AlertInso />
+        </body>
+      </AlertProvider>
       </html>
     </ClerkProvider>
   )
