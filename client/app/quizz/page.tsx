@@ -1,6 +1,6 @@
 'use client'
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { SlMagnifier } from "react-icons/sl";
 import {
     Card,
     CardHeader,
@@ -17,8 +17,8 @@ import {
     IconButton,
     Tooltip, Select,
 } from "@material-tailwind/react";
-import {BiPlus} from "react-icons/bi";
-import {useRouter} from "next/navigation";
+import { BiPlus } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 const TABS = [
     { label: "Tous", value: "all" },
@@ -27,12 +27,12 @@ const TABS = [
 ];
 
 const LANGUAGES = [
-    { label: "JAVA", value: "java"},
-    { label: ".NET", value: "dotnet"},
-    { label: "C#", value: "csharp"},
-    { label: "ANGULAR", value: "angular"},
-    { label: "REACT", value: "react"},
-    { label: "VUE", value: "vue"},
+    { label: "JAVA", value: "java" },
+    { label: ".NET", value: "dotnet" },
+    { label: "C#", value: "csharp" },
+    { label: "ANGULAR", value: "angular" },
+    { label: "REACT", value: "react" },
+    { label: "VUE", value: "vue" },
 ];
 
 
@@ -78,7 +78,7 @@ export default function Page() {
                             </TabsHeader>
                         </Tabs>
                         <div className="w-full md:w-72">
-                            <Input label="Rechercher" icon={<MagnifyingGlassIcon className="h-5 w-5" />} />
+                            <Input label="Rechercher" icon={<SlMagnifier className="h-5 w-5" />} />
                         </div>
                     </div>
                 </CardHeader>

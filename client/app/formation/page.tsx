@@ -1,9 +1,9 @@
 "use client"
 
-import {Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
-import {Button} from "@material-tailwind/react/components/Button";
-import {BiPlus} from "react-icons/bi";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Card, CardBody, CardHeader, Input, Typography } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react/components/Button";
+import { BiPlus } from "react-icons/bi";
+import { SlMagnifier } from "react-icons/sl";
 
 
 export default function Page() {
@@ -26,7 +26,7 @@ export default function Page() {
                             <Input
                                 type="text"
                                 label="Rechercher"
-                                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                                icon={<SlMagnifier className="h-5 w-5" />}
                             />
                             <Button color="blue" size="sm">
                                 <BiPlus strokeWidth={2} className="h-4 w-4" />
