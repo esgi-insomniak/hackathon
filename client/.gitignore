@@ -40,3 +40,7 @@ yarn.lock
 package-lock.json
 
 /.npm
+/.yarn
+/.cache
+.yarnrc
+.ash_history
