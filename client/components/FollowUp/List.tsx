@@ -10,11 +10,17 @@ import { colors } from "@material-tailwind/react/types/generic";
 import Link from "next/link";
 
 type ListComponentProps = {
-  data: string[][],
+  data: string[][];
+  fullname: string;
 };
 
-export default function ListComponent({ data }: ListComponentProps) {
-  console.log(data);
+const ListComponent: React.FC<ListComponentProps> = ({ data, fullname }) => {
+
+  const fullName = fullname
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
   return (
     <Card className="w-full mx-auto">
       <List>
@@ -61,12 +67,16 @@ export default function ListComponent({ data }: ListComponentProps) {
         })}
         <ListItem>
           <div className="flex justify-between items-center w-full mr-3">
-            {/* <Button className="mx-auto">
-              <Link href={`/historique/${fullname}`}>Voir l'historique complets</Link>
-            </Button> */}
+            <Button className="mx-auto">
+              <Link href={`/historique/${fullName}`}>
+                Voir l'historique complets
+              </Link>
+            </Button>
           </div>
         </ListItem>
       </List>
     </Card>
   );
-}
+};
+
+export default ListComponent;
