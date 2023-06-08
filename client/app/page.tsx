@@ -86,7 +86,7 @@ export default function Home() {
                                 {/* Formations */}
                                 <div className="flex items-center mb-4">
                                     <div className="w-2/4 pr-4">
-                                        <span className="text-lg font-light">Développement front-end</span>
+                                        <span className="text-lg font-light">React</span>
                                     </div>
                                     <div className="relative flex-grow h-3 bg-orange-200 rounded">
                                         <div className="absolute top-0 left-0 h-full bg-orange-500 rounded w-2/5"></div>
@@ -94,7 +94,7 @@ export default function Home() {
                                 </div>
                                 <div className="flex items-center mb-4">
                                     <div className="w-2/4 pr-4">
-                                        <span className="text-lg font-light">Développement back-end</span>
+                                        <span className="text-lg font-light">Symfony</span>
                                     </div>
                                     <div className="relative flex-grow h-3 bg-green-200 rounded">
                                         <div className="absolute top-0 left-0 h-full bg-green-500 rounded w-4/5"></div>
@@ -102,7 +102,7 @@ export default function Home() {
                                 </div>
                                 <div className="flex items-center mb-4">
                                     <div className="w-2/4 pr-4">
-                                        <span className="text-lg font-light">UX / UI</span>
+                                        <span className="text-lg font-light">C #</span>
                                     </div>
                                     <div className="relative flex-grow h-3 bg-red-200 rounded">
                                         <div className="absolute top-0 left-0 h-full bg-red-500 rounded w-1/5"></div>
@@ -110,7 +110,7 @@ export default function Home() {
                                 </div>
                                 <div className="flex items-center mb-4">
                                     <div className="w-2/4 pr-4">
-                                        <span className="text-lg font-light">Web Design</span>
+                                        <span className="text-lg font-light">VueJS</span>
                                     </div>
                                     <div className="relative flex-grow h-3 bg-green-500 rounded">
                                         <div className="absolute top-0 left-0 h-full bg-green-500 rounded w-5/5"></div>
@@ -150,16 +150,16 @@ export default function Home() {
                             <BsCalendarEvent className="h-5 w-5 ml-3" />
                         </div>
                         <div className="p-3 w-full space-y-3">
-                            <EventItem title="Event 1" type="off-work" date={'02/07/2023'}
-                                action={() => handleOpenModal("Event 1", 'off', "02/07/2023")} />
-                            <EventItem title="Event 2" type="work" date={'02/07/2023'}
-                                action={() => handleOpenModal("Event 2", 'work', "02/07/2023")} />
-                            <EventItem title="Event 3" type="off-work" date={'02/07/2023'}
-                                action={() => handleOpenModal("Event 3", 'off', "02/07/2023")} />
-                            <EventItem title="Event 4" type="work" date={'02/07/2023'}
-                                action={() => handleOpenModal("Event 4", 'work', "02/07/2023")} />
-                             <EventItem title="Event 4" type="work" date={'02/07/2023'}
-                                action={() => handleOpenModal("Event 4", 'work', "02/07/2023")} />
+                            <EventItem title="Bar Nations" type="off-work" date={'12/05/2023'}
+                                action={() => handleOpenModal("Bar Nations", 'off', "12/05/2023")} />
+                            <EventItem title="Rendez-vous RH" type="work" date={'30/05/2023'}
+                                action={() => handleOpenModal("Rendez-vous RH", 'work', "30/05/2023")} />
+                            <EventItem title="After Work Duplex" type="off-work" date={'12/06/2023'}
+                                action={() => handleOpenModal("After Work Duplex", 'off', "12/06/2023")} />
+                            <EventItem title="Visite médical" type="work" date={'10/06/2023'}
+                                action={() => handleOpenModal("Visite médical", 'work', "10/06/2023")} />
+                             <EventItem title="Conférence coworking" type="work" date={'19/06/2023'}
+                                action={() => handleOpenModal("Conférence coworking", 'work', "19/06/2023")} />
                         </div>
                     </div>
                     </div>
@@ -170,7 +170,7 @@ export default function Home() {
                             <HiOutlineUserCircle className="h-5 w-5 ml-3" />
                         </div>
                         <div className="p-3 w-full space-y-3">
-                            <h2 className="font-bold">Contact Ressource Humaines</h2>
+                            <h2 className="font-bold">Contact Ressources Humaine</h2>
                             <div className="flex items-center flex-col sm:flex-row space-y-4 sm:space-y-0 space-x-4 p-4 bg-white rounded-lg border">
                                 <div className="flex-shrink-0 w-12 h-12">
                                 <Image src={Sarah} alt="Avatar" width={100} height={100} loading="lazy" className="object-cover rounded-full" />
@@ -178,7 +178,7 @@ export default function Home() {
                                 <div className="flex flex-col">
                                     <span className="font-bold">Sarah Col</span>
                                     <span className="text-gray-600">sarah.col@carbon-it.com</span>
-                                    <span className="text-gray-600">+ 33 6 12 34 56 78</span>
+                                    <span className="text-gray-600">06 12 34 56 78</span>
                                 </div>
                                 <div className="mt-4 sm:mt-0">
                                     <button className="block px-4 py-2 bg-blue-500 text-white rounded-md shadow-md mb-2 w-full">
@@ -194,7 +194,7 @@ export default function Home() {
                                 <div className="flex flex-col">
                                     <span className="font-bold">Tyler Nix</span>
                                     <span className="text-gray-600">tyler.nix@carbon-it.com</span>
-                                    <span className="text-gray-600">+33 7 12 34 56 78</span>
+                                    <span className="text-gray-600">07 12 34 56 78</span>
                                 </div>
                                 <div className="mt-4 sm:mt-0">
                                     <button className="block px-4 py-2 bg-blue-500 text-white rounded-md shadow-md mb-2 w-full">
