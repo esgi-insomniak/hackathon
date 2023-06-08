@@ -82,6 +82,9 @@ export default function Page() {
                         </div>
                     </div>
                 </CardHeader>
+
+                <hr className="w-full pt-5" />
+
                 <CardBody className="px-0 w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
 
