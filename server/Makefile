@@ -5,11 +5,8 @@ list: ## List of all commands available
 build: ## Build the docker images
 	docker compose build --force-rm --pull
 	docker compose run --rm php composer install --no-interaction --no-progress --no-suggest
-	docker compose run --rm php sh -c "chmod +x bin/** && mkdir 'config/jwt' || true"
-	make jwt
+	docker compose run --rm php sh -c "chmod +x bin/**"
 	make start
-jwt: ## Generate the JWT keys
-	docker compose run --rm php sh -c 'set -e && apk add openssl && php bin/console lexik:jwt:generate-keypair --overwrite && setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt && setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt'
 start: ## Start the docker containers
 	docker compose up -d
 stop: ## Stop the docker containers

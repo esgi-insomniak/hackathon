@@ -1,10 +1,16 @@
 "use client";
 
 import React from "react";
-import CardMission from "@/components/FollowUp/Card";
-import ProgressBar from "@/components/FollowUp/ProgressBar";
+import MissionAccordeons from "@/components/FollowUp/MissionAccordeons";
+import BadgesSkills from "@/components/FollowUp/BadgesSkills";
 import { Button, Card } from "@material-tailwind/react";
 import ListComponent from "@/components/FollowUp/List";
+import { IoSchoolSharp } from "react-icons/io5";
+import { SiGooglemaps } from "react-icons/si";
+import { GrUserWorker } from "react-icons/gr";
+import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
+import { CgWebsite } from "react-icons/cg";
+import colors from "tailwindcss/colors";
 
 const data = {
   name: "Bessonnier",
@@ -14,121 +20,175 @@ const data = {
 };
 
 export default function Page() {
+  const data1 = [
+    ["Afterwork", "15/03/2023"],
+    ["Présentation de sujet", "02/02/2023"],
+    ["Accompagnement de junior", "01/11/2022"],
+  ];
+
+  const data2 = [
+    ["PHP - Confirmé", "89% / Acquis"],
+    ["React - Expert", "30% / Révision recommandé"],
+    ["Angular - Novice", "54% / Consolidation"],
+  ];
+
+  const missionAccordeons = [
+    {
+      missionName: "Mission 1",
+      missionDate: "15/03/2023 au 15/03/2023",
+      missionDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi vitae nunc aliquam aliquet. Sed vitae nisi vitae nunc aliquam aliquet.",
+    },
+    {
+      missionName: "Mission 2",
+      missionDate: "15/03/2023 au 15/03/2023",
+      missionDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi vitae nunc aliquam aliquet. Sed vitae nisi vitae nunc aliquam aliquet.",
+    },
+    {
+      missionName: "Mission 3",
+      missionDate: "15/03/2023 au 15/03/2023",
+      missionDescription:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi vitae nunc aliquam aliquet. Sed vitae nisi vitae nunc aliquam aliquet.",
+    },
+  ];
+
+  const badgesSkills1 = {
+    color: "yellow",
+    logo: "/badgesImages/goldBlock.png",
+    stack: "Java",
+    level: "Niveau Or",
+  };
+
+  const badgesSkills2 = {
+    color: "gray",
+    logo: "/badgesImages/ironBlock.png",
+    stack: ".NET",
+    level: "Niveau Fer",
+  };
+
+  const badgesSkills3 = {
+    color: "orange",
+    logo: "/badgesImages/copperBlock.png",
+    stack: "C#",
+    level: "Niveau Cuivre",
+  };
+  const badgesSkills4 = {
+    color: "green",
+    logo: "/badgesImages/emeraldBlock.png",
+    stack: "ReactJS",
+    level: "Niveau Emeraude",
+  };
+  const badgesSkills5 = {
+    color: "gray",
+    logo: "/badgesImages/ironBlock.png",
+    stack: "Angular",
+    level: "Niveau Fer",
+  };
+  const badgesSkills6 = {
+    color: "cyan",
+    logo: "/badgesImages/diamondBlock.png",
+    stack: "VueJS",
+    level: "Niveau DIamant",
+  };
+
   return (
     <React.Fragment>
-      <div className="flex justify-around items-center my-5">
-        <div className="flex items-center my-5">
-          <div className="">
-            <img
-              className="h-44 w-44 rounded-full m-5"
-              src={data.profilePicture}
-              alt="nature image"
-            />
+      <div className="">
+        <div className="flex justify-around items-center my-5">
+          <div className="flex items-center my-5">
+            <div>
+              <img
+                className="w-32  h-32 rounded-full m-5"
+                src={data.profilePicture}
+                alt="nature image"
+              />
+            </div>
+            <div>
+              <h1 className="block font-sans text-3xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
+                {data.firstname} {data.name}
+              </h1>
+              <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
+                {data.poste}
+              </h2>
+            </div>
           </div>
-          <div className="">
-            <h1 className="block font-sans text-5xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
-              {data.firstname} {data.name}
-            </h1>
-            <h2 className="block font-sans text-3xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
-              {data.poste}
-            </h2>
+          <div className="w-2/5">
+            <div className="mx-auto">
+              <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center my-3">
+                Informations
+              </h2>
+              <hr />
+              <div className="flex justify-between items-center my-3">
+                <div className="mx-3 w-1/2">
+                  <p className="flex gap-4 items-center">
+                    <SiGooglemaps />1 rue de la paix - Paris
+                  </p>
+                  <p className="flex gap-4 items-center">
+                    <GrUserWorker />3 ans d'expérience
+                  </p>
+                  <p className="flex gap-4 items-center">
+                    <IoSchoolSharp /> Bac +5
+                  </p>
+                </div>
+                <div className="mx-3 w-1/3">
+                  <p className="flex gap-4 items-center">
+                    <AiOutlineMail />
+                    test@test.fr
+                  </p>
+                  <p className="flex gap-4 items-center">
+                    <AiFillPhone />
+                    010203040506
+                  </p>
+                  <p className="flex gap-4 items-center">
+                    <CgWebsite />
+                    https://www.test.fr
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="w-1/2">
-          <Card className="mx-auto">
+        <div className="flex justify-around items-start mt-8">
+          <div className="w-1/2">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Informations sur le collaborateurs
+              Compétences
             </h2>
-            <hr />
-            <div className="flex justify-between items-center">
-              <div>
-                <p>Age : 25 ans</p>
-                <p>Adresse : 1 rue de la paix</p>
-                <p>Code postal : 75000</p>
-                <p>Ville : Paris</p>
-              </div>
-              <div>
-                <p>Experience: 3 ans</p>
-                <p>Formation : Bac +5</p>
-                <p>Disponibilité : 1 mois</p>
-                <p>Secteur: Banque, Informatique...</p>
-              </div>
-              <div>
-                <p>Adresse mail: test@test.fr</p>
-                <p>Téléphone: 010203040506</p>
-                <p>Portfolio: https://www.test.fr</p>
-                <p>Linkedin: </p>
-              </div>
+            <div className="mt-8 mx-5 grid xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-1 gap-4">
+              <BadgesSkills props={badgesSkills1} />
+              <BadgesSkills props={badgesSkills2} />
+              <BadgesSkills props={badgesSkills3} />
+              <BadgesSkills props={badgesSkills4} />
+              <BadgesSkills props={badgesSkills5} />
+              <BadgesSkills props={badgesSkills6} />
             </div>
-          </Card>
-        </div>
-      </div>
-      <div className="flex justify-around items-start mt-20">
-        <div className="w-1/2">
-          <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-            Compétences du collaborateurs
-          </h2>
-          <div className="w-full mt-6 mx-5">
-            <div className="my-5">
-              <ProgressBar />
-              <p>Technologies : React (Débutant), Vue, Angular, HTML, CSS</p>
-            </div>
-            <div className="my-5">
-              <ProgressBar />
-              <p>Technologies : PHP (Senior), C#, Java, .net</p>
-            </div>
-            <div className="my-5">
-              <ProgressBar />
-              <p>Technologies : SEO, SEA</p>
-            </div>
-            <div className="my-5">
-              <ProgressBar />
-              <p>Technologies : Docker, Kubernetes, DevOps</p>
-            </div>
-            <div className="my-5">
-              <ProgressBar />
-              <p>Technologies : Esprit d'équipe, motivation</p>
+            <Button className="flex items-center mx-auto my-5">
+              Se former sur une formation
+            </Button>
+          </div>
+          <div className="w-1/3">
+            <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
+              Dernières missions
+            </h2>
+            <div className="mx-auto w-full flex justify-around flex-wrap mt-8">
+              <MissionAccordeons data={missionAccordeons} />
             </div>
           </div>
-          <div>
+        </div>
+        <div className="flex justify-around items-start mt-8 mb-5">
+          <div className="w-1/2">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
               Badges acquis
             </h2>
-            <p>Aucun badges acquis pour le moment</p>
+            <p className="text-center">Aucun badges acquis pour le moment</p>
           </div>
-          <div>
-            <Button className="mx-auto">Se former sur une formation</Button>
-          </div>
-        </div>
-        <div className="w-1/2">
-          <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-            Dernières missions du collaborateurs
-          </h2>
-          <div className="mx-auto w-full flex justify-around flex-wrap mt-6">
-            <CardMission />
-            <CardMission />
-            <CardMission />
-          </div>
-          <Button className="mx-auto text-center">
-            Se placer sur une nouvelle mission
-          </Button>
-        </div>
-      </div>
-      <div className="flex justify-around items-start mt-20 mb-5">
-        <div>
-          <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-            Mon impact dans l'entreprise
-          </h2>
-          <div>
-            <ListComponent />
-          </div>
-        </div>
-        <div>
-          <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-            Mes dernières formations
-          </h2>
-          <div>
-            <ListComponent />
+          <div className="w-1/3">
+            <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
+              Dernières formations
+            </h2>
+            <div>
+              <ListComponent data={data2} />
+            </div>
           </div>
         </div>
       </div>

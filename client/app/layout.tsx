@@ -1,6 +1,7 @@
 import SideBar from '@/components/navbar'
 import './globals.css'
 import { ClerkProvider, RedirectToSignIn, currentUser } from '@clerk/nextjs'
+import { AlertInso, AlertProvider } from '@/providers/alert'
 
 export const metadata = {
   title: 'Carbon IT',
@@ -18,6 +19,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="fr">
+      <AlertProvider>
         <body className="bg-slate-200 h-screen flex justify-end">
           {user && (
               <div className="w-full flex">
@@ -35,7 +37,9 @@ export default async function RootLayout({
                 {children}
               </div>
           )}
+          <AlertInso />
         </body>
+      </AlertProvider>
       </html>
     </ClerkProvider>
   )
