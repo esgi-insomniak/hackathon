@@ -56,7 +56,7 @@ export default function CardSearch({ data }: CardSearchProps) {
       </CardBody>
       <CardFooter className="pt-0">
         <Button>
-          <Link href={`/follow-up/${fullName}`}>Voir plus d'informations</Link>
+          <Link href={`/suivi/${fullName}`}>Voir plus d'informations</Link>
         </Button>
       </CardFooter>
     </Card>
