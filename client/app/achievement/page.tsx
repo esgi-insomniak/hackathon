@@ -86,40 +86,40 @@ export default function Page() {
     },
   };
 
-  const style: SkillThemeType = {
-    backgroundColor: "#fff",
-    border: "1px solid #000",
-    borderRadius: "0.5rem",
-    primaryFont: "Roboto, sans-serif",
-    primaryFontColor: "#000",
-    treeBackgroundColor: "#fff",
-    //disabledTreeOpacity: 0.5,
-    headingFont: "Roboto, sans-serif",
-    headingFontColor: "#000",
-    headingFontSize: "1.5rem",
-    headingHoverColor: "#000",
-    headingHoverColorTransition: "0.2s ease-in-out",
-    tooltipBackgroundColor: "#000",
-    tooltipFontColor: "#fff",
-    // tooltipZIndex: 100,
-    nodeBackgroundColor: "#fff",
-    nodeBorderColor: "#000",
-    nodeAlternativeFontColor: "#000",
-    nodeAltenativeActiveFontColor: "#000",
-    nodeOverlayColor: "#fff",
-    //nodeAlternativeActiveBackgroundColor: "#F00",
-    //nodeActiveBackgroundColor: "#F00",
-    nodeHoverBorder: "1px solid #000",
-    nodeHoverBorderColor: "#000",
-    nodeIconWidth: "2rem",
-    //nodeMobileTextNodeHeight: "2rem",
-    //nodeMobileTextNodeWidth: "2rem",
-    //nodeMobileFontSize: "1rem",
-    //nodeDesktopTextNodeHeight: "2rem",
-    //nodeDesktopTextNodeWidth: "2rem",
-    //nodeDesktopFontSize: "2rem",
-    edgeBorder: "2px solid #000",
-  };
+  // const style: SkillThemeType = {
+  //   backgroundColor: "#fff",
+  //   border: "1px solid #000",
+  //   borderRadius: "0.5rem",
+  //   primaryFont: "Roboto, sans-serif",
+  //   primaryFontColor: "#000",
+  //   treeBackgroundColor: "#fff",
+  //   //disabledTreeOpacity: 0.5,
+  //   headingFont: "Roboto, sans-serif",
+  //   headingFontColor: "#000",
+  //   headingFontSize: "1.5rem",
+  //   headingHoverColor: "#000",
+  //   headingHoverColorTransition: "0.2s ease-in-out",
+  //   tooltipBackgroundColor: "#000",
+  //   tooltipFontColor: "#fff",
+  //   // tooltipZIndex: 100,
+  //   nodeBackgroundColor: "#fff",
+  //   nodeBorderColor: "#000",
+  //   nodeAlternativeFontColor: "#000",
+  //   nodeAltenativeActiveFontColor: "#000",
+  //   nodeOverlayColor: "#fff",
+  //   //nodeAlternativeActiveBackgroundColor: "#F00",
+  //   //nodeActiveBackgroundColor: "#F00",
+  //   nodeHoverBorder: "1px solid #000",
+  //   nodeHoverBorderColor: "#000",
+  //   nodeIconWidth: "2rem",
+  //   //nodeMobileTextNodeHeight: "2rem",
+  //   //nodeMobileTextNodeWidth: "2rem",
+  //   //nodeMobileFontSize: "1rem",
+  //   //nodeDesktopTextNodeHeight: "2rem",
+  //   //nodeDesktopTextNodeWidth: "2rem",
+  //   //nodeDesktopFontSize: "2rem",
+  //   edgeBorder: "2px solid #000",
+  // };
 
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -134,7 +134,7 @@ export default function Page() {
   return (
     <React.Fragment>
       <SkillProvider>
-        <SkillTreeGroup theme={style}>
+        <SkillTreeGroup>
             {({ skillCount }: SkillGroupDataType) => (
               // Your content here
               <div
