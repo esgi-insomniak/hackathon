@@ -25,7 +25,8 @@ class ClerkAuthenticator extends AbstractAuthenticator
 {
     private $clerkApiEndpointUrl;
 
-    public function __construct(ContainerInterface $container, private EntityManagerInterface $entityManager){
+    public function __construct(ContainerInterface $container, private EntityManagerInterface $entityManager)
+    {
         $this->clerkApiEndpointUrl = $container->getParameter('clerk_api_endpoint_url');
     }
 
@@ -63,13 +64,16 @@ class ClerkAuthenticator extends AbstractAuthenticator
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
             }
-
-            return new SelfValidatingPassport(new UserBadge($decodedToken->userId));
         } catch (ExpiredException $e) {
-            throw new CustomUserMessageAuthenticationException('JWT token expired');
+            // if token expired more then 10 min, throw error
+            // if (time() - $decodedToken->exp > 600) {
+            //     throw new CustomUserMessageAuthenticationException('JWT token expired');
+            // }
         } catch (UnexpectedValueException $e) {
             throw new CustomUserMessageAuthenticationException('Invalid JWT token');
         }
+
+        return new SelfValidatingPassport(new UserBadge($decodedToken->userId));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

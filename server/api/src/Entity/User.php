@@ -85,11 +85,16 @@ class User implements UserInterface
     #[ORM\OneToMany(mappedBy: 'manager', targetEntity: self::class)]
     private Collection $subordinates;
 
+    #[Groups(['collection:get:user', 'item:get:user'])]
+    #[ORM\ManyToMany(mappedBy: 'participants', targetEntity: Event::class)]
+    private Collection $events;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
         $this->createdAt = new DateTimeImmutable('now');
         $this->subordinates = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,6 +214,34 @@ class User implements UserInterface
             if ($subordinate->getManager() === $this) {
                 $subordinate->setManager(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->contains($event)) {
+            $this->events->removeElement($event);
+            $event->removeParticipant($this);
         }
 
         return $this;
