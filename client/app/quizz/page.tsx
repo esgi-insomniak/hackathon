@@ -15,6 +15,7 @@ import {
 import {BiPlus} from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import {FaRocket} from "react-icons/fa";
+import * as SkillLevels from "../../helpers/data/skill_levels.json";
 
 const TABS = [
     { label: "Tous", value: "all" },
@@ -51,7 +52,7 @@ export default function Page() {
                     <div className="mb-8 flex items-center justify-between gap-8">
                         <div>
                             <Typography variant="h5" color="blue-gray">
-                                Liste des quizz
+                                Liste des formations
                             </Typography>
                             <Typography color="gray" className="mt-1 font-normal">
                                 Retrouvez ici la liste des quizz / formations
@@ -93,7 +94,7 @@ export default function Page() {
                     </div>
                 </CardHeader>
 
-                <hr className="w-full pt-5" />
+                <hr className="w-full m-5" />
 
                 <CardBody className="px-0 w-full">
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 overflow-y-auto max-h-fit">
