@@ -18,16 +18,21 @@ export default function Page() {
             display: "none",
           }
         }
+      },
+      RaLayout: {
+        styleOverrides: {
+          root: {
+            width: "fit-content !important",
+            zIndex: 0,
+          }
+        }
       }
     }
   };
 
-  return (
-    <HydraAdmin
-      theme={overrideTheme}
-      dataProvider={dataProvider()}
-      entrypoint={API_ENTRYPOINT}
-    >
-    </HydraAdmin>
-  );
+  return <HydraAdmin
+    theme={overrideTheme}
+    dataProvider={dataProvider()}
+    entrypoint={API_ENTRYPOINT}
+  />
 }

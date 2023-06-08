@@ -20,6 +20,9 @@ const nextConfig = {
     };
     return config;
   },
+  images: {
+    domains: ["localhost", "images.unsplash.com", "images.clerk.dev"],
+  },
 };
 
 module.exports = nextConfig;

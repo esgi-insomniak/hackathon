@@ -7,16 +7,14 @@ import {
     ListItem,
     ListItemPrefix,
 } from "@material-tailwind/react";
-import {
-    HiOutlineUser
-} from "react-icons/hi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { BsCalendarEvent } from "react-icons/bs";
-import { MdOutlineDashboard, MdOutlineForum, MdQuiz } from "react-icons/md";
+import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";
+import Image from "next/image";
 
 export default function SideBar() {
     const { user, isLoaded } = useUser()
@@ -61,9 +59,17 @@ export default function SideBar() {
                         </ListItemPrefix>
                         Evenements
                     </ListItem>
+                    <ListItem onClick={() => router.push('/admin')}>
+                        <ListItemPrefix>
+                            <MdAdminPanelSettings className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Admin
+                    </ListItem>
                     <ListItem onClick={() => router.push(`/user/${user?.id}`)}>
                         <ListItemPrefix>
-                            <HiOutlineUser className="h-5 w-5" />
+                            {user?.profileImageUrl && (
+                                <Image src={user?.profileImageUrl} width={20} height={20} className="rounded-full" alt="ton-user" />
+                            )}
                         </ListItemPrefix>
                         {!isLoaded ? "Loading..." : (user?.firstName + " " + user?.lastName)}
                     </ListItem>
