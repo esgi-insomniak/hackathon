@@ -13,7 +13,7 @@ import {
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { BsCalendarEvent } from "react-icons/bs";
-import { MdOutlineDashboard, MdOutlineForum } from "react-icons/md";
+import {MdOutlineDashboard, MdOutlineForum, MdQuiz} from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";
@@ -36,7 +36,13 @@ export default function SideBar() {
                     </ListItemPrefix>
                     Dashboard
                 </ListItem>
-                <ListItem onClick={() => router.push('/formations')}>
+                <ListItem onClick={() => router.push('/quizz')}>
+                    <ListItemPrefix>
+                        <MdQuiz className="h-5 w-5" />
+                    </ListItemPrefix>
+                    Quizz
+                </ListItem>
+                <ListItem onClick={() => router.push('/formation')}>
                     <ListItemPrefix>
                         <AiOutlineCode className="h-5 w-5" />
                     </ListItemPrefix>

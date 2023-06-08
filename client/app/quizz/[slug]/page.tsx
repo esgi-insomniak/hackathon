@@ -80,12 +80,12 @@ export default function Page({ params }) {
     };
 
     const handleQuestionTextFocusOut = () => {
-        //console.log(questionText.current);
         const question = findQuestion(selectedQuestion);
         question.content = questionText.current;
         setQuestions([...questions]);
     };
 
+    //Check answer as correct
     const handleAnswerClick = (questionId, answerId) => {
         const newQuestions = questions.map((question) => {
             if (question.id === questionId) {
@@ -101,6 +101,7 @@ export default function Page({ params }) {
         setQuestions(newQuestions);
     }
 
+    //Add generic question
     const handleAddQuestion = () => {
         const newQuestion = {
             id: questions.length + 1,
@@ -111,6 +112,7 @@ export default function Page({ params }) {
         selectQuestion(newQuestion);
     }
 
+    //Delete question
     const handleDeleteQuestion = (questionId) => {
         const newQuestions = questions.filter((question) => question.id !== questionId);
         setQuestions(newQuestions);
@@ -119,6 +121,7 @@ export default function Page({ params }) {
         }
     }
 
+    //Add generic answer to question
     const handleAddAnswer = (questionId) => {
         const newQuestions = questions.map((question) => {
             if (question.id === questionId) {
@@ -134,27 +137,33 @@ export default function Page({ params }) {
         setQuestions(newQuestions);
     }
 
+    //Select question
     const selectQuestion = (question) => {
         setSelectedQuestion(question.id);
         questionText.current = question.content;
     }
 
+    //Find question by id
     const findQuestion = (questionId) => {
         return questions.find((question) => question.id === questionId);
     }
 
-    function handleDeleteAnswer(selectedQuestion, id) {
+    //Delete answer
+    const handleDeleteAnswer = (selectedQuestion, id) => {
         const question = findQuestion(selectedQuestion);
         question.answers = question.answers.filter((answer) => answer.id !== id);
         setQuestions([...questions]);
     }
 
-    function handleAnswerFocusOut(selectedQuestion, id, evt) {
+    //Update answer content
+    const handleAnswerChange = (selectedQuestion, id, evt) => {
         const question = findQuestion(selectedQuestion);
-        const answer = question.answers.find((answer) => answer.id === id);
-        answer.content = evt.target.value;
-        setQuestions([...questions]);
-    }
+        if (question && question.answers.length > 0) {
+            const answer = question.answers.find((answer) => answer.id === id);
+            answer.content = evt.target.innerText;
+            setQuestions([...questions]);
+        }
+    };
 
     return (
         <div className="h-full flex flex-col gap-4 p-4">
@@ -168,6 +177,11 @@ export default function Page({ params }) {
                             <Typography color="gray" className="mt-1 font-normal">
                                 Personnaliser votre quizz
                             </Typography>
+                        </div>
+                        <div className="flex shrink-0 flex-col gap-2 sm:flex-row pr-4">
+                            <Button className="flex items-center gap-3" color="blue" size="sm">
+                                <BiCheck strokeWidth={2} className="h-4 w-4" /> Valider
+                            </Button>
                         </div>
                     </div>
                 </CardHeader>
@@ -233,7 +247,7 @@ export default function Page({ params }) {
                                                     color={answer.isCorrect ? "green" : "blue"}
                                                     className="flex items-center justify-center gap-3 w-full"
                                                 >
-                                                    <ContentEditable html={answer.content} onBlur={(e) => handleAnswerFocusOut(selectedQuestion, answer.id, e)} />
+                                                    <ContentEditable html={answer.content} onBlur={(e) => handleAnswerChange(selectedQuestion, answer.id, e)} />
                                                 </Button>
                                             </SpeedDialHandler>
                                             <SpeedDialContent>

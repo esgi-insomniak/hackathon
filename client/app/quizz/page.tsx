@@ -1,7 +1,6 @@
 'use client'
 
-import { MagnifyingGlassIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
     Card,
     CardHeader,
@@ -16,75 +15,35 @@ import {
     Tab,
     Avatar,
     IconButton,
-    Tooltip,
+    Tooltip, Select,
 } from "@material-tailwind/react";
 import {BiPlus} from "react-icons/bi";
 import {useRouter} from "next/navigation";
 
 const TABS = [
-    {
-        label: "Tous",
-        value: "all",
-    },
-    {
-        label: "Monitoré",
-        value: "monitored",
-    },
-    {
-        label: "Unmonitored",
-        value: "unmonitored",
-    },
+    { label: "Tous", value: "all" },
+    { label: "En cours", value: "active" },
+    { label: "Terminé", value: "completed" },
 ];
 
-const TABLE_HEAD = ["Quizz", "Function", "Niveau", "Date de création", "Actions"];
-
-const TABLE_ROWS = [
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-        name: "John Michael",
-        email: "john@creative-tim.com",
-        job: "Manager",
-        org: "Organization",
-        online: true,
-        date: "23/04/18",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-        name: "Alexa Liras",
-        email: "alexa@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: false,
-        date: "23/04/18",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-        name: "Laurent Perrier",
-        email: "laurent@creative-tim.com",
-        job: "Executive",
-        org: "Projects",
-        online: false,
-        date: "19/09/17",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-        name: "Michael Levi",
-        email: "michael@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: true,
-        date: "24/12/08",
-    },
-    {
-        img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-        name: "Richard Gran",
-        email: "richard@creative-tim.com",
-        job: "Manager",
-        org: "Executive",
-        online: false,
-        date: "04/10/21",
-    },
+const LANGUAGES = [
+    { label: "JAVA", value: "java"},
+    { label: ".NET", value: "dotnet"},
+    { label: "C#", value: "csharp"},
+    { label: "ANGULAR", value: "angular"},
+    { label: "REACT", value: "react"},
+    { label: "VUE", value: "vue"},
 ];
+
+
+function RocketLaunchIcon(props: { className: string }) {
+    return null;
+}
+
+function ArrowLongRightIcon(props: { strokeWidth: number, className: string }) {
+    return null;
+}
+
 export default function Page() {
 
     const router = useRouter();
@@ -109,7 +68,7 @@ export default function Page() {
                         </div>
                     </div>
                     <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-                        <Tabs value="all" className="w-full md:w-max" id="tabs">
+                        <Tabs value="all" className="w-full md:w-1/2" id="tabs">
                             <TabsHeader>
                                 {TABS.map(({ label, value }) => (
                                     <Tab key={value} value={value}>
@@ -124,107 +83,32 @@ export default function Page() {
                     </div>
                 </CardHeader>
                 <CardBody className="px-0 w-full">
-                    <table className="mt-4 w-full min-w-max table-auto text-left">
-                        <thead>
-                        <tr>
-                            {TABLE_HEAD.map((head, index) => (
-                                <th
-                                    key={head}
-                                    className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
-                                >
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                                    >
-                                        {head}{" "}
-                                        {index !== TABLE_HEAD.length - 1 && (
-                                            <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
-                                        )}
-                                    </Typography>
-                                </th>
-                            ))}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {TABLE_ROWS.map(({ img, name, email, job, org, online, date }, index) => {
-                            const isLast = index === TABLE_ROWS.length - 1;
-                            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
 
-                            return (
-                                <tr key={name}>
-                                    <td className={classes}>
-                                        <div className="flex items-center gap-3">
-                                            <Avatar src={img} alt={name} size="sm" />
-                                            <div className="flex flex-col">
-                                                <Typography variant="small" color="blue-gray" className="font-normal">
-                                                    {name}
-                                                </Typography>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal opacity-70"
-                                                >
-                                                    {email}
-                                                </Typography>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className={classes}>
-                                        <div className="flex flex-col">
-                                            <Typography variant="small" color="blue-gray" className="font-normal">
-                                                {job}
-                                            </Typography>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal opacity-70"
-                                            >
-                                                {org}
-                                            </Typography>
-                                        </div>
-                                    </td>
-                                    <td className={classes}>
-                                        <div className="w-max">
-                                            <Chip
-                                                variant="ghost"
-                                                size="sm"
-                                                value={online ? "online" : "offline"}
-                                                color={online ? "green" : "blue-gray"}
-                                            />
-                                        </div>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography variant="small" color="blue-gray" className="font-normal">
-                                            {date}
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Tooltip content="Editer le quizz">
-                                            <IconButton variant="text" color="blue-gray">
-                                                <PencilIcon className="h-4 w-4" />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>
-                </CardBody>
-                <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-                    <Typography variant="small" color="blue-gray" className="font-normal mr-2">
-                        Page 1 sur 10
-                    </Typography>
-                    <div className="flex gap-2">
-                        <Button variant="outlined" color="blue-gray" size="sm">
-                            Précédent
-                        </Button>
-                        <Button variant="outlined" color="blue-gray" size="sm">
-                            Suivant
-                        </Button>
+
+                        <Card>
+                            <CardBody>
+                                <RocketLaunchIcon className="text-blue-500 w-12 h-12 mb-4" />
+                                <Typography variant="h5" color="blue-gray" className="mb-2">
+                                    UI/UX Review Check
+                                </Typography>
+                                <Typography>
+                                    Because it's about motivating the doers. Because I'm here to follow my dreams and inspire others.
+                                </Typography>
+                            </CardBody>
+                            <CardFooter className="pt-0">
+                                <a href="#" className="inline-block">
+                                    <Button size="sm" variant="text" className="flex items-center gap-2">
+                                        Participer
+                                        <ArrowLongRightIcon strokeWidth={2} className="w-4 h-4" />
+                                    </Button>
+                                </a>
+                            </CardFooter>
+                        </Card>
+
+
                     </div>
-                </CardFooter>
+                </CardBody>
             </Card>
         </div>
     );
