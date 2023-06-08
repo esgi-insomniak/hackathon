@@ -75,11 +75,11 @@ export default function Page({ params }) {
     const questionText = useRef(questions[0]?.content || "");
     const [selectedQuestion, setSelectedQuestion] = useState(0);
 
-    const handleChange = evt => {
+    const handleQuestionTextChange = evt => {
         questionText.current = evt.target.value;
     };
 
-    const handleBlur = () => {
+    const handleQuestionTextFocusOut = () => {
         //console.log(questionText.current);
         const question = findQuestion(selectedQuestion);
         question.content = questionText.current;
@@ -149,6 +149,13 @@ export default function Page({ params }) {
         setQuestions([...questions]);
     }
 
+    function handleAnswerFocusOut(selectedQuestion, id, evt) {
+        const question = findQuestion(selectedQuestion);
+        const answer = question.answers.find((answer) => answer.id === id);
+        answer.content = evt.target.value;
+        setQuestions([...questions]);
+    }
+
     return (
         <div className="h-full flex flex-col gap-4 p-4">
             <Card>
@@ -212,31 +219,27 @@ export default function Page({ params }) {
                             <div className="flex flex-col w-full h-full items-center justify-center">
                                 <ContentEditable
                                     html={questionText.current} // innerHTML of the editable div
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
+                                    onBlur={handleQuestionTextFocusOut}
+                                    onChange={handleQuestionTextChange}
                                     className="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-blue-gray-900"
                                 />
 
                                 <div className="grid grid-cols-2 gap-4 mt-8">
                                     {questions.find(question => question.id === selectedQuestion)?.answers.map((answer, index) => (
-                                        <SpeedDial>
+                                        <SpeedDial key={answer.id}>
                                             <SpeedDialHandler>
                                                 <Button
                                                     variant={answer.isCorrect ? "filled" : "outlined"}
                                                     color={answer.isCorrect ? "green" : "blue"}
-                                                    className="flex items-center justify-center gap-3"
-                                                    key={answer.id}
+                                                    className="flex items-center justify-center gap-3 w-full"
                                                 >
-                                                    {answer.content}
+                                                    <ContentEditable html={answer.content} onBlur={(e) => handleAnswerFocusOut(selectedQuestion, answer.id, e)} />
                                                 </Button>
                                             </SpeedDialHandler>
                                             <SpeedDialContent>
                                                 <div className="flex flex-col items-center justify-center gap-3">
                                                     <Button onClick={() => handleAnswerClick(selectedQuestion, answer.id)} variant="filled" color="green" className="flex items-center justify-center gap-3  w-full">
                                                         <BiCheck className="h-4 w-4" /> Valider
-                                                    </Button>
-                                                    <Button variant="filled" color="blue" className="flex items-center justify-center gap-3 w-full">
-                                                        <BiPen className="h-4 w-4" /> Modifier
                                                     </Button>
                                                     <Button onClick={() => handleDeleteAnswer(selectedQuestion, answer.id)} variant="filled" color="red" className="flex items-center justify-center gap-3 w-full">
                                                         <TrashIcon className="h-4 w-4" /> Supprimer
