@@ -8,14 +8,21 @@ services:
     stdin_open: true
     tty: true
     working_dir: /home/node
-    entrypoint:
-      - npm run start:dev
+    entrypoint: ["/bin/sh", "-c", "yarn && yarn dev"]
+    environment:
+      - NODE_ENV=development
     ports:
       - "3000:3000"
     volumes:
-        - .:/home/node
+      - .:/home/node
 
-  npm:
-    extends:
-      service: node
-    entrypoint: npm
+  pocket-base:
+    image: augustodelg/pocketbase:latest
+    restart: unless-stopped
+    ports:
+      - "${VITE_POCKETBASE_PORT}:${VITE_POCKETBASE_PORT}"
+    volumes:
+      - pocket-base-data:/pb_data
+
+volumes:
+  pocket-base-data:

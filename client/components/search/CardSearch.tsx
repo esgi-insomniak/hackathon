@@ -8,6 +8,7 @@ import {
   Chip,
 } from "@material-tailwind/react";
 import Link from "next/link";
+import BadgesSkills from "../FollowUp/BadgesSkills";
 
 type CardSearchProps = {
   data: {
@@ -15,7 +16,12 @@ type CardSearchProps = {
     firstname: string;
     profilePicture: string;
     poste: string;
-    skills: Array<string>;
+    skills: {
+      color: string;
+      logo: string;
+      stack: string;
+      level: string;
+    }[];
   };
 };
 
@@ -42,15 +48,7 @@ export default function CardSearch({ data }: CardSearchProps) {
         <br />
         <div className="flex justify-between items-center my-5 flex-wrap">
           {data.skills.map((item, index) => {
-            return (
-              <Chip
-                key={index}
-                value={item}
-                color="green"
-                size="sm"
-                className="rounded-full my-2"
-              />
-            );
+            return <BadgesSkills key={index} props={item} />;
           })}
         </div>
       </CardBody>
