@@ -73,7 +73,7 @@ class Skill
     private ?SkillLevel $skillLevel = null;
 
     #[Groups(['collection:get:skill', 'item:get:skill', 'item:post:skill', 'item:put:skill', 'item:patch:skill'])]
-    #[ORM\OneToOne(mappedBy: 'name', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'skill', cascade: ['persist', 'remove'])]
     private ?Quizz $quizz = null;
 
     public function __construct()
