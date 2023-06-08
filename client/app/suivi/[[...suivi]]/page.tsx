@@ -10,7 +10,6 @@ import { SiGooglemaps } from "react-icons/si";
 import { GrUserWorker } from "react-icons/gr";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg";
-import colors from "tailwindcss/colors";
 
 const data = {
   name: "Bessonnier",
@@ -20,16 +19,13 @@ const data = {
 };
 
 export default function Page() {
-  const data1 = [
-    ["Afterwork", "15/03/2023"],
-    ["Présentation de sujet", "02/02/2023"],
-    ["Accompagnement de junior", "01/11/2022"],
-  ];
+  const fullName = `${data.firstname}-${data.name}`;
 
   const data2 = [
-    ["PHP - Confirmé", "89% / Acquis"],
-    ["React - Expert", "30% / Révision recommandé"],
-    ["Angular - Novice", "54% / Consolidation"],
+    ["Soirée Pizza", "08/06/2023", "afterwork"],
+    ["Bienvenue chez CarbonIT", "08/06/2023", "badges"],
+    ["Formation React", "08/06/2023", "formation"],
+    ["Mission CarbonIT", "08/06/2023", "mission"],
   ];
 
   const missionAccordeons = [
@@ -99,7 +95,7 @@ export default function Page() {
           <div className="flex items-center my-5">
             <div>
               <img
-                className="w-32  h-32 rounded-full m-5"
+                className="w-32 h-32 rounded-full mx-5"
                 src={data.profilePicture}
                 alt="nature image"
               />
@@ -149,12 +145,12 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="flex justify-around items-start mt-8">
+        <div className="flex justify-around items-start">
           <div className="w-1/2">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
               Compétences
             </h2>
-            <div className="mt-8 mx-5 grid xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-1 gap-4">
+            <div className="mt-5 mx-5 grid xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-1 gap-4">
               <BadgesSkills props={badgesSkills1} />
               <BadgesSkills props={badgesSkills2} />
               <BadgesSkills props={badgesSkills3} />
@@ -170,7 +166,7 @@ export default function Page() {
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
               Dernières missions
             </h2>
-            <div className="mx-auto w-full flex justify-around flex-wrap mt-8">
+            <div className="mx-auto w-full flex justify-around flex-wrap mt-5">
               <MissionAccordeons data={missionAccordeons} />
             </div>
           </div>
@@ -184,7 +180,7 @@ export default function Page() {
           </div>
           <div className="w-1/3">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Dernières formations
+              Historiques
             </h2>
             <div>
               <ListComponent data={data2} />
