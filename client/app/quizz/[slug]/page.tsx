@@ -5,11 +5,22 @@ import {
     ListItem,
     ListItemSuffix,
     Card,
-    IconButton, Typography, Tabs, TabsHeader, Tab, Input, CardHeader, Select, Option,
+    IconButton,
+    Typography,
+    Tabs,
+    TabsHeader,
+    Tab,
+    Input,
+    CardHeader,
+    Select,
+    Option,
+    SpeedDial,
+    SpeedDialHandler,
+    SpeedDialContent,
 } from "@material-tailwind/react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import {Button} from "@material-tailwind/react/components/Button";
-import { BiPlus } from "react-icons/bi";
+import {BiCheck, BiPen, BiPlus} from "react-icons/bi";
 import ContentEditable from "react-contenteditable";
 import React, {useRef, useState} from "react";
 
@@ -61,15 +72,18 @@ const QUESTIONS = [
 
 export default function Page({ params }) {
     const [questions, setQuestions] = useState(QUESTIONS);
-    const questionText = useRef(questions[0].content);
-    const [selectedQuestion, setSelectedQuestion] = useState(1);
+    const questionText = useRef(questions[0]?.content || "");
+    const [selectedQuestion, setSelectedQuestion] = useState(0);
 
     const handleChange = evt => {
         questionText.current = evt.target.value;
     };
 
     const handleBlur = () => {
-        console.log(questionText.current);
+        //console.log(questionText.current);
+        const question = findQuestion(selectedQuestion);
+        question.content = questionText.current;
+        setQuestions([...questions]);
     };
 
     const handleAnswerClick = (questionId, answerId) => {
@@ -98,9 +112,11 @@ export default function Page({ params }) {
     }
 
     const handleDeleteQuestion = (questionId) => {
-        const newQuestions = questions.filter((question) => question.id != questionId);
+        const newQuestions = questions.filter((question) => question.id !== questionId);
         setQuestions(newQuestions);
-        selectQuestion(newQuestions[0]);
+        if (newQuestions.length > 0){
+            selectQuestion(newQuestions[0]);
+        }
     }
 
     const handleAddAnswer = (questionId) => {
@@ -121,6 +137,16 @@ export default function Page({ params }) {
     const selectQuestion = (question) => {
         setSelectedQuestion(question.id);
         questionText.current = question.content;
+    }
+
+    const findQuestion = (questionId) => {
+        return questions.find((question) => question.id === questionId);
+    }
+
+    function handleDeleteAnswer(selectedQuestion, id) {
+        const question = findQuestion(selectedQuestion);
+        question.answers = question.answers.filter((answer) => answer.id !== id);
+        setQuestions([...questions]);
     }
 
     return (
@@ -182,31 +208,49 @@ export default function Page({ params }) {
                         </List>
                     </div>
                     <div className="w-2/3">
-                        <div className="flex flex-col w-full h-full items-center justify-center">
-                            <ContentEditable
-                                html={questionText.current} // innerHTML of the editable div
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                className="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-blue-gray-900"
-                            />
+                        {questions.length > 0 && selectedQuestion > 0 && (
+                            <div className="flex flex-col w-full h-full items-center justify-center">
+                                <ContentEditable
+                                    html={questionText.current} // innerHTML of the editable div
+                                    onBlur={handleBlur}
+                                    onChange={handleChange}
+                                    className="block antialiased tracking-normal font-sans text-3xl font-semibold leading-snug text-blue-gray-900"
+                                />
 
-                            <div className="grid grid-cols-2 gap-4 mt-8">
-                                {questions.find(question => question.id === selectedQuestion)?.answers.map((answer, index) => (
-                                    <Button
-                                        variant={answer.isCorrect ? "filled" : "outlined"}
-                                        color={answer.isCorrect ? "green" : "blue"}
-                                        className="flex items-center justify-center gap-3"
-                                        key={answer.id}
-                                        onClick={() => handleAnswerClick(selectedQuestion, answer.id)}
-                                    >
-                                        {answer.content}
+                                <div className="grid grid-cols-2 gap-4 mt-8">
+                                    {questions.find(question => question.id === selectedQuestion)?.answers.map((answer, index) => (
+                                        <SpeedDial>
+                                            <SpeedDialHandler>
+                                                <Button
+                                                    variant={answer.isCorrect ? "filled" : "outlined"}
+                                                    color={answer.isCorrect ? "green" : "blue"}
+                                                    className="flex items-center justify-center gap-3"
+                                                    key={answer.id}
+                                                >
+                                                    {answer.content}
+                                                </Button>
+                                            </SpeedDialHandler>
+                                            <SpeedDialContent>
+                                                <div className="flex flex-col items-center justify-center gap-3">
+                                                    <Button onClick={() => handleAnswerClick(selectedQuestion, answer.id)} variant="filled" color="green" className="flex items-center justify-center gap-3  w-full">
+                                                        <BiCheck className="h-4 w-4" /> Valider
+                                                    </Button>
+                                                    <Button variant="filled" color="blue" className="flex items-center justify-center gap-3 w-full">
+                                                        <BiPen className="h-4 w-4" /> Modifier
+                                                    </Button>
+                                                    <Button onClick={() => handleDeleteAnswer(selectedQuestion, answer.id)} variant="filled" color="red" className="flex items-center justify-center gap-3 w-full">
+                                                        <TrashIcon className="h-4 w-4" /> Supprimer
+                                                    </Button>
+                                                </div>
+                                            </SpeedDialContent>
+                                        </SpeedDial>
+                                    ))}
+                                    <Button variant="filled" className="flex items-center justify-center gap-3 col-span-2" onClick={() => handleAddAnswer(selectedQuestion)}>
+                                        <BiPlus strokeWidth={2} className="h-4 w-4" /> Ajouter une réponse
                                     </Button>
-                                ))}
-                                <Button variant="filled" className="flex items-center justify-center gap-3 col-span-2">
-                                    <BiPlus strokeWidth={2} className="h-4 w-4" /> Ajouter une réponse
-                                </Button>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </Card>
