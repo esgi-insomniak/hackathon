@@ -1,9 +1,12 @@
-install:
-	docker compose run --rm npm install
+include .env.local
+export
 
 start: ## Start the project
-	docker compose run --name npm -p 3000:3000 --rm npm run dev
+	docker compose up -d
 
 stop: ## Stop the project
 	docker compose stop
+
+down: ## Stop and remove the project
+	docker compose down
 

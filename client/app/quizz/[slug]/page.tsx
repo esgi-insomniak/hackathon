@@ -23,6 +23,9 @@ import {Button} from "@material-tailwind/react/components/Button";
 import {BiCheck, BiPen, BiPlus} from "react-icons/bi";
 import ContentEditable from "react-contenteditable";
 import React, {useRef, useState} from "react";
+import {Breadcrumbs} from "@mui/material";
+import {AiFillHome} from "react-icons/ai";
+import {useRouter} from "next/navigation";
 
 
 const QUESTIONS = [
@@ -74,6 +77,7 @@ export default function Page({ params }) {
     const [questions, setQuestions] = useState(QUESTIONS);
     const questionText = useRef(questions[0]?.content || "");
     const [selectedQuestion, setSelectedQuestion] = useState(0);
+
 
     const handleQuestionTextChange = evt => {
         questionText.current = evt.target.value;
@@ -165,10 +169,13 @@ export default function Page({ params }) {
         }
     };
 
+
+
     return (
         <div className="h-full flex flex-col gap-4 p-4">
             <Card>
                 <CardHeader floated={false} shadow={false} className="rounded-none w-full">
+
                     <div className="mb-8 flex items-center justify-between gap-8">
                         <div>
                             <Typography variant="h5" color="blue-gray">
@@ -190,7 +197,7 @@ export default function Page({ params }) {
                     <Input type="text" placeholder="Nom du quizz" className="w-1/3" />
                     <Input type="text" placeholder="Description du quizz" className="w-1/3" />
                     <Select
-                        size="lg"
+                        size="md"
                         label="Sélectionner un niveau"
                         selected={(element) =>
                             element &&
