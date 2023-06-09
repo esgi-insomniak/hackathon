@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import ListComponent from "@/components/FollowUp/List";
 import { IoSchoolSharp } from "react-icons/io5";
 import { SiGooglemaps } from "react-icons/si";
 import { GrUserWorker } from "react-icons/gr";
@@ -84,7 +83,7 @@ export default function Page() {
           </div>
         </div>
         <div className="flex justify-around items-start mt-8 mb-5">
-            <TableHistorique data={data2} />
+          <TableHistorique data={data2} />
         </div>
       </div>
     </React.Fragment>
