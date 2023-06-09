@@ -6,10 +6,11 @@ import useModal from "@/components/modal/hook"
 import React from "react"
 import { BsCalendarEvent } from "react-icons/bs"
 import { HiOutlineUserCircle } from 'react-icons/hi';
+import { FaReact, FaAngular, FaJava } from 'react-icons/fa';
+import {SiCsharp} from 'react-icons/si';
 import Sarah from "@/helpers/sarah.png"
 import Tyler from "@/helpers/tyler.png"
 import Image from "next/image"
-import { Progress } from "@/components/progress"
 import { dataEvent } from "./events/data"
 import { RhContact } from "@/components/rh-contact"
 import { mockNew } from "@/mock"
@@ -25,6 +26,29 @@ export default function Home() {
             date
         })
     }
+    const formations = [
+        { title: 'React JS', progress: 76, icon: <FaReact /> },
+        { title: 'Angular', progress: 31, icon: <FaAngular /> },
+        { title: 'Java', progress: 52, icon: <FaJava /> },
+        { title: 'C#', progress: 19, icon: <SiCsharp /> },
+
+      ];
+      
+      
+      const getColor = (progress) => {
+        if (progress === 0) {
+          return 'gray';
+        } else if (progress < 20) {
+          return 'red';
+        } else if (progress < 50) {
+          return 'orange';
+        } else if (progress <= 100) {
+          return 'green';
+        } else {
+          return 'gray';
+        }
+      };
+      
 
     return (
         <React.Fragment>
@@ -42,11 +66,35 @@ export default function Home() {
                         <div className="p-5 bg-white rounded-md drop-shadow-lg flex flex-col ">
                             <h2 className="font-semi-bold text-2xl mb-8">Progression formations </h2>
                             <div className="overflow-hidden">
-                                <Progress title="React JS" color="orange" progress={80} />
-                                <Progress title="Angular" color="purple" progress={40} />
-                                <Progress title="Java" color="cyan" progress={60} />
-                                <Progress title="C#" color="yellow" progress={55} />
+                            {formations.map((formation, index) => (
+                                <div className="flex items-center mb-4" key={index}>
+                                <div className="w-2/4 pr-4 flex items-center">
+                                    
+                                    <span className="text-lg font-light mr-2">{formation.title}</span>
+                                    {formation.icon}
+                                </div>
+                                <div
+                                    className={`relative flex-grow h-5 bg-${getColor(
+                                    formation.progress
+                                    )}-200 rounded`}
+                                >
+                                    <div
+                                    className={`absolute top-0 left-0 h-full bg-${getColor(
+                                        formation.progress
+                                    )}-500 rounded`}
+                                    style={{ width: `${formation.progress}%`, padding: '0 20px' }}
+                                    >
+                                    <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs">
+                                        {formation.progress}%
+                                    </span>
+                                    </div>
+                                </div>
+                                </div>
+                            ))}
                             </div>
+
+
+
                         </div>
                     </div>
                     <div className="col-span-4 row-span-2 space-y-4 overflow-x-auto rounded-md drop-shadow-lg flex flex-wrap">
