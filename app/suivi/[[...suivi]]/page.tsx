@@ -181,7 +181,7 @@ export default function Page() {
           </div>
           <div className="w-1/3">
             <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Historiques
+              Historique
             </h2>
             <div>
               <ListComponent data={data2} fullname={fullName} />
