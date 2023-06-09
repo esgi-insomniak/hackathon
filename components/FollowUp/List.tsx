@@ -69,7 +69,7 @@ const ListComponent: React.FC<ListComponentProps> = ({ data, fullname }) => {
           <div className="flex justify-between items-center w-full mr-3">
             <Button className="mx-auto">
               <Link href={`/historique/${fullName}`}>
-                Voir l'historique complets
+                Voir l'historique complet
               </Link>
             </Button>
           </div>

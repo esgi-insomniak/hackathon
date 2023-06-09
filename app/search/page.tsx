@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import CardSearch from "@/components/search/CardSearch";
+import TableSearch from "@/components/search/TableSearch";
 
 export default function SearchPage() {
   const data = [
@@ -14,19 +14,19 @@ export default function SearchPage() {
         {
           color: "brown",
           logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
+          stack: "Javascript",
           level: "Niveau Bois",
         },
         {
           color: "brown",
           logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
+          stack: "Javascript",
           level: "Niveau Bois",
         },
         {
           color: "brown",
           logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
+          stack: "Javascript",
           level: "Niveau Bois",
         },
       ],
@@ -163,41 +163,10 @@ export default function SearchPage() {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = React.useState("");
-
-  const handleSearch = (event: any) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredData = data.filter((item) => {
-    const fullName = `${item.firstname} ${item.name}`.toLowerCase();
-    const searchTermLower = searchTerm.toLowerCase();
-
-    const matchingSkills = item.skills
-      .map((skill) => skill.stack.toLowerCase())
-      .filter((skill) => skill.includes(searchTermLower));
-
-    return fullName.includes(searchTermLower) || matchingSkills.length > 0;
-  });
-
   return (
     <React.Fragment>
       <div className="pt-2 relative text-gray-600">
-        <input
-          className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-1/3 mx-auto"
-          type="search"
-          name="search"
-          placeholder="Search"
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-      </div>
-      <div className="flex flex-wrap justify-center my-10">
-        {!filteredData.length
-          ? data.map((item, index) => <CardSearch data={item} key={index} />)
-          : filteredData.map((item, index) => (
-              <CardSearch data={item} key={index} />
-            ))}
+            <TableSearch data={data}/>
       </div>
     </React.Fragment>
   );
