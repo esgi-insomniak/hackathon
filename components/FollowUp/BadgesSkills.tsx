@@ -8,6 +8,8 @@ type BadgesType = {
     logo: string;
     stack: string;
     level: string;
+    width: number;
+    height: number;
   };
 };
 
@@ -20,11 +22,11 @@ export default function BadgesSkills({ props }: BadgesType) {
         className="flex justify-around items-center gap-3 my-2"
       >
         {props.stack}
-        <Image
+        <img
           src={props.logo}
           alt={props.stack}
-          width={25}
-          height={25}
+          width={props.width}
+          height={props.height}
           className="flex-shrink-0"
         />
       </Button>

@@ -15,7 +15,9 @@ import {
 import {BiPlus} from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import {FaRocket} from "react-icons/fa";
-import * as SkillLevels from "../../helpers/data/skill_levels.json";
+import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
+import {useEffect, useState} from "react";
+import BadgesSkills from "@/components/FollowUp/BadgesSkills";
 
 const TABS = [
     { label: "Tous", value: "all" },
@@ -43,8 +45,42 @@ const NIVEAUX = [
 
 
 export default function Page() {
-
+    const pb = PocketbaseHelper.pocketbase;
     const router = useRouter();
+    const [quizzes, setQuizzes] = useState([]);
+    const [formations, setFormations] = useState([]);
+    const [parcours, setParcours] = useState([]);
+    const [skills, setSkills] = useState([]);
+
+    useEffect(() => {
+        pb.collection('skills').getFullList().then((data) => {
+            const skillsFormatted = data.map((skill) => {
+                return {
+                    id: skill.id,
+                    name: skill.name
+                }
+            });
+            //array unique by name
+            let skillsGroupedByName = [];
+            skillsFormatted.forEach((skill) => {
+                if(!skillsGroupedByName[skill.name]) {
+                    skillsGroupedByName[skill.name] = skill;
+                }
+            });
+            setSkills(Object.values(skillsGroupedByName));
+        });
+        pb.collection('quizz').getFullList({
+            sort:'-created',
+            expand: 'skill,skill.skill_level'
+        }).then((data) => {
+            setQuizzes(data);
+        });
+        pb.collection('formations').getFullList({
+            sort:'-created',
+        }).then((data) => {
+            setFormations(data);
+        });
+    },[]);
 
     return (
         <div className="w-full max-h-screen">
@@ -80,8 +116,8 @@ export default function Page() {
                         </Tabs>
 
                         <Select size="md" label="Sélectionner une compétence">
-                            {LANGUAGES.map(({ label, value }) => (
-                                <Option key={value} value={value}>{label}</Option>
+                            {skills.map((skill) => (
+                                <Option key={skill.id} value={skill.id}>{skill.name}</Option>
                             ))}
                         </Select>
 
@@ -100,190 +136,69 @@ export default function Page() {
                 <CardBody className="px-0 w-full flex-grow overflow-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
 
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">FORMATION</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
+                        {quizzes.map((quizz) => (
+                            <Card key={quizz.id} className="flex-row w-full max-w-[48rem]">
+                                <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
+                                    <img
+                                        src="https://www.decheterie-pro-grenoble.veolia.fr/sites/g/files/dvc3066/files/styles/crop_freeform/public/image/2017/08/pictogramme_quizz_0.jpg?h=205d396d&itok=bCjn9mUf"
+                                        alt="image"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </CardHeader>
+                                <CardBody className="w-full">
+                                    <div className="flex items-center justify-between gap-2 mb-4">
+                                        <Typography variant="h6" color="blue" className="uppercase">QUIZZ</Typography>
+                                        {quizz.expand.skill && quizz.expand.skill.expand.skill_level && (
+                                            <BadgesSkills props={
+                                                {
+                                                    color: quizz.expand.skill.expand.skill_level.color,
+                                                    logo: pb.files.getUrl(quizz.expand.skill.expand.skill_level, quizz.expand.skill.expand.skill_level.icon, {'thumb': '20x20'}),
+                                                    stack: quizz.expand.skill.name,
+                                                    level: quizz.expand.skill.expand.skill_level.name,
+                                                    width: 20,
+                                                    height: 20,
+                                                }
+                                            } />
+                                        )}
+                                    </div>
+                                    <Typography variant="h4" color="blue-gray" className="mb-2">
+                                        {quizz.name}
+                                    </Typography>
+                                    <Typography color="gray" className="font-normal mb-8">
+                                        {quizz.description}
+                                    </Typography>
+                                    <Button onClick={() => router.push(`/quizz/${quizz.id}`)} variant="filled" className="inline-block float-right flex items-center gap-2">
+                                        GO !
+                                        <FaRocket strokeWidth={2} className="h-4 w-4" />
+                                    </Button>
+                                </CardBody>
+                            </Card>
+                        ))}
 
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://www.decheterie-pro-grenoble.veolia.fr/sites/g/files/dvc3066/files/styles/crop_freeform/public/image/2017/08/pictogramme_quizz_0.jpg?h=205d396d&itok=bCjn9mUf"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">QUIZZ</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
-
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">FORMATION</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
-
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://www.decheterie-pro-grenoble.veolia.fr/sites/g/files/dvc3066/files/styles/crop_freeform/public/image/2017/08/pictogramme_quizz_0.jpg?h=205d396d&itok=bCjn9mUf"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">QUIZZ</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
-
-
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">FORMATION</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
-
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://www.decheterie-pro-grenoble.veolia.fr/sites/g/files/dvc3066/files/styles/crop_freeform/public/image/2017/08/pictogramme_quizz_0.jpg?h=205d396d&itok=bCjn9mUf"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">QUIZZ</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
-
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">FORMATION</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
-
-                        <Card className="flex-row w-full max-w-[48rem]">
-                            <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
-                                <img
-                                    src="https://www.decheterie-pro-grenoble.veolia.fr/sites/g/files/dvc3066/files/styles/crop_freeform/public/image/2017/08/pictogramme_quizz_0.jpg?h=205d396d&itok=bCjn9mUf"
-                                    alt="image"
-                                    className="w-full h-full object-cover"
-                                />
-                            </CardHeader>
-                            <CardBody>
-                                <Typography variant="h6" color="blue" className="uppercase mb-4">QUIZZ</Typography>
-                                <Typography variant="h4" color="blue-gray" className="mb-2">
-                                    Dev PHP Junior
-                                </Typography>
-                                <Typography color="gray" className="font-normal mb-8">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.
-                                </Typography>
-                                <Button variant="filled" className="inline-block float-right flex items-center gap-2">
-                                    GO !
-                                    <FaRocket strokeWidth={2} className="h-4 w-4" />
-                                </Button>
-                            </CardBody>
-                        </Card>
+                        {formations.map((formation) => (
+                            <Card key={formation.id} className="flex-row w-full max-w-[48rem]">
+                                <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                                        alt="image"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </CardHeader>
+                                <CardBody>
+                                    <Typography variant="h6" color="blue" className="uppercase mb-4">FORMATION</Typography>
+                                    <Typography variant="h4" color="blue-gray" className="mb-2">
+                                        {formation.name}
+                                    </Typography>
+                                    <Typography color="gray" className="font-normal mb-8">
+                                        {formation.description}
+                                    </Typography>
+                                    <Button variant="filled" className="inline-block float-right flex items-center gap-2">
+                                        GO !
+                                        <FaRocket strokeWidth={2} className="h-4 w-4" />
+                                    </Button>
+                                </CardBody>
+                            </Card>
+                        ))}
 
                     </div>
                 </CardBody>

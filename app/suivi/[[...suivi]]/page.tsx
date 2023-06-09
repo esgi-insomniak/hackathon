@@ -55,6 +55,8 @@ export default function Page() {
     logo: "/badgesImages/ironBlock.png",
     stack: "Java",
     level: "Niveau Fer",
+    width: 25,
+    height: 25,
   };
 
   const badgesSkills2 = {
@@ -62,6 +64,8 @@ export default function Page() {
     logo: "/badgesImages/goldBlock.png",
     stack: ".NET",
     level: "Niveau Or",
+    width: 25,
+    height: 25,
   };
 
   const badgesSkills3 = {
@@ -69,24 +73,32 @@ export default function Page() {
     logo: "/badgesImages/woodBlock.png",
     stack: "C#",
     level: "Niveau Bois",
+    width: 25,
+    height: 25,
   };
   const badgesSkills4 = {
     color: "blue-gray",
     logo: "/badgesImages/ironBlock.png",
     stack: "ReactJS",
     level: "Niveau Fer",
+    width: 25,
+    height: 25,
   };
   const badgesSkills5 = {
     color: "gray",
     logo: "/badgesImages/cobbleBlock.png",
     stack: "Angular",
     level: "Niveau Pierre",
+    width: 25,
+    height: 25,
   };
   const badgesSkills6 = {
     color: "cyan",
     logo: "/badgesImages/diamondBlock.png",
     stack: "VueJS",
     level: "Niveau DIamant",
+    width: 25,
+    height: 25,
   };
 
   return (
