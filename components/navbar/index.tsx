@@ -13,11 +13,8 @@ import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";
-import Image from "next/image";
 
 export default function SideBar() {
-    // const { user, isLoaded } = useUser()
-    // const { signOut } = useAuth()
     const router = useRouter()
 
     return (
@@ -36,15 +33,9 @@ export default function SideBar() {
                     </ListItem>
                     <ListItem onClick={() => router.push('/quizz')}>
                         <ListItemPrefix>
-                            <MdQuiz className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Quizz
-                    </ListItem>
-                    <ListItem onClick={() => router.push('/formation')}>
-                        <ListItemPrefix>
                             <AiOutlineCode className="h-5 w-5" />
                         </ListItemPrefix>
-                        Formations
+                        Formations / Quizz
                     </ListItem>
                     <ListItem onClick={() => router.push('/forum')}>
                         <ListItemPrefix>
