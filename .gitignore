@@ -44,3 +44,4 @@ package-lock.json
 /.cache
 .yarnrc
 .ash_history
+.idea

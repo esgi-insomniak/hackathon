@@ -21,6 +21,7 @@ const TABS = [
     { label: "Tous", value: "all" },
     { label: "Formations", value: "formations" },
     { label: "Quizz", value: "quizz" },
+    { label: "Parcours", value: "parcours" }
 ];
 
 const LANGUAGES = [
@@ -47,7 +48,7 @@ export default function Page() {
 
     return (
         <div className="w-full max-h-screen">
-            <Card className="flex justify-center items-center p-5">
+            <Card className="flex flex-col justify-center items-center p-5">
                 <CardHeader floated={false} shadow={false} className="rounded-none w-full">
                     <div className="mb-8 flex items-center justify-between gap-8">
                         <div>
@@ -96,8 +97,8 @@ export default function Page() {
 
                 <hr className="w-full m-5" />
 
-                <CardBody className="px-0 w-full">
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5 overflow-y-auto max-h-fit">
+                <CardBody className="px-0 w-full flex-grow overflow-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
 
                         <Card className="flex-row w-full max-w-[48rem]">
                             <CardHeader shadow={false} floated={false} className="w-2/5 shrink-0 m-0 rounded-r-none">

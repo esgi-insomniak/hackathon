@@ -1,6 +1,10 @@
 include .env.local
 export
 
+install:
+	docker compose run --rm node yarn install
+
+
 start: ## Start the project
 	docker compose up -d
 
