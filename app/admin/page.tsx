@@ -1,7 +1,5 @@
 "use client";
 
-import { HydraAdmin } from "@api-platform/admin";
-import dataProvider from "@/helpers/api-platform/dataProvider";
 import React from "react";
 import { defaultTheme } from 'react-admin';
 
@@ -30,9 +28,9 @@ export default function Page() {
     }
   };
 
-  return <HydraAdmin
-    theme={overrideTheme}
-    dataProvider={dataProvider()}
-    entrypoint={API_ENTRYPOINT}
-  />
+  // return <HydraAdmin
+  //   theme={overrideTheme}
+  //   dataProvider={dataProvider()}
+  //   entrypoint={API_ENTRYPOINT}
+  // />
 }

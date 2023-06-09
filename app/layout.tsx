@@ -1,6 +1,5 @@
 import SideBar from '@/components/navbar'
 import './globals.css'
-import { ClerkProvider, RedirectToSignIn, currentUser } from '@clerk/nextjs'
 import { AlertInso, AlertProvider } from '@/providers/alert'
 
 export const metadata = {
@@ -13,34 +12,30 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
-  const user = await currentUser()
+  const user = true;
 
   return (
-    <ClerkProvider>
-      <html lang="fr">
-        <AlertProvider>
-          <body className="bg-slate-200 h-screen flex justify-end">
-            {user && (
-              <div className="w-full flex">
-                <div className="w-1/6">
-                  <SideBar />
-                </div>
-                <div className="w-5/6">
-                  {children}
-                </div>
+    <html lang="fr">
+      <AlertProvider>
+        <body className="bg-slate-200 h-screen flex justify-end">
+          {user && (
+            <div className="w-full flex">
+              <div className="w-1/6">
+                <SideBar />
               </div>
-            )}
-            {!user && (
-              <div className='h-full w-full'>
-                <RedirectToSignIn />
+              <div className="w-5/6">
                 {children}
               </div>
-            )}
-            <AlertInso />
-          </body>
-        </AlertProvider>
-      </html>
-    </ClerkProvider>
+            </div>
+          )}
+          {!user && (
+            <div className='h-full w-full'>
+              {children}
+            </div>
+          )}
+          <AlertInso />
+        </body>
+      </AlertProvider>
+    </html>
   )
 }

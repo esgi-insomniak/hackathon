@@ -3,7 +3,6 @@
 import { EventItem } from "@/components/event"
 import Modal from "@/components/modal"
 import useModal from "@/components/modal/hook"
-import { useUser } from "@clerk/nextjs"
 import React from "react"
 import { BsCalendarEvent } from "react-icons/bs"
 import { HiOutlineUserCircle } from 'react-icons/hi';
@@ -16,7 +15,6 @@ import { RhContact } from "@/components/rh-contact"
 import { mockNew } from "@/mock"
 
 export default function Home() {
-    const { user } = useUser()
     const { toggle, isShowing, setData, data } = useModal()
 
     const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string) => {
@@ -34,7 +32,7 @@ export default function Home() {
                 <section className="grid grid-cols-4 gap-5 h-full w-2/3">
                     <div className="col-span-4 row-span-1 space-y-4 overflow-scroll">
                         <div className="p-5 bg-carbon-blue text-carbon-white rounded-md drop-shadow-lg flex flex-col ">
-                            <h2 className='font-bold mb-5'>Bienvenue {user?.firstName} {user?.lastName} !</h2>
+                            <h2 className='font-bold mb-5'>Bienvenue !</h2>
                             <span>
                                 Lance toi dans l'aventure et poursuis ton apprentissage !
                             </span>

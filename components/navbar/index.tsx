@@ -8,7 +8,6 @@ import {
     ListItemPrefix,
 } from "@material-tailwind/react";
 import { AiOutlinePoweroff } from "react-icons/ai";
-import { useAuth, useUser } from "@clerk/nextjs";
 import { BsCalendarEvent } from "react-icons/bs";
 import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
@@ -17,8 +16,8 @@ import { Logo } from "@/helpers/svg/logo";
 import Image from "next/image";
 
 export default function SideBar() {
-    const { user, isLoaded } = useUser()
-    const { signOut } = useAuth()
+    // const { user, isLoaded } = useUser()
+    // const { signOut } = useAuth()
     const router = useRouter()
 
     return (
@@ -65,16 +64,16 @@ export default function SideBar() {
                         </ListItemPrefix>
                         Admin
                     </ListItem>
-                    <ListItem onClick={() => router.push(`/user/${user?.id}`)}>
+                    {/* <ListItem onClick={() => router.push(`/user/${user?.id}`)}>
                         <ListItemPrefix>
                             {user?.profileImageUrl && (
                                 <Image src={user?.profileImageUrl} width={20} height={20} className="rounded-full" alt="ton-user" />
                             )}
                         </ListItemPrefix>
                         {!isLoaded ? "Loading..." : (user?.firstName + " " + user?.lastName)}
-                    </ListItem>
+                    </ListItem> */}
                 </div>
-                <ListItem onClick={() => signOut()} className="flex justify-center items-center">
+                <ListItem onClick={() => {}} className="flex justify-center items-center">
                     <ListItemPrefix>
                         <AiOutlinePoweroff className="h-5 w-5 text-red-500" />
                     </ListItemPrefix>

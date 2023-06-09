@@ -1,4 +1,3 @@
-import { useAuth } from "@clerk/nextjs";
 import axios, { AxiosRequestHeaders } from "axios";
 
 const API_URL = `${process.env.NEXT_API_ENTRYPOINT}`;
