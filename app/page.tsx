@@ -15,6 +15,7 @@ import { dataEvent } from "./events/data"
 import { RhContact } from "@/components/rh-contact"
 import { mockNew } from "@/mock"
 import { Button, Input } from "@material-tailwind/react"
+import { useAuth } from "@/providers/auth"
 
 export default function Home() {
 

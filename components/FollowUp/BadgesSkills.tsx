@@ -5,8 +5,8 @@ import Image from "next/image";
 import React from "react";
 
 export default function BadgesSkills({ props }: any) {
-  const [data, setData] = React.useState([]);
-  const [typeBadges, setTypeBadges] = React.useState([]);
+  const [data, setData] = React.useState<Array<any>>([]);
+  const [typeBadges, setTypeBadges] = React.useState<Array<any>>([]);
   const pb = PocketbaseHelper.pocketbase;
 
   React.useEffect(() => {

@@ -15,6 +15,7 @@ export type UserType = {
 }
 
 export type AuthContextType = {
+    id: string;
     record: UserType | null;
     token: string;
     login: (token: string) => void;
@@ -22,6 +23,7 @@ export type AuthContextType = {
 }
 
 const AuthContext = React.createContext<AuthContextType | null>({
+    id: '',
     record: {
         avatar: '',
         created: '',
@@ -48,11 +50,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (localToken) {
             const decodedToken = jwt_decode<UserState>(localToken);
             return {
+                id: decodedToken?.id,
                 record: decodedToken?.record,
                 token: localToken
             }
         }
-        return { record: null, token: '' }
+        return { id: '', record: null, token: '' }
     }, [localToken])
 
     const [user, setUser] = React.useState<UserState>(defaultUser);
@@ -61,6 +64,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.setItem('token', token);
         const decodedToken = jwt_decode<UserState>(token);
         setUser({
+            id: decodedToken?.id,
             record: decodedToken?.record,
             token: token
         });
@@ -70,12 +74,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const logout = React.useCallback(() => {
         localStorage.removeItem('token');
         setUser({
+            id: '',
             record: null,
             token: ''
         });
     }, [setUser]);
 
     const value = React.useMemo<AuthContextType>(() => ({
+        id: user?.id,
         record: user?.record,
         token: user?.token,
         login,

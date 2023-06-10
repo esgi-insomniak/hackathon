@@ -5,13 +5,14 @@ import TableSearch from "@/components/search/TableSearch";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 
 export default function SearchPage() {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState<Array<any>>([]);
   const pb = PocketbaseHelper.pocketbase;
 
   React.useEffect(() => {
     const fetchUsers = async () => {
       const fetchedData = await pb.collection("users").getFullList({
         sort: "-created",
+        filter: 'role = "consultant"',
         $autoCancel: false,
       });
       setData(fetchedData);

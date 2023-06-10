@@ -13,6 +13,7 @@ export default function Page() {
     const alert = useAlert();
     const { register, handleSubmit } = useForm<{ email: string, password: string }>()
     const { login } = useAuth()
+    const router = useRouter()
 
     const onSubmit = (data: { email: string, password: string }) => {
         pb
@@ -21,7 +22,8 @@ export default function Page() {
             .then((res) => {
                 login(res.token)
                 alert?.success('Vous êtes connecté !')
-                redirect('/')
+                //redirect to home without redirect of next
+                router.push('/');
             })
             .catch((error) => {
                 alert?.error(error.message)

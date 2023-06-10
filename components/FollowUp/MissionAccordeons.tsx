@@ -26,8 +26,8 @@ function Icon({ id, open }: { id: number; open: number }) {
 
 export default function MissionAccordeons({ data }: any) {
   const [open, setOpen] = useState(4);
-  const [mission, setMission] = useState([]);
-  const [userMissions, setUserMissions] = useState([]);
+  const [mission, setMission] = useState<Array<any>>([]);
+  const [userMissions, setUserMissions] = useState<Array<any>>([]);
   const pb = PocketbaseHelper.pocketbase;
 
   const handleOpen = (value: number) => {
@@ -46,15 +46,14 @@ export default function MissionAccordeons({ data }: any) {
     fetchMission();
   }, []);
 
-  mission.map((missions) => {
+  mission.map((missions: any) => {
     if (data.includes(missions.id) && !userMissions.includes(missions)) {
-      setUserMissions((userMissions) => [...userMissions, missions]);
+      setUserMissions((userMissions: any) => [...userMissions, missions]);
     }
   });
-  console.log(userMissions);
   return (
     <Fragment>
-      {userMissions.slice(0,3).map((mission, index) => (
+      {userMissions.slice(0,3).map((mission: any, index) => (
         <Accordion
           open={open === index}
           icon={<Icon id={index} open={open} />}
