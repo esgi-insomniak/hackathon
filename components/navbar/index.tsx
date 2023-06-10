@@ -13,6 +13,8 @@ import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";
+import Image from "next/image";
+import { SlMagnifier } from "react-icons/sl";
 
 export default function SideBar() {
     const router = useRouter()
@@ -30,6 +32,12 @@ export default function SideBar() {
                             <MdOutlineDashboard className="h-5 w-5" />
                         </ListItemPrefix>
                         Dashboard
+                    </ListItem>
+                    <ListItem onClick={() => router.push('/search')}>
+                        <ListItemPrefix>
+                            <SlMagnifier className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Rechercher
                     </ListItem>
                     <ListItem onClick={() => router.push('/quizz')}>
                         <ListItemPrefix>
@@ -64,7 +72,7 @@ export default function SideBar() {
                         {!isLoaded ? "Loading..." : (user?.firstName + " " + user?.lastName)}
                     </ListItem> */}
                 </div>
-                <ListItem onClick={() => {}} className="flex justify-center items-center">
+                <ListItem onClick={() => { }} className="flex justify-center items-center">
                     <ListItemPrefix>
                         <AiOutlinePoweroff className="h-5 w-5 text-red-500" />
                     </ListItemPrefix>

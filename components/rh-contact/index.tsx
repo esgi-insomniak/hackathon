@@ -8,9 +8,10 @@ export interface RhContactProps {
     phone: string;
     avatar: StaticImageData;
     name: string;
+    action?: () => void
 }
 
-export const RhContact = ({ title, email, phone, avatar, name }: RhContactProps) => {
+export const RhContact = ({ title, email, phone, avatar, name, action }: RhContactProps) => {
     return (
         <React.Fragment>
             <h2 className="font-bold">{title}</h2>
@@ -26,10 +27,11 @@ export const RhContact = ({ title, email, phone, avatar, name }: RhContactProps)
                     </div>
                 </div>
                 <div className="flex space-x-5 w-full justify-center">
-                    <Button variant="outlined" fullWidth style={{ paddingTop: 5, paddingBottom: 5 }}>
+                    <Button variant="outlined" fullWidth style={{ paddingTop: 5, paddingBottom: 5 }} onClick={() => { window.location.href = `mailto:${email}` }
+                    }>
                         Contacter
                     </Button>
-                    <Button fullWidth style={{ paddingTop: 5, paddingBottom: 5 }}>
+                    <Button fullWidth style={{ paddingTop: 5, paddingBottom: 5 }} onClick={action}>
                         Prendre RDV
                     </Button>
                 </div>

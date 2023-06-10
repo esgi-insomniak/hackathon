@@ -166,7 +166,7 @@ export default function SearchPage() {
   return (
     <React.Fragment>
       <div className="pt-2 relative text-gray-600">
-            <TableSearch data={data}/>
+        <TableSearch data={data} />
       </div>
     </React.Fragment>
   );

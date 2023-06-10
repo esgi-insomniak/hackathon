@@ -12,11 +12,11 @@ import {
     TabsHeader,
     Tab, Select, Option
 } from "@material-tailwind/react";
-import {BiPlus} from "react-icons/bi";
+import { BiPlus } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import {FaRocket} from "react-icons/fa";
+import { FaRocket } from "react-icons/fa";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import BadgesSkills from "@/components/FollowUp/BadgesSkills";
 
 const TABS = [
@@ -61,26 +61,26 @@ export default function Page() {
                 }
             });
             //array unique by name
-            let skillsGroupedByName = [];
+            let skillsGroupedByName: any[] = [];
             skillsFormatted.forEach((skill) => {
-                if(!skillsGroupedByName[skill.name]) {
+                if (!skillsGroupedByName[skill.name]) {
                     skillsGroupedByName[skill.name] = skill;
                 }
             });
             setSkills(Object.values(skillsGroupedByName));
         });
         pb.collection('quizz').getFullList({
-            sort:'-created',
+            sort: '-created',
             expand: 'skill,skill.skill_level'
         }).then((data) => {
             setQuizzes(data);
         });
         pb.collection('formations').getFullList({
-            sort:'-created',
+            sort: '-created',
         }).then((data) => {
             setFormations(data);
         });
-    },[]);
+    }, []);
 
     return (
         <div className="w-full max-h-screen">
@@ -116,7 +116,7 @@ export default function Page() {
                         </Tabs>
 
                         <Select size="md" label="Sélectionner une compétence">
-                            {skills.map((skill) => (
+                            {skills.map((skill: any) => (
                                 <Option key={skill.id} value={skill.id}>{skill.name}</Option>
                             ))}
                         </Select>
@@ -152,7 +152,7 @@ export default function Page() {
                                             <BadgesSkills props={
                                                 {
                                                     color: quizz.expand.skill.expand.skill_level.color,
-                                                    logo: pb.files.getUrl(quizz.expand.skill.expand.skill_level, quizz.expand.skill.expand.skill_level.icon, {'thumb': '20x20'}),
+                                                    logo: pb.files.getUrl(quizz.expand.skill.expand.skill_level, quizz.expand.skill.expand.skill_level.icon, { 'thumb': '20x20' }),
                                                     stack: quizz.expand.skill.name,
                                                     level: quizz.expand.skill.expand.skill_level.name,
                                                     width: 20,

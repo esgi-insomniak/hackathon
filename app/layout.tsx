@@ -1,7 +1,9 @@
 import SideBar from '@/components/navbar'
 import './globals.css'
 import { AlertInso, AlertProvider } from '@/providers/alert'
-import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
+import { AuthProvider } from '@/providers/auth';
+import { checkLoggedIn, isLoggedIn, useUser, useUserProtected } from '@/helpers/utils/user';
+import React from 'react';
 
 export const metadata = {
   title: 'Carbon IT',
@@ -13,32 +15,28 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const user = true;
 
-  const pocketbase = PocketbaseHelper.pocketbase;
+  const user = true
 
   return (
-      <html lang="fr">
+    <html lang="fr">
+      <AuthProvider>
         <AlertProvider>
           <body className="bg-slate-200 h-screen flex justify-end">
-            {user && (
-              <div className="w-full flex">
+            <div className="w-full flex">
+              {user && (
                 <div className="w-1/6">
                   <SideBar />
                 </div>
-                <div className="w-5/6">
-                  {children}
-                </div>
-              </div>
-            )}
-            {!user && (
-              <div className='h-full w-full'>
+              )}
+              <div className="w-5/6">
                 {children}
               </div>
-            )}
+            </div>
             <AlertInso />
           </body>
         </AlertProvider>
-      </html>
+      </AuthProvider>
+    </html>
   )
 }
