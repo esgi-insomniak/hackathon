@@ -2,166 +2,28 @@
 
 import React from "react";
 import TableSearch from "@/components/search/TableSearch";
+import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 
 export default function SearchPage() {
-  const data = [
-    {
-      name: "Bessonnier",
-      firstname: "Raphaël",
-      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-      poste: "Développeur",
-      skills: [
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "Javascript",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "Javascript",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "Javascript",
-          level: "Niveau Bois",
-        },
-      ],
-    },
-    {
-      name: "Cleris",
-      firstname: "Loan",
-      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-      poste: "Développeur",
-      skills: [
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-      ],
-    },
-    {
-      name: "Jamin",
-      firstname: "Mael",
-      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-      poste: "Développeur",
-      skills: [
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-      ],
-    },
-    {
-      name: "Cuillandre",
-      firstname: "Tom",
-      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-      poste: "Développeur",
-      skills: [
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-      ],
-    },
-    {
-      name: "Mohamed",
-      firstname: "Kassim",
-      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-      poste: "Développeur",
-      skills: [
-        {
-          color: "cyan",
-          logo: "/badgesImages/diamondBlock.png",
-          stack: "PHP",
-          level: "Niveau Diamant",
-        },
-        {
-          color: "yellow",
-          logo: "/badgesImages/goldBlock.png",
-          stack: "JS",
-          level: "Niveau Or",
-        },
-        {
-          color: "blue-gray",
-          logo: "/badgesImages/ironBlock.png",
-          stack: "ReactJS",
-          level: "Niveau Fer",
-        },
-      ],
-    },
-    {
-      name: "Laurence",
-      firstname: "Yann",
-      profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-      poste: "Marketeur",
-      skills: [
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-        {
-          color: "brown",
-          logo: "/badgesImages/woodBlock.png",
-          stack: "C#",
-          level: "Niveau Bois",
-        },
-      ],
-    },
-  ];
+  const [data, setData] = React.useState([]);
+  const pb = PocketbaseHelper.pocketbase;
+
+  React.useEffect(() => {
+    const fetchUsers = async () => {
+      const fetchedData = await pb.collection("users").getFullList({
+        sort: "-created",
+        $autoCancel: false,
+      });
+      setData(fetchedData);
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (!data) {
+    // Add loading state or return null while data is being fetched
+    return null;
+  }
 
   return (
     <React.Fragment>

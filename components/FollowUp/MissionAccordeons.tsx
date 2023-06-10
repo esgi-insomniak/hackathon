@@ -4,6 +4,8 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import React from "react";
+import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 
 function Icon({ id, open }: { id: number; open: number }) {
   return (
@@ -22,24 +24,37 @@ function Icon({ id, open }: { id: number; open: number }) {
   );
 }
 
-type MissionAccordeonsType = {
-  data: {
-    missionName: string;
-    missionDate: string;
-    missionDescription: string;
-  }[];
-};
-
-export default function MissionAccordeons({ data }: MissionAccordeonsType) {
+export default function MissionAccordeons({ data }: any) {
   const [open, setOpen] = useState(4);
+  const [mission, setMission] = useState([]);
+  const [userMissions, setUserMissions] = useState([]);
+  const pb = PocketbaseHelper.pocketbase;
 
   const handleOpen = (value: number) => {
     setOpen(open === value ? 0 : value);
   };
 
+  React.useEffect(() => {
+    const fetchMission = async () => {
+      const fetchedData = await pb.collection("missions").getFullList({
+        sort: "-created",
+        $autoCancel: false,
+      });
+      setMission(fetchedData);
+    };
+
+    fetchMission();
+  }, []);
+
+  mission.map((missions) => {
+    if (data.includes(missions.id) && !userMissions.includes(missions)) {
+      setUserMissions((userMissions) => [...userMissions, missions]);
+    }
+  });
+  console.log(userMissions);
   return (
     <Fragment>
-      {data.map((mission, index) => (
+      {userMissions.slice(0,3).map((mission, index) => (
         <Accordion
           open={open === index}
           icon={<Icon id={index} open={open} />}
@@ -50,10 +65,12 @@ export default function MissionAccordeons({ data }: MissionAccordeonsType) {
             onClick={() => handleOpen(index)}
             className={`border-b-0 transition-colors`}
           >
-            {mission.missionName} - {mission.missionDate}
+            {mission.name} -{" "}
+            {new Date(mission.start_date).toLocaleDateString("en-GB")} au{" "}
+            {new Date(mission.end_date).toLocaleDateString("en-GB")}
           </AccordionHeader>
           <AccordionBody className="text-base font-normal pt-0">
-            {mission.missionDescription}
+            {mission.description}
           </AccordionBody>
         </Accordion>
       ))}

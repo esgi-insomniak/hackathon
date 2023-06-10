@@ -1,0 +1,107 @@
+[
+    {
+        "name": "Conference",
+        "description": "Join us for an exciting conference on the latest technologies.",
+        "location": "Grand Convention Center",
+        "is_internal": false,
+        "start_date": "2023-06-10",
+        "end_date": "2023-06-12",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Team Building Activity",
+        "description": "Engage in fun team-building exercises to strengthen collaboration.",
+        "location": "Adventure Park",
+        "is_internal": true,
+        "start_date": "2023-07-05",
+        "end_date": "2023-07-05",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Product Launch",
+        "description": "Introducing our latest product to the market.",
+        "location": "Company Headquarters",
+        "is_internal": false,
+        "start_date": "2023-08-15",
+        "end_date": "2023-08-15",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Workshop: Agile Methodologies",
+        "description": "Learn about the principles and practices of Agile methodologies.",
+        "location": "Training Room 1",
+        "is_internal": true,
+        "start_date": "2023-09-20",
+        "end_date": "2023-09-21",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Charity Event",
+        "description": "Support a worthy cause and make a positive impact on the community.",
+        "location": "City Park",
+        "is_internal": false,
+        "start_date": "2023-10-12",
+        "end_date": "2023-10-12",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Project Kickoff Meeting",
+        "description": "Officially start the new project and align team members.",
+        "location": "Meeting Room 3",
+        "is_internal": true,
+        "start_date": "2023-11-02",
+        "end_date": "2023-11-02",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Networking Event",
+        "description": "Expand your professional network and make valuable connections.",
+        "location": "City Center Hotel",
+        "is_internal": false,
+        "start_date": "2024-01-08",
+        "end_date": "2024-01-08",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Training Session: Effective Communication",
+        "description": "Enhance your communication skills for better collaboration.",
+        "location": "Training Room 2",
+        "is_internal": true,
+        "start_date": "2024-02-16",
+        "end_date": "2024-02-16",
+        "author": "qr1jz4reukw8cht",
+        "participants": []
+    },
+    {
+        "name": "Company Anniversary Celebration",
+        "description": "Celebrate another successful year with our company.",
+        "location": "Event Hall",
+        "is_internal": false,
+        "start_date": "2024-03-25",
+        "end_date": "2024-03-25",
+        "author": "qr1jz4reukw8cht",
+        "participants": [
+            "4"
+        ]
+    },
+    {
+        "name": "Project Review Meeting",
+        "description": "Evaluate the progress and performance of the project.",
+        "location": "Conference Room B",
+        "is_internal": true,
+        "start_date": "2024-04-14",
+        "end_date": "2024-04-14",
+        "author": "qr1jz4reukw8cht",
+        "participants": [
+            "2",
+            "3"
+        ]
+    }
+]
