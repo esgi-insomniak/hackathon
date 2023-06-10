@@ -87,22 +87,22 @@ type TableSearchType = {
   }[];
 };
 
-export default function TableSearch({ data }: TableSearchType) {
+export default function TableSearch({ data }: any) {
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleSearch = (event: any) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredData = data.filter((item) => {
+  const filteredData = data.filter((item: any) => {
     const fullName = `${item.firstname} ${item.name}`.toLowerCase();
     const searchTermLower = searchTerm.toLowerCase();
 
-    const matchingSkills = item.skills
-      .map((skill) => skill.stack.toLowerCase())
-      .filter((skill) => skill.includes(searchTermLower));
+    // const matchingSkills = item.kills
+    //   .map((skill: any) => skill.stack.toLowerCase())
+    //   .filter((skill: any) => skill.includes(searchTermLower));
 
-    return fullName.includes(searchTermLower) || matchingSkills.length > 0;
+    return fullName.includes(searchTermLower);
   });
 
   return (
@@ -151,86 +151,69 @@ export default function TableSearch({ data }: TableSearchType) {
           </thead>
           <tbody>
             {filteredData.length != 0 ? (
-              filteredData.map(
-                (
-                  {
-                    name,
-                    firstname,
-                    profilePicture,
-                    poste,
-                    skills,
-                  }: {
-                    name: string;
-                    firstname: string;
-                    profilePicture: string;
-                    poste: string;
-                    skills: {
-                      color: string;
-                      logo: string;
-                      stack: string;
-                      level: string;
-                    }[];
-                  },
-                  index
-                ) => {
-                  const fullName = `${firstname}-${name}`
-                    .toLowerCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "");
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
+              filteredData.map((data: any, index: number) => {
+                const isLast = index === TABLE_ROWS.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-                  return (
-                    <tr key={index}>
-                      <td className={classes}>
-                        <div className="flex items-center gap-3">
+                return (
+                  <tr key={index}>
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        {data.avatar != "" ? (
                           <Avatar
-                            src={profilePicture}
-                            alt={name}
+                            src={`http://localhost:8090/api/files/users/${data.id}/${data.avatar}?thumb=24x24`}
+                            alt={data.name}
                             size="md"
                             className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
                           />
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-bold"
-                          >
-                            {name} {firstname}
-                          </Typography>
-                        </div>
-                      </td>
-                      <td className={classes}>
+                        ) : (
+                          <Avatar
+                            src={`https://www.w3schools.com/w3images/avatar2.png`}
+                            alt={data.name}
+                            size="md"
+                            className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                          />
+                        )}
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal"
+                          className="font-bold"
                         >
-                          {poste}
+                          {data.name}
                         </Typography>
-                      </td>
-                      <td className={classes}>
-                        <div className="flex justify-around items-center">
-                          {skills.map((skill, index) => (
-                            <BadgesSkills key={index} props={skill} />
-                          ))}
-                        </div>
-                      </td>
-                      <td className={classes}>
-                        <div className="w-max">
-                          <Button>
-                            <Link href={`/suivi/${fullName}`}>
-                              {/* <AiOutlinePlusCircle size={25} /> */}
-                              Voir le profil
-                            </Link>
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                }
-              )
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        <p>{data.poste}</p>
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex justify-around items-center">
+                        {data.defaultSkills.map((skill: any, index: number) => (
+                          <BadgesSkills key={index} props={skill} />
+                        ))}
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <div className="w-max">
+                        <Button>
+                          <Link href={`/suivi/${data.id}`}>
+                            {/* <AiOutlinePlusCircle size={25} /> */}
+                            Voir le profil
+                          </Link>
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td className="p-4 text-center" colSpan={4}>
@@ -243,36 +226,12 @@ export default function TableSearch({ data }: TableSearchType) {
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Button variant="outlined" color="blue-gray" size="sm">
-          Previous
-        </Button>
+      <CardFooter className="flex items-center justify-center border-t border-blue-gray-50 p-4">
         <div className="flex items-center gap-2">
           <IconButton variant="outlined" color="blue-gray" size="sm">
             1
           </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            ...
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            9
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            10
-          </IconButton>
         </div>
-        <Button variant="outlined" color="blue-gray" size="sm">
-          Next
-        </Button>
       </CardFooter>
     </Card>
   );

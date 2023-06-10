@@ -7,7 +7,7 @@ import {
     ListItem,
     ListItemPrefix,
 } from "@material-tailwind/react";
-import { AiOutlinePoweroff } from "react-icons/ai";
+import { AiOutlinePoweroff, AiOutlineSearch } from "react-icons/ai";
 import { BsCalendarEvent } from "react-icons/bs";
 import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";
 import Image from "next/image";
 import { SlMagnifier } from "react-icons/sl";
+import { GrValidate } from "react-icons/gr";
 
 export default function SideBar() {
     const router = useRouter()
@@ -56,6 +57,12 @@ export default function SideBar() {
                             <BsCalendarEvent className="h-5 w-5" />
                         </ListItemPrefix>
                         Evenements
+                    </ListItem>
+                    <ListItem onClick={() => router.push('/achievement')}>
+                        <ListItemPrefix>
+                            <GrValidate className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Succès
                     </ListItem>
                     <ListItem onClick={() => router.push('/admin')}>
                         <ListItemPrefix>
