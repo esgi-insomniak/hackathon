@@ -22,11 +22,11 @@ export default function BadgesSkills({ props }: BadgesType) {
         className="flex justify-around items-center gap-3 my-2"
       >
         {props.stack}
-        <img
+        <Image
           src={props.logo}
           alt={props.stack}
-          width={props.width}
-          height={props.height}
+          width={25}
+          height={25}
           className="flex-shrink-0"
         />
       </Button>
