@@ -10,10 +10,9 @@ import {
 import React, { FormEvent } from "react";
 
 export default function Page() {
-  const [successData, setSuccessData] = React.useState([]);
+  const [successData, setSuccessData] = React.useState<Array<any>>([]);
 
   const handleSubmit = (event: any) => {
-    console.log(event);
     event.preventDefault();
 
     const id = event.target[0].value
@@ -24,7 +23,6 @@ export default function Page() {
     const imageUrl = event.target[3].value;
 
     const data = [id, name, description, imageUrl];
-    console.log("Success Data:", data);
 
     setSuccessData(data);
 

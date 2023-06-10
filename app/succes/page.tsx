@@ -8,10 +8,8 @@ import {
   SkillGroupDataType,
   SavedDataType,
   SkillThemeType,
-  NodeSelectEvent,
 } from "beautiful-skill-tree";
 import Link from "next/link";
-import { Button } from "ra-ui-materialui";
 import React from "react";
 
 export default function Page() {

@@ -18,12 +18,12 @@ import Link from "next/link";
 export default function Page() {
   const id = useParams().suivi;
 
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [skills, setSkills] = React.useState([]);
-  const [userSkills, setUserSkills] = React.useState([]);
-  const [missions, setMissions] = React.useState([]);
-  const [userMissions, setUserMissions] = React.useState([]);
+  const [data, setData] = React.useState<Array<any>>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [skills, setSkills] = React.useState<Array<any>>([]);
+  const [userSkills, setUserSkills] = React.useState<Array<any>>([]);
+  const [missions, setMissions] = React.useState<Array<any>>([]);
+  const [userMissions, setUserMissions] = React.useState<Array<any>>([]);
   const pb = PocketbaseHelper.pocketbase;
 
   React.useEffect(() => {
@@ -59,15 +59,15 @@ export default function Page() {
     return null;
   }
 
-  skills.map((skill) => {
+  skills.map((skill: any) => {
     if (data.defaultSkills.includes(skill.id) && !userSkills.includes(skill.id)) {
-      setUserSkills((userSkills) => [...userSkills, skill.id]);
+      setUserSkills((userSkills: any) => [...userSkills, skill.id]);
     }
   });
 
-  missions.map((mission) => {
+  missions.map((mission: any) => {
     if (data.missions.includes(mission.id) && !userMissions.includes(mission.id)) {
-      setUserMissions((userMissions) => [...userMissions, mission.id]);
+      setUserMissions((userMissions: any) => [...userMissions, mission.id]);
     }
   });
 

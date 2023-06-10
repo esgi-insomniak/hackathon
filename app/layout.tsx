@@ -1,21 +1,27 @@
+'use client'
 import SideBar from '@/components/navbar'
 import './globals.css'
 import { AlertInso, AlertProvider } from '@/providers/alert'
-import { AuthProvider } from '@/providers/auth';
+import { AuthProvider, useAuth } from '@/providers/auth';
 import { checkLoggedIn, isLoggedIn, useUser, useUserProtected } from '@/helpers/utils/user';
 import React from 'react';
+import { getUserData } from '@/helpers/hook';
 
-export const metadata = {
-  title: 'Carbon IT',
-  description: 'Intranet Carbon',
-}
+// export const metadata = {
+//   title: 'Carbon IT',
+//   description: 'Intranet Carbon',
+// }
 
 export default async function RootLayout({
   children
 }: {
   children: React.ReactNode
 }) {
-
+  // const { id } = useAuth();
+    
+  React.useEffect(() => {
+      console.log(getUserData("bxwzsxj9hckkags"));
+  }, []);
   const user = true
 
   return (

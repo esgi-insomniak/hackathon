@@ -31,19 +31,18 @@ export default function TableSearch({ data }: any) {
         const skillIds = response.map((skill: any) => skill);
         setSkills(skillIds);
       } catch (error) {
-        console.error("Error fetching skills:", error);
+
       }
     };
     fetchSkills();
   }, []);
-  //console.log(skills);
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
   const getSkillByNames = (searchTerm: string) => {
     const skillObj: any = {};
-    skills.forEach((skill) => {
+    skills.forEach((skill: any) => {
       skillObj[skill.id] = skill;
     });
 
@@ -58,7 +57,7 @@ export default function TableSearch({ data }: any) {
     const searchTermLower = searchTerm.toLowerCase();
 
     const matchingSkills = getSkillByNames(searchTermLower);
-    const matchingSkillIds = matchingSkills.map((skill) => skill.id);
+    const matchingSkillIds = matchingSkills.map((skill: any) => skill.id);
 
     return (
       fullName.includes(searchTermLower) ||
@@ -67,8 +66,6 @@ export default function TableSearch({ data }: any) {
       )
     );
   });
-
-  console.log(filteredData);
 
   return (
     <Card className="h-full w-full">
