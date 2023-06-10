@@ -4,106 +4,71 @@ import {
   Typography,
   Button,
   CardBody,
-  Chip,
   CardFooter,
   Avatar,
   IconButton,
-  Tooltip,
   Input,
 } from "@material-tailwind/react";
 import BadgesSkills from "../FollowUp/BadgesSkills";
 import Link from "next/link";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import React from "react";
+import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 
 const TABLE_HEAD = ["Nom", "Poste", "Compétences principales", ""];
 
-const TABLE_ROWS = [
-  {
-    img: "/img/logos/logo-spotify.svg",
-    name: "Spotify",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-amazon.svg",
-    name: "Amazon",
-    amount: "$5,000",
-    date: "Wed 1:00pm",
-    status: "paid",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-pinterest.svg",
-    name: "Pinterest",
-    amount: "$3,400",
-    date: "Mon 7:40pm",
-    status: "pending",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-google.svg",
-    name: "Google",
-    amount: "$1,000",
-    date: "Wed 5:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-netflix.svg",
-    name: "netflix",
-    amount: "$14,000",
-    date: "Wed 3:30am",
-    status: "cancelled",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-];
-
-type TableSearchType = {
-  data: {
-    name: string;
-    firstname: string;
-    profilePicture: string;
-    poste: string;
-    skills: {
-      color: string;
-      logo: string;
-      stack: string;
-      level: string;
-    }[];
-  }[];
-};
-
 export default function TableSearch({ data }: any) {
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [skills, setSkills] = React.useState<string[]>([]);
+  const pb = PocketbaseHelper.pocketbase;
 
-  const handleSearch = (event: any) => {
+  React.useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await pb
+          .collection("skills")
+          .getFullList({ $autoCancel: false });
+        const skillIds = response.map((skill: any) => skill);
+        setSkills(skillIds);
+      } catch (error) {
+        console.error("Error fetching skills:", error);
+      }
+    };
+    fetchSkills();
+  }, []);
+  //console.log(skills);
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+  };
+
+  const getSkillByNames = (searchTerm: string) => {
+    const skillObj: any = {};
+    skills.forEach((skill) => {
+      skillObj[skill.id] = skill;
+    });
+
+    const matchingSkills = Object.values(skillObj).filter((skill: any) =>
+      skill.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    return matchingSkills;
   };
 
   const filteredData = data.filter((item: any) => {
     const fullName = `${item.firstname} ${item.name}`.toLowerCase();
     const searchTermLower = searchTerm.toLowerCase();
 
-    // const matchingSkills = item.kills
-    //   .map((skill: any) => skill.stack.toLowerCase())
-    //   .filter((skill: any) => skill.includes(searchTermLower));
+    const matchingSkills = getSkillByNames(searchTermLower);
+    const matchingSkillIds = matchingSkills.map((skill) => skill.id);
 
-    return fullName.includes(searchTermLower);
+    return (
+      fullName.includes(searchTermLower) ||
+      item.defaultSkills.some((skillId: string) =>
+        matchingSkillIds.includes(skillId)
+      )
+    );
   });
+
+  console.log(filteredData);
 
   return (
     <Card className="h-full w-full">
@@ -120,7 +85,7 @@ export default function TableSearch({ data }: any) {
           <div className="flex w-full shrink-0 gap-2 md:w-max">
             <div className="w-full md:w-72">
               <Input
-                label="Search"
+                label="Recherche"
                 icon={<BsSearch className="h-5 w-5" />}
                 value={searchTerm}
                 onChange={handleSearch}
@@ -152,7 +117,7 @@ export default function TableSearch({ data }: any) {
           <tbody>
             {filteredData.length != 0 ? (
               filteredData.map((data: any, index: number) => {
-                const isLast = index === TABLE_ROWS.length - 1;
+                const isLast = index === filteredData.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
@@ -191,7 +156,7 @@ export default function TableSearch({ data }: any) {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        <p>{data.poste}</p>
+                        {data.poste}
                       </Typography>
                     </td>
                     <td className={classes}>

@@ -35,11 +35,15 @@ import("pocketbase")
                 for (const user of users) {
                   try {
                     user.missions = [
-                      missions[randomInt(0, 2)],
-                      missions[randomInt(0, 2)],
-                      missions[randomInt(0, 2)],
+                      missions[randomInt(0, 3)],
+                      missions[randomInt(0, 3)],
+                      missions[randomInt(0, 3)],
                     ];
-                    user.defaultSkills = [defaultSkill[randomInt(0, 4)]];
+                    user.defaultSkills = [
+                      defaultSkill[randomInt(0, 4)],
+                      defaultSkill[randomInt(0, 4)],
+                      defaultSkill[randomInt(0, 4)],
+                    ];
                     const createdRecord = await pb
                       .collection("users")
                       .create(user, { $autoCancel: false });

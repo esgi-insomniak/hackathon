@@ -54,7 +54,7 @@ export default function MissionAccordeons({ data }: any) {
   console.log(userMissions);
   return (
     <Fragment>
-      {userMissions.map((mission, index) => (
+      {userMissions.slice(0,3).map((mission, index) => (
         <Accordion
           open={open === index}
           icon={<Icon id={index} open={open} />}

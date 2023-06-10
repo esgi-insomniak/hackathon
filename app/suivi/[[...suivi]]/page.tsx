@@ -187,7 +187,7 @@ export default function Page() {
                 Historique
               </h2>
               <div>
-                <ListComponent data={data2} fullname={fullName} />
+                <ListComponent data={data2} fullname={id} />
               </div>
             </div>
           </div>
