@@ -486,6 +486,73 @@
     "options": {}
   },
   {
+    "id": "cvra8hr6w1yqjx6",
+    "name": "skill_levels",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "jeyi7nrk",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "fnlh5xk1",
+        "name": "weight",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": 0,
+          "max": null
+        }
+      },
+      {
+        "id": "sjbw9cun",
+        "name": "color",
+        "type": "select",
+        "system": false,
+        "required": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "blue-gray",
+            "gray",
+            "yellow",
+            "cyan",
+            "brown"
+          ]
+        }
+      },
+      {
+        "id": "cpr2giqj",
+        "name": "icon",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
     "id": "_pb_users_auth_",
     "name": "users",
     "type": "auth",
@@ -604,6 +671,22 @@
           "max": null,
           "pattern": ""
         }
+      },
+      {
+        "id": "cn8mvack",
+        "name": "roles",
+        "type": "select",
+        "system": false,
+        "required": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "admin",
+            "consultant",
+            "rh",
+            "commercial"
+          ]
+        }
       }
     ],
     "indexes": [],
@@ -622,72 +705,5 @@
       "onlyEmailDomains": null,
       "requireEmail": false
     }
-  },
-  {
-    "id": "cvra8hr6w1yqjx6",
-    "name": "skill_levels",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "jeyi7nrk",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "fnlh5xk1",
-        "name": "weight",
-        "type": "number",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": 0,
-          "max": null
-        }
-      },
-      {
-        "id": "sjbw9cun",
-        "name": "color",
-        "type": "select",
-        "system": false,
-        "required": false,
-        "options": {
-          "maxSelect": 1,
-          "values": [
-            "blue-gray",
-            "gray",
-            "yellow",
-            "cyan",
-            "brown"
-          ]
-        }
-      },
-      {
-        "id": "cpr2giqj",
-        "name": "icon",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
   }
 ]

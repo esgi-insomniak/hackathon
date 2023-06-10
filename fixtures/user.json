@@ -11,7 +11,8 @@
         "missions": [],
         "formations": [],
         "defaultSkills": [],
-        "poste": "Développeur"
+        "poste": "Développeur",
+        "roles": "consultant"
     },
     {
         "username": "user2",
@@ -25,7 +26,8 @@
         "missions": [],
         "formations": [],
         "defaultSkills": [],
-        "poste": "Développeur"
+        "poste": "Développeur",
+        "roles": "consultant"
     },
     {
         "username": "user3",
@@ -39,7 +41,8 @@
         "missions": [],
         "formations": [],
         "defaultSkills": [],
-        "poste": "Développeur"
+        "poste": "Développeur",
+        "roles": "consultant"
     },
     {
         "username": "user4",
@@ -53,7 +56,8 @@
         "missions": [],
         "formations": [],
         "defaultSkills": [],
-        "poste": "Développeur"
+        "poste": "Développeur",
+        "roles": "consultant"
     },
     {
         "username": "user5",
@@ -67,6 +71,52 @@
         "missions": [],
         "formations": [],
         "defaultSkills": [],
-        "poste": "Marketeur"
+        "poste": "Marketeur",
+        "roles": "consultant"
+    },
+    {
+        "username": "Admin",
+        "email": "admin@example.com",
+        "emailVisibility": true,
+        "password": "password4",
+        "passwordConfirm": "password4",
+        "name": "Admin Carbon",
+        "manager": "",
+        "quizzes": [],
+        "missions": [],
+        "formations": [],
+        "defaultSkills": [],
+        "poste": "Admin",
+        "roles": "admin"
+    },
+    {
+        "username": "RH",
+        "email": "rh@example.com",
+        "emailVisibility": true,
+        "password": "password4",
+        "passwordConfirm": "password4",
+        "name": "Ressources Humaines",
+        "manager": "",
+        "quizzes": [],
+        "missions": [],
+        "formations": [],
+        "defaultSkills": [],
+        "poste": "Ressources Humaines",
+        "roles": "rh"
+    },
+    {
+        "username": "Commercial",
+        "email": "commercial@example.com",
+        "emailVisibility": true,
+        "password": "password4",
+        "passwordConfirm": "password4",
+        "name": "Commercial Carbon",
+        "manager": "",
+        "quizzes": [],
+        "missions": [],
+        "formations": [],
+        "defaultSkills": [],
+        "poste": "Commercial",
+        "roles": "commercial"
     }
 ]
