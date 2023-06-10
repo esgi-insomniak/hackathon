@@ -13,18 +13,11 @@ import { CgWebsite } from "react-icons/cg";
 import Avis from "@/components/FollowUp/Avis";
 import { useParams } from "next/navigation";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
+import Link from "next/link";
 
 export default function Page() {
   const id = useParams().suivi;
 
-  const data3 = {
-    name: "Bessonnier",
-    firstname: "Raphaël",
-    profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-    poste: "Développeur",
-  };
-
-  const fullName = `${data3.firstname}-${data3.name}`;
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [skills, setSkills] = React.useState([]);
@@ -78,7 +71,6 @@ export default function Page() {
     }
   });
 
-  console.log(userMissions);
   const data2 = [
     ["Soirée Pizza", "08/06/2023", "afterwork"],
     ["Bienvenue chez CarbonIT", "08/06/2023", "badges"],
@@ -163,7 +155,7 @@ export default function Page() {
                 ))}
               </div>
               <Button className="flex items-center mx-auto my-5">
-                Se former sur une formation
+                <Link href="/quizz">Se former sur une formation</Link>
               </Button>
             </div>
             <div className="w-1/3">

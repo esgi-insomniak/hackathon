@@ -58,7 +58,7 @@ export default function SideBar() {
                         </ListItemPrefix>
                         Evenements
                     </ListItem>
-                    <ListItem onClick={() => router.push('/achievement')}>
+                    <ListItem onClick={() => router.push('/succes')}>
                         <ListItemPrefix>
                             <GrValidate className="h-5 w-5" />
                         </ListItemPrefix>
