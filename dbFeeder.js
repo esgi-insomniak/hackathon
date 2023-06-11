@@ -40,9 +40,9 @@ import("pocketbase")
                       missions[randomInt(0, 3)],
                     ];
                     user.defaultSkills = [
-                      defaultSkill[randomInt(0, 4)],
-                      defaultSkill[randomInt(0, 4)],
-                      defaultSkill[randomInt(0, 4)],
+                      defaultSkill[randomInt(0, 5)],
+                      defaultSkill[randomInt(0, 5)],
+                      defaultSkill[randomInt(0, 5)],
                     ];
                     const createdRecord = await pb
                       .collection("users")
