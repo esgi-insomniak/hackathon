@@ -11,6 +11,7 @@
         "type": "text",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": null,
           "max": null,
@@ -23,6 +24,7 @@
         "type": "text",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": null,
           "max": null,
@@ -35,6 +37,7 @@
         "type": "text",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": null,
           "max": null,
@@ -47,6 +50,7 @@
         "type": "bool",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {}
       },
       {
@@ -55,6 +59,7 @@
         "type": "date",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": "",
           "max": ""
@@ -66,6 +71,7 @@
         "type": "date",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": "",
           "max": ""
@@ -77,6 +83,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "_pb_users_auth_",
           "cascadeDelete": false,
@@ -91,6 +98,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "_pb_users_auth_",
           "cascadeDelete": false,
@@ -100,451 +108,6 @@
         }
       }
     ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "h3oo21t37ahxrq3",
-    "name": "formations",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "lkovrjyy",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "s2hg0bm1",
-        "name": "description",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "mx5t0836",
-        "name": "content",
-        "type": "editor",
-        "system": false,
-        "required": false,
-        "options": {}
-      },
-      {
-        "id": "4p00nabe",
-        "name": "source",
-        "type": "url",
-        "system": false,
-        "required": false,
-        "options": {
-          "exceptDomains": null,
-          "onlyDomains": null
-        }
-      },
-      {
-        "id": "mgu883qp",
-        "name": "quizz",
-        "type": "relation",
-        "system": false,
-        "required": false,
-        "options": {
-          "collectionId": "n5sb277kgyoq73z",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": 1,
-          "displayFields": []
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "bs5ecegsoddfswu",
-    "name": "missions",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "mju1rv2k",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "m1uopxq8",
-        "name": "start_date",
-        "type": "date",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": "",
-          "max": ""
-        }
-      },
-      {
-        "id": "8iwrrtwz",
-        "name": "end_date",
-        "type": "date",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": "",
-          "max": ""
-        }
-      },
-      {
-        "id": "hinkvnnz",
-        "name": "description",
-        "type": "editor",
-        "system": false,
-        "required": false,
-        "options": {}
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "n5sb277kgyoq73z",
-    "name": "quizz",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "aywb3zsf",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "sb3npfz8",
-        "name": "description",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "sw4v1quo",
-        "name": "questions",
-        "type": "relation",
-        "system": false,
-        "required": false,
-        "options": {
-          "collectionId": "nobb8lvdqb8q5df",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": null,
-          "displayFields": []
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "dquz1qm5lu91pg8",
-    "name": "quizz_answers",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "viqtegy4",
-        "name": "content",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "bthkcdke",
-        "name": "is_correct",
-        "type": "bool",
-        "system": false,
-        "required": false,
-        "options": {}
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "nobb8lvdqb8q5df",
-    "name": "quizz_questions",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "uqpzm8zo",
-        "name": "content",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "3ssyuqst",
-        "name": "order",
-        "type": "number",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": 0,
-          "max": null
-        }
-      },
-      {
-        "id": "da9yfvif",
-        "name": "field",
-        "type": "relation",
-        "system": false,
-        "required": false,
-        "options": {
-          "collectionId": "dquz1qm5lu91pg8",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": null,
-          "displayFields": []
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "lybuq18nxn0ktgu",
-    "name": "roadmaps",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "a0dpjhvv",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "oodpjieq",
-        "name": "description",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "kijqktmv",
-        "name": "quizz",
-        "type": "relation",
-        "system": false,
-        "required": false,
-        "options": {
-          "collectionId": "n5sb277kgyoq73z",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": 1,
-          "displayFields": []
-        }
-      },
-      {
-        "id": "tkniorua",
-        "name": "formations",
-        "type": "relation",
-        "system": false,
-        "required": true,
-        "options": {
-          "collectionId": "h3oo21t37ahxrq3",
-          "cascadeDelete": false,
-          "minSelect": 1,
-          "maxSelect": null,
-          "displayFields": []
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "y0vb023w7yizhpw",
-    "name": "skills",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "knmackte",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "ud2pn5wk",
-        "name": "skill_level",
-        "type": "relation",
-        "system": false,
-        "required": false,
-        "options": {
-          "collectionId": "cvra8hr6w1yqjx6",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": 1,
-          "displayFields": []
-        }
-      }
-    ],
-    "indexes": [],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": "",
-    "updateRule": "",
-    "deleteRule": "",
-    "options": {}
-  },
-  {
-    "id": "cvra8hr6w1yqjx6",
-    "name": "skill_levels",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "id": "jeyi7nrk",
-        "name": "name",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "id": "fnlh5xk1",
-        "name": "weight",
-        "type": "number",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": 0,
-          "max": null
-        }
-      },
-      {
-        "id": "sjbw9cun",
-        "name": "color",
-        "type": "select",
-        "system": false,
-        "required": false,
-        "options": {
-          "maxSelect": 1,
-          "values": [
-            "blue-gray",
-            "gray",
-            "yellow",
-            "cyan",
-            "brown"
-          ]
-        }
-      },
-      {
-        "id": "cpr2giqj",
-        "name": "icon",
-        "type": "text",
-        "system": false,
-        "required": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      }
-    ],
-    "indexes": [],
     "listRule": "",
     "viewRule": "",
     "createRule": "",
@@ -564,6 +127,7 @@
         "type": "text",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": null,
           "max": null,
@@ -576,6 +140,7 @@
         "type": "file",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "maxSelect": 1,
           "maxSize": 5242880,
@@ -586,8 +151,7 @@
             "image/gif",
             "image/webp"
           ],
-          "thumbs": null,
-          "protected": false
+          "thumbs": null
         }
       },
       {
@@ -596,6 +160,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "_pb_users_auth_",
           "cascadeDelete": false,
@@ -610,6 +175,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "n5sb277kgyoq73z",
           "cascadeDelete": false,
@@ -624,6 +190,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "bs5ecegsoddfswu",
           "cascadeDelete": false,
@@ -638,6 +205,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "h3oo21t37ahxrq3",
           "cascadeDelete": false,
@@ -652,6 +220,7 @@
         "type": "relation",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "collectionId": "y0vb023w7yizhpw",
           "cascadeDelete": false,
@@ -666,6 +235,7 @@
         "type": "text",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "min": null,
           "max": null,
@@ -678,6 +248,7 @@
         "type": "select",
         "system": false,
         "required": false,
+        "unique": false,
         "options": {
           "maxSelect": 1,
           "values": [
@@ -689,7 +260,6 @@
         }
       }
     ],
-    "indexes": [],
     "listRule": "",
     "viewRule": "",
     "createRule": "",
@@ -705,5 +275,483 @@
       "onlyEmailDomains": null,
       "requireEmail": false
     }
+  },
+  {
+    "id": "h3oo21t37ahxrq3",
+    "name": "formations",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "lkovrjyy",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "s2hg0bm1",
+        "name": "description",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "mx5t0836",
+        "name": "content",
+        "type": "editor",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {}
+      },
+      {
+        "id": "4p00nabe",
+        "name": "source",
+        "type": "url",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "exceptDomains": null,
+          "onlyDomains": null
+        }
+      },
+      {
+        "id": "mgu883qp",
+        "name": "quizz",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "collectionId": "n5sb277kgyoq73z",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "bs5ecegsoddfswu",
+    "name": "missions",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "mju1rv2k",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "m1uopxq8",
+        "name": "start_date",
+        "type": "date",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
+      },
+      {
+        "id": "8iwrrtwz",
+        "name": "end_date",
+        "type": "date",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
+      },
+      {
+        "id": "hinkvnnz",
+        "name": "description",
+        "type": "editor",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {}
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "dquz1qm5lu91pg8",
+    "name": "quizz_answers",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "viqtegy4",
+        "name": "content",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "bthkcdke",
+        "name": "is_correct",
+        "type": "bool",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {}
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "lybuq18nxn0ktgu",
+    "name": "roadmaps",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "a0dpjhvv",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "oodpjieq",
+        "name": "description",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "kijqktmv",
+        "name": "quizz",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "collectionId": "n5sb277kgyoq73z",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "tkniorua",
+        "name": "formations",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "collectionId": "h3oo21t37ahxrq3",
+          "cascadeDelete": false,
+          "minSelect": 1,
+          "maxSelect": null,
+          "displayFields": []
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "y0vb023w7yizhpw",
+    "name": "skills",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "knmackte",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "ud2pn5wk",
+        "name": "skill_level",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "collectionId": "cvra8hr6w1yqjx6",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "cvra8hr6w1yqjx6",
+    "name": "skill_levels",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "jeyi7nrk",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "fnlh5xk1",
+        "name": "weight",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": null
+        }
+      },
+      {
+        "id": "sjbw9cun",
+        "name": "color",
+        "type": "select",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "blue-gray",
+            "gray",
+            "yellow",
+            "cyan",
+            "brown"
+          ]
+        }
+      },
+      {
+        "id": "cpr2giqj",
+        "name": "icon",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "n5sb277kgyoq73z",
+    "name": "quizz",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "aywb3zsf",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "sb3npfz8",
+        "name": "description",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "sw4v1quo",
+        "name": "questions",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "collectionId": "nobb8lvdqb8q5df",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "q122kzq0",
+        "name": "skill",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "collectionId": "y0vb023w7yizhpw",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
+  },
+  {
+    "id": "nobb8lvdqb8q5df",
+    "name": "quizz_questions",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "uqpzm8zo",
+        "name": "content",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "3ssyuqst",
+        "name": "order",
+        "type": "number",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": null
+        }
+      },
+      {
+        "id": "da9yfvif",
+        "name": "answers",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "collectionId": "dquz1qm5lu91pg8",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": []
+        }
+      }
+    ],
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "options": {}
   }
 ]
