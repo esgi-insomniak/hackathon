@@ -51,7 +51,9 @@ export default function Page() {
   const router = useRouter();
   const [quizzes, setQuizzes] = useState([]);
   const [formations, setFormations] = useState([]);
+  const [parcours, setParcours] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [selectedTab, setSelectedTab] = useState("all");
   const { record } = useAuth();
   const userRole = record?.roles;
 
@@ -91,6 +93,14 @@ export default function Page() {
       .then((data) => {
         setFormations(data);
       });
+    pb.collection("roadmaps").getFullList({
+        sort: "-created",
+        $autoCancel: false,
+        expand: "formations, quizz"
+    }).then((data) => {
+      console.log(data);
+        setParcours(data);
+    });
   }, []);
 
   return (
@@ -137,7 +147,7 @@ export default function Page() {
             <Tabs value="all" id="tabs" className="w-full">
               <TabsHeader>
                 {TABS.map(({ label, value }) => (
-                  <Tab key={value} value={value}>
+                  <Tab key={value} value={value} onClick={() => setSelectedTab(value)}>
                     &nbsp;&nbsp;{label}&nbsp;&nbsp;
                   </Tab>
                 ))}
@@ -171,7 +181,7 @@ export default function Page() {
 
         <CardBody className="px-0 w-full flex-grow overflow-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
-            {quizzes.map((quizz) => (
+            { (selectedTab === "all" || selectedTab === "quizz") && quizzes.map((quizz) => (
               <Card key={quizz.id} className="flex-row w-full max-w-[48rem]">
                 <CardHeader
                   shadow={false}
@@ -214,7 +224,7 @@ export default function Page() {
                     {quizz.description}
                   </Typography>
                   <Button
-                    onClick={() => router.push(`/quizz/${quizz.id}`)}
+                    onClick={() => router.push(`/quizz/view/${quizz.id}`)}
                     variant="filled"
                     className="inline-block float-right flex items-center gap-2"
                   >
@@ -225,7 +235,8 @@ export default function Page() {
               </Card>
             ))}
 
-            {formations.map((formation) => (
+            { (selectedTab === "all" || selectedTab === "formations") &&
+              formations.map((formation) => (
               <Card
                 key={formation.id}
                 className="flex-row w-full max-w-[48rem]"
@@ -265,6 +276,49 @@ export default function Page() {
                 </CardBody>
               </Card>
             ))}
+
+            { (selectedTab === "all" || selectedTab === "parcours") &&
+                parcours.map((parcour) => (
+                <Card
+                  key={parcour.id}
+                  className="flex-row w-full max-w-[48rem]"
+                >
+                    <CardHeader
+                        shadow={false}
+                        floated={false}
+                        className="w-2/5 shrink-0 m-0 rounded-r-none"
+                    >
+                        <img
+                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                        alt="image"
+                        className="w-full h-full object-cover"
+                        />
+                    </CardHeader>
+                    <CardBody>
+                        <Typography
+                        variant="h6"
+                        color="blue"
+                        className="uppercase mb-4"
+                        >
+                        PARCOURS
+                        </Typography>
+                        <Typography variant="h4" color="blue-gray" className="mb-2">
+                        {parcour.name}
+                        </Typography>
+                        <Typography color="gray" className="font-normal mb-8">
+                        {parcour.description}
+                        </Typography>
+                        <Button
+                        variant="filled"
+                        className="inline-block float-right flex items-center gap-2"
+                        >
+                        GO !
+                        <FaRocket strokeWidth={2} className="h-4 w-4" />
+                        </Button>
+                    </CardBody>
+                </Card>
+                ))}
+
           </div>
         </CardBody>
       </Card>
