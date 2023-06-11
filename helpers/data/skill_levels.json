@@ -1,0 +1,27 @@
+{
+  "wood": {
+    "color": "brown",
+    "logo": "/badgesImages/woodBlock.png",
+    "level": 0
+  },
+  "cobble": {
+    "color": "gray",
+    "logo": "/badgesImages/cobbleBlock.png",
+    "level": 1
+  },
+  "iron": {
+    "color": "blue-gray",
+    "logo": "/badgesImages/ironBlock.png",
+    "level": 2
+  },
+  "gold": {
+      "color": "yellow",
+      "logo": "/badgesImages/goldBlock.png",
+      "level": 3
+  },
+  "diamond": {
+      "color": "cyan",
+      "logo": "/badgesImages/diamondBlock.png",
+      "level": 4
+  }
+}

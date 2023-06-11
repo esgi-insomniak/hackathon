@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Bois",
+        "weight": "1",
+        "color": "brown",
+        "icon": "woodBlock.png"
+    },
+    {
+        "name": "Pierre",
+        "weight": "2",
+        "color": "gray",
+        "icon": "cobbleBlock.png"
+    },
+    {
+        "name": "Fer",
+        "weight": "3",
+        "color": "blue-gray",
+        "icon": "ironBlock.png"
+    },
+    {
+        "name": "Or",
+        "weight": "4",
+        "color": "yellow",
+        "icon": "goldBlock.png"
+    },
+    {
+        "name": "Diamant",
+        "weight": "5",
+        "color": "cyan",
+        "icon": "diamondBlock.png"
+    }
+]

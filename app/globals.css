@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cls-1 {
+    fill: none;
+}
+
+.cls-2 {
+    fill: #282b2a;
+}
+
+#formation-content {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
+#formation-content img {
+    max-width: 100%;
+}
+
+#formation-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#formation-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#formation-content p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 1.5rem;
+}

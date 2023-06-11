@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  node:
+    image: node:19.0.0-alpine
+    #container_name: node_nest_app
+    #user: node
+    stdin_open: true
+    tty: true
+    working_dir: /home/node
+    command: ["/bin/sh", "-c", "yarn dev"]
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node
+
+  pocket-base:
+    image: augustodelg/pocketbase:latest
+    restart: unless-stopped
+    ports:
+      - "${VITE_POCKETBASE_PORT}:${VITE_POCKETBASE_PORT}"
+    volumes:
+      - pocket-base-data:/pb_data
+
+volumes:
+  pocket-base-data:

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Angular",
+        "skill_level": 1
+    },
+    {
+        "name": "Java",
+        "skill_level": 2
+    },
+    {
+        "name": "C#",
+        "skill_level": 3
+    },
+    {
+        "name": "Python",
+        "skill_level": 4
+    },
+    {
+        "name": "ReactJS",
+        "skill_level": 5
+    },
+    {
+        "name": "VueJS",
+        "skill_level": 5
+    }
+]
