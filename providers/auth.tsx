@@ -42,16 +42,16 @@ const AuthContext = React.createContext<AuthContextType | null>({
 
 type UserState = Omit<AuthContextType, 'login' | 'logout'>;
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children, userData }: { children: React.ReactNode, userData: any }) => {
 
     const localToken = typeof window !== 'undefined' ? localStorage.getItem('token') : ''
-
+    console.log(userData.record);
     const defaultUser = React.useMemo(() => {
         if (localToken) {
             const decodedToken = jwt_decode<UserState>(localToken);
             return {
                 id: decodedToken?.id,
-                record: decodedToken?.record,
+                record: userData,
                 token: localToken
             }
         }
@@ -63,9 +63,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = React.useCallback((token: string) => {
         localStorage.setItem('token', token);
         const decodedToken = jwt_decode<UserState>(token);
+        localStorage.setItem('user', JSON.stringify(decodedToken?.id));
+        // set user id in cookie
+        document.cookie = `userId=${decodedToken?.id}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
         setUser({
             id: decodedToken?.id,
-            record: decodedToken?.record,
+            record: userData,
             token: token
         });
 
@@ -73,6 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const logout = React.useCallback(() => {
         localStorage.removeItem('token');
+        localStorage.remove('user');
         setUser({
             id: '',
             record: null,

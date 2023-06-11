@@ -3,7 +3,7 @@
 import { EventItem } from "@/components/event"
 import Modal from "@/components/modal"
 import useModal from "@/components/modal/hook"
-import React from "react"
+import React, { useContext } from "react"
 import { BsCalendarEvent } from "react-icons/bs"
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import { FaReact, FaAngular, FaJava } from 'react-icons/fa';
@@ -18,10 +18,10 @@ import { Button, Input } from "@material-tailwind/react"
 import { useAuth } from "@/providers/auth"
 
 export default function Home() {
-
     const { toggle, isShowing, setData, data } = useModal()
     const { toggle: rhToggle, isShowing: showRh, setData: setRh, data: dataRh } = useModal()
-
+    const { id, record } = useAuth();
+    console.log(record, id);
     const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string) => {
         toggle()
         setData({

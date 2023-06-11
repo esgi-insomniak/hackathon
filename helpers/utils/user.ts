@@ -1,42 +1,45 @@
-import { UserType } from '@/providers/auth'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { UserType, useAuth } from "@/providers/auth";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
+import PocketbaseHelper from "../pocketbase/pocketbase";
 
-const api_Url = process.env.NEXT_POCKETBASE_URL
+const api_Url = process.env.NEXT_POCKETBASE_URL;
+const pb = PocketbaseHelper.pocketbase;
 
 export const useUser = () => {
     const nextCookies = cookies()
-    const pb_auth = nextCookies.get('pb_auth')
+    const pb_auth = nextCookies.get('userId')
     let user = null
     if (pb_auth) {
-        user = JSON.parse(pb_auth.value)
+        user = pb_auth.value
         return user
     } else return null
 }
 
 export const useUserProtected = () => {
     const nextCookies = cookies()
-    const pb_auth = nextCookies.get('pb_auth')
+    const pb_auth = nextCookies.get('userId')
     let user = null
     if (!pb_auth) {
         redirect('/sign-in')
     } else {
-        user = JSON.parse(pb_auth.value)
+        user = pb_auth.value
     }
     return user
 }
 
 export const checkLoggedIn = () => {
     const nextCookies = cookies()
-    const pb_auth = nextCookies.get('pb_auth')
+    const pb_auth = nextCookies.get('userId')
     if (pb_auth) {
-        redirect('/')
-    } else redirect('/sign-in')
+        return true
+    } else return false
 }
 
 export const isLoggedIn = () => {
     const nextCookies = cookies()
-    const pb_auth = nextCookies.get('pb_auth')
+    const pb_auth = nextCookies.get('userId')
     if (pb_auth) {
         checkLoggedIn()
         return true
@@ -47,10 +50,16 @@ export const isLoggedIn = () => {
 }
 
 export const getUSerData = async () => {
-    const user = useUser()
-    const id = user?.model?.id as string | null
-    const userData = (await fetch(
-        `${api_Url}collections/users/records/${id}`,
-    ).then((res) => res.json())) as UserType
-    return userData
-}
+  const nextCookies = cookies();
+  const pb_auth = nextCookies.get("userId");
+  try {
+    const res = await pb.collection("users").getOne(pb_auth?.value, {
+        $autoCancel: false,
+    });
+    const userData = res;
+    return userData;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return null;
+  }
+};

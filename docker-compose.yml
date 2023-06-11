@@ -4,7 +4,7 @@ services:
   node:
     image: node:19.0.0-alpine
     #container_name: node_nest_app
-    user: node
+    #user: node
     stdin_open: true
     tty: true
     working_dir: /home/node
