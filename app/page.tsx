@@ -22,6 +22,8 @@ export default function Home() {
     const { toggle, isShowing, setData, data } = useModal()
     const { toggle: rhToggle, isShowing: showRh, setData: setRh, data: dataRh } = useModal()
     const { id, record } = useAuth();
+    const userRole = record?.roles;
+    const userName = record?.name
 
     const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string) => {
         toggle()
@@ -67,7 +69,7 @@ export default function Home() {
                 <section className="grid grid-cols-4 gap-5 h-full w-2/3">
                     <div className="col-span-4 row-span-1 space-y-4 overflow-scroll">
                         <div className="p-5 bg-carbon-blue text-carbon-white rounded-md drop-shadow-lg flex flex-col ">
-                            <h2 className='font-bold mb-5'>Bienvenue !</h2>
+                            <h2 className='font-bold mb-5'>Bienvenue {userName} !</h2>
                             <span>
                                 Lance toi dans l'aventure et poursuis ton apprentissage !
                             </span>

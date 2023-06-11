@@ -1,15 +1,20 @@
-'use client'
+"use client";
 import React from "react";
 import {
-    Card,
-    Typography,
-    List,
-    ListItem,
-    ListItemPrefix,
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
 } from "@material-tailwind/react";
 import { AiOutlinePoweroff, AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { BsCalendarEvent } from "react-icons/bs";
-import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from "react-icons/md";
+import {
+  MdAdminPanelSettings,
+  MdOutlineDashboard,
+  MdOutlineForum,
+  MdQuiz,
+} from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";

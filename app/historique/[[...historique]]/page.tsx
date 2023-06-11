@@ -7,15 +7,20 @@ import { GrUserWorker } from "react-icons/gr";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg";
 import TableHistorique from "@/components/historique/Table";
-
-const data = {
-  name: "Bessonnier",
-  firstname: "Raphaël",
-  profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-  poste: "Développeur",
-};
+import { useAuth } from "@/providers/auth";
+import { MdWebAsset } from "react-icons/md";
+import { useParams, useRouter } from "next/navigation";
 
 export default function Page() {
+  const id = useParams().historique;
+  const router = useRouter();
+  const { record } = useAuth();
+  const userRole = record?.roles;
+
+  if (userRole !== "consultant" || record?.id !== id) {
+    router.push("/");
+  }
+
   const data2 = [
     ["Rendu du hackathon", "formation", "09/06/2023"],
     ["Soirée Pizza", "afterwork", "08/06/2023"],
@@ -31,18 +36,26 @@ export default function Page() {
         <div className="flex justify-around items-center my-5">
           <div className="flex items-center my-5">
             <div>
-              <img
-                className="w-32 h-32 rounded-full mx-5"
-                src={data.profilePicture}
-                alt="nature image"
-              />
+              {record?.avatar ? (
+                <img
+                  className="w-32 h-32 rounded-full mx-5"
+                  src={record?.avatar}
+                  alt="nature image"
+                />
+              ) : (
+                <img
+                  className="w-32 h-32 rounded-full mx-5"
+                  src={`https://www.w3schools.com/w3images/avatar2.png`}
+                  alt="nature image"
+                />
+              )}
             </div>
             <div>
               <h1 className="block font-sans text-3xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
-                {data.firstname} {data.name}
+                {record?.name}
               </h1>
               <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased mx-auto">
-                {data.poste}
+                {record?.poste}
               </h2>
             </div>
           </div>
@@ -74,7 +87,7 @@ export default function Page() {
                     010203040506
                   </p>
                   <p className="flex gap-4 items-center">
-                    <CgWebsite />
+                    <MdWebAsset />
                     https://www.test.fr
                   </p>
                 </div>

@@ -188,7 +188,7 @@ export default function Page() {
                     ) : (
                         <div className="grid grid-cols-5 gap-4">
                             {/* Afficher les badges de compétences */}
-                            {skillsContent.map((skill, index) => (
+                            {user?.defaultSkills.map((skill, index) => (
                                 <BadgesSkills key={index} props={skill} />
                             ))}
                         </div>

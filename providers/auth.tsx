@@ -11,6 +11,7 @@ export type UserType = {
     name: string
     updated: string
     username: string
+    poste: string
     verified: boolean
     roles?: 'admin' | 'consultant' | 'rh' | 'commercial'
 }
@@ -33,6 +34,7 @@ const AuthContext = React.createContext<AuthContextType | null>({
         name: '',
         updated: '',
         username: '',
+        poste: '',
         verified: false,
         roles: 'consultant'
     },
@@ -46,7 +48,6 @@ type UserState = Omit<AuthContextType, 'login' | 'logout'>;
 export const AuthProvider = ({ children, userData }: { children: React.ReactNode, userData: any }) => {
 
     const localToken = typeof window !== 'undefined' ? localStorage.getItem('token') : ''
-
     const defaultUser = React.useMemo(() => {
         if (localToken) {
             const decodedToken = jwt_decode<UserState>(localToken);

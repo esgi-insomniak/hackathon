@@ -12,7 +12,7 @@ export default function SearchPage() {
     const fetchUsers = async () => {
       const fetchedData = await pb.collection("users").getFullList({
         sort: "-created",
-        filter: 'role = "consultant"',
+        filter: 'roles = "consultant"',
         $autoCancel: false,
       });
       setData(fetchedData);

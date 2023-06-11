@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/providers/auth";
 import {
   SkillTreeGroup,
   SkillTree,
@@ -13,6 +14,9 @@ import Link from "next/link";
 import React from "react";
 
 export default function Page() {
+  const { record } = useAuth();
+  const userRole = record?.roles;
+
   const data: SkillType[] = [
     {
       id: "welcome-to-carbon",
@@ -270,14 +274,16 @@ export default function Page() {
 
   return (
     <React.Fragment>
-      <div className="m-5 flex justify-end">
-        <Link
-          href="/succes/add"
-          className="bg-carbon-blue hover:bg-carbon-blue text-white font-bold py-2 px-4 rounded"
-        >
-          Créé un succès
-        </Link>
-      </div>
+      {userRole == "admin" && (
+        <div className="m-5 flex justify-end">
+          <Link
+            href="/succes/add"
+            className="bg-carbon-blue hover:bg-carbon-blue text-white font-bold py-2 px-4 rounded"
+          >
+            Créé un succès
+          </Link>
+        </div>
+      )}
       <SkillProvider>
         <SkillTreeGroup theme={style}>
           {({ skillCount }: SkillGroupDataType) => (
