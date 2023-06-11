@@ -16,14 +16,18 @@ import { RhContact } from "@/components/rh-contact"
 import { mockNew } from "@/mock"
 import { Button, Input } from "@material-tailwind/react"
 import { useAuth } from "@/providers/auth"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
     const { toggle, isShowing, setData, data } = useModal()
     const { toggle: rhToggle, isShowing: showRh, setData: setRh, data: dataRh } = useModal()
-    const { id, record } = useAuth();
-    const userRole = record?.roles;
+    const { record } = useAuth();
+    const router = useRouter();
     const userName = record?.name
+
+    if(!record){
+        router.push("/sign-in")
+    }
 
     const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string) => {
         toggle()

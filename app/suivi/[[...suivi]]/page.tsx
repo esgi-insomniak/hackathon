@@ -9,7 +9,6 @@ import { IoSchoolSharp } from "react-icons/io5";
 import { SiGooglemaps } from "react-icons/si";
 import { GrUserWorker } from "react-icons/gr";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
-import { CgWebsite } from "react-icons/cg";
 import Avis from "@/components/FollowUp/Avis";
 import { useParams, useRouter } from "next/navigation";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";

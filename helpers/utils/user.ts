@@ -1,10 +1,7 @@
-import { UserType, useAuth } from "@/providers/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { useRouter } from "next/router";
 import PocketbaseHelper from "../pocketbase/pocketbase";
 
-const api_Url = process.env.NEXT_POCKETBASE_URL;
 const pb = PocketbaseHelper.pocketbase;
 
 export const useUser = () => {

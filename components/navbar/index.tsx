@@ -10,15 +10,12 @@ import {
 import { AiOutlinePoweroff, AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { BsCalendarEvent } from "react-icons/bs";
 import {
-  MdAdminPanelSettings,
   MdOutlineDashboard,
   MdOutlineForum,
-  MdQuiz,
 } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/helpers/svg/logo";
-import Image from "next/image";
 import { SlMagnifier } from "react-icons/sl";
 import { GrValidate } from "react-icons/gr";
 import { useAuth } from "@/providers/auth";

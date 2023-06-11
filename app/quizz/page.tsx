@@ -51,7 +51,6 @@ export default function Page() {
   const router = useRouter();
   const [quizzes, setQuizzes] = useState([]);
   const [formations, setFormations] = useState([]);
-  const [parcours, setParcours] = useState([]);
   const [skills, setSkills] = useState([]);
   const { record } = useAuth();
   const userRole = record?.roles;

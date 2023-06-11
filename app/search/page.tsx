@@ -22,7 +22,6 @@ export default function SearchPage() {
   }, []);
 
   if (!data) {
-    // Add loading state or return null while data is being fetched
     return null;
   }
 

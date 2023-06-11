@@ -5,7 +5,6 @@ import { IoSchoolSharp } from "react-icons/io5";
 import { SiGooglemaps } from "react-icons/si";
 import { GrUserWorker } from "react-icons/gr";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
-import { CgWebsite } from "react-icons/cg";
 import TableHistorique from "@/components/historique/Table";
 import { useAuth } from "@/providers/auth";
 import { MdWebAsset } from "react-icons/md";

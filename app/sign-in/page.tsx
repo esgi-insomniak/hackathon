@@ -22,7 +22,6 @@ export default function Page() {
             .then((res) => {
                 login(res.token)
                 alert?.success('Vous êtes connecté !')
-                //redirect to home without redirect of next
                 router.push('/');
             })
             .catch((error) => {
