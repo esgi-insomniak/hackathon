@@ -19,7 +19,7 @@ import { GrValidate } from "react-icons/gr";
 
 export default function SideBar() {
     const router = useRouter()
-
+    
     return (
         <Card className="w-full shadow-xl shadow-blue-gray-900/5 h-full">
             <div className="flex justify-center items-center">
