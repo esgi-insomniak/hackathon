@@ -1,6 +1,7 @@
 'use client'
 import React from "react";
 import jwt_decode from "jwt-decode";
+import { redirect } from "next/navigation";
 
 export type UserType = {
     avatar: string
@@ -45,7 +46,7 @@ type UserState = Omit<AuthContextType, 'login' | 'logout'>;
 export const AuthProvider = ({ children, userData }: { children: React.ReactNode, userData: any }) => {
 
     const localToken = typeof window !== 'undefined' ? localStorage.getItem('token') : ''
-    console.log(userData.record);
+
     const defaultUser = React.useMemo(() => {
         if (localToken) {
             const decodedToken = jwt_decode<UserState>(localToken);
@@ -76,12 +77,13 @@ export const AuthProvider = ({ children, userData }: { children: React.ReactNode
 
     const logout = React.useCallback(() => {
         localStorage.removeItem('token');
-        localStorage.remove('user');
+        localStorage.removeItem('user');
         setUser({
             id: '',
             record: null,
             token: ''
         });
+        redirect('/sign-in');
     }, [setUser]);
 
     const value = React.useMemo<AuthContextType>(() => ({

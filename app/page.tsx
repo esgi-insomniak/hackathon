@@ -16,12 +16,13 @@ import { RhContact } from "@/components/rh-contact"
 import { mockNew } from "@/mock"
 import { Button, Input } from "@material-tailwind/react"
 import { useAuth } from "@/providers/auth"
+import { redirect } from "next/navigation"
 
 export default function Home() {
     const { toggle, isShowing, setData, data } = useModal()
     const { toggle: rhToggle, isShowing: showRh, setData: setRh, data: dataRh } = useModal()
     const { id, record } = useAuth();
-    console.log(record, id);
+
     const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string) => {
         toggle()
         setData({

@@ -1,12 +1,11 @@
 import SideBar from "@/components/navbar";
 import "./globals.css";
 import { AlertInso, AlertProvider } from "@/providers/alert";
-import { AuthProvider, useAuth } from "@/providers/auth";
+import { AuthProvider, UserType } from "@/providers/auth";
 import {
-  getUSerData, isLoggedIn, useUser,
+  getUSerData, useUser,
 } from "@/helpers/utils/user";
 import React from "react";
-import { redirect } from "next/navigation";
 
 export const metadata = {
   title: 'Carbon IT',
@@ -18,6 +17,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   const fetchData = async () => {
     try {
       const userData = await getUSerData();
@@ -26,9 +26,9 @@ export default async function RootLayout({
       console.error("Error fetching user data:", error);
     }
   };
-  
+
   const userData = await fetchData()
-  const plainUser = JSON.parse(JSON.stringify(userData));
+  const plainUser: UserType = JSON.parse(JSON.stringify(userData));
   const user = useUser();
 
   return (
@@ -42,7 +42,7 @@ export default async function RootLayout({
                   <SideBar />
                 </div>
               )}
-              <div className="w-5/6">{children}</div>
+              <div className={`${user ? 'w-5/6' : 'w-full'}`}>{children}</div>
             </div>
             <AlertInso />
           </body>

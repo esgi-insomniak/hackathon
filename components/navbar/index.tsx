@@ -7,7 +7,7 @@ import {
     ListItem,
     ListItemPrefix,
 } from "@material-tailwind/react";
-import { AiOutlinePoweroff, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlinePoweroff, AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { BsCalendarEvent } from "react-icons/bs";
 import { MdAdminPanelSettings, MdOutlineDashboard, MdOutlineForum, MdQuiz } from "react-icons/md";
 import { AiOutlineCode } from "react-icons/ai";
@@ -16,10 +16,12 @@ import { Logo } from "@/helpers/svg/logo";
 import Image from "next/image";
 import { SlMagnifier } from "react-icons/sl";
 import { GrValidate } from "react-icons/gr";
+import { useAuth } from "@/providers/auth";
 
 export default function SideBar() {
     const router = useRouter()
-    
+    const { logout, record } = useAuth()
+
     return (
         <Card className="w-full shadow-xl shadow-blue-gray-900/5 h-full">
             <div className="flex justify-center items-center">
@@ -64,22 +66,22 @@ export default function SideBar() {
                         </ListItemPrefix>
                         Succès
                     </ListItem>
-                    <ListItem onClick={() => router.push('/admin')}>
+                    {/* <ListItem onClick={() => router.push(`/user/${record?.id}`)}>
                         <ListItemPrefix>
-                            <MdAdminPanelSettings className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Admin
-                    </ListItem>
-                    {/* <ListItem onClick={() => router.push(`/user/${user?.id}`)}>
-                        <ListItemPrefix>
-                            {user?.profileImageUrl && (
-                                <Image src={user?.profileImageUrl} width={20} height={20} className="rounded-full" alt="ton-user" />
+                            {record?.avatar && (
+                                <Image src={record?.avatar} width={20} height={20} className="rounded-full" alt="ton-user" />
                             )}
                         </ListItemPrefix>
-                        {!isLoaded ? "Loading..." : (user?.firstName + " " + user?.lastName)}
+                        {record?.name}
                     </ListItem> */}
+                    <ListItem onClick={() => router.push(`/user/${record?.id}`)}>
+                        <ListItemPrefix>
+                            <AiOutlineUser className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Mon profil
+                    </ListItem>
                 </div>
-                <ListItem onClick={() => { }} className="flex justify-center items-center">
+                <ListItem onClick={logout} className="flex justify-center items-center">
                     <ListItemPrefix>
                         <AiOutlinePoweroff className="h-5 w-5 text-red-500" />
                     </ListItemPrefix>
