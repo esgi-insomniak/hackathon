@@ -1,22 +1,26 @@
 [
     {
-        "name": "Skill 1",
+        "name": "Angular",
         "skill_level": 1
     },
     {
-        "name": "Skill 2",
+        "name": "Java",
         "skill_level": 2
     },
     {
-        "name": "Skill 3",
+        "name": "C#",
         "skill_level": 3
     },
     {
-        "name": "Skill 4",
+        "name": "Python",
         "skill_level": 4
     },
     {
-        "name": "Skill 5",
+        "name": "ReactJS",
+        "skill_level": 5
+    },
+    {
+        "name": "VueJS",
         "skill_level": 5
     }
 ]

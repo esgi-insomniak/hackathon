@@ -69,7 +69,7 @@ export default function Page() {
 
   skills.map((skill: any) => {
     if (
-      data.defaultSkills.includes(skill.id) &&
+      record?.defaultSkills.includes(skill.id) &&
       !userSkills.includes(skill.id)
     ) {
       setUserSkills((userSkills: any) => [...userSkills, skill.id]);
@@ -78,7 +78,7 @@ export default function Page() {
 
   missions.map((mission: any) => {
     if (
-      data.missions.includes(mission.id) &&
+      record?.missions.includes(mission.id) &&
       !userMissions.includes(mission.id)
     ) {
       setUserMissions((userMissions: any) => [...userMissions, mission.id]);
