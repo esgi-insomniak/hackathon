@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import BadgesSkills from "@/components/FollowUp/BadgesSkills";
 import {
@@ -8,117 +8,109 @@ import {
     TimelineIcon,
     Typography,
     TimelineHeader,
-    Input,
 } from "@material-tailwind/react";
 import { BsBuilding, BsPencil } from "react-icons/bs";
 import { useAuth } from "@/providers/auth";
+import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 
 export default function Page() {
-    const { record: user } = useAuth();
+  const { record: user } = useAuth();
+  const [userName, setUserName] = React.useState<string>("");
+  const [userPoste, setUserPoste] = React.useState<string>("");
 
-    const data = {
-        profilePicture: "https://www.w3schools.com/howto/img_avatar.png",
-    };
-    const [isAboutEditing, setIsAboutEditing] = React.useState(false);
-    const [isSkillsEditing, setIsSkillsEditing] = React.useState(false);
-    const [aboutContent, setAboutContent] = React.useState(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper cursus risus in gravida. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vitae sapien sit amet risus malesuada auctor."
-    );
-    const [skillsContent, setSkillsContent] = React.useState([
-        {
-            color: "yellow",
-            logo: "/badgesImages/goldBlock.png",
-            stack: "Java",
-            level: "Niveau Or",
-        },
-        {
-            color: "gray",
-            logo: "/badgesImages/ironBlock.png",
-            stack: ".NET",
-            level: "Niveau Fer",
-        },
-        {
-            color: "orange",
-            logo: "/badgesImages/copperBlock.png",
-            stack: "C#",
-            level: "Niveau Cuivre",
-        },
-        {
-            color: "green",
-            logo: "/badgesImages/emeraldBlock.png",
-            stack: "ReactJS",
-            level: "Niveau Emeraude",
-        },
-        {
-            color: "gray",
-            logo: "/badgesImages/ironBlock.png",
-            stack: "Angular",
-            level: "Niveau Fer",
-        },
-        {
-            color: "cyan",
-            logo: "/badgesImages/diamondBlock.png",
-            stack: "VueJS",
-            level: "Niveau Diamant",
-        },
-    ]);
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUserName(user?.name);
+      setUserPoste(user?.poste);
+    }
+  }, []);
 
-    const [experiences, setExperiences] = React.useState([
-        {
-            id: 1,
-            title: "Développeur Web",
-            company: "ABC Company",
-            duration: "Janvier 2019 - Présent",
-            description:
-                "Responsable du développement et de la maintenance des applications web de l'entreprise.",
-        },
-        {
-            id: 2,
-            title: "Stagiaire en design UX",
-            company: "XYZ Agency",
-            duration: "Mai 2018 - Août 2018",
-            description:
-                "Travaillé sur des projets de conception d'interfaces utilisateur conviviales et attrayantes.",
-        },
-        {
-            id: 3,
-            title: "Ingénieur logiciel",
-            company: "DEF Corporation",
-            duration: "Septembre 2017 - Décembre 2018",
-            description:
-                "Conception et développement de logiciels pour des clients internationaux.",
-        },
-    ]);
+  const pb = PocketbaseHelper.pocketbase;
+  const data = {
+    profilePicture: "https://www.w3schools.com/w3images/avatar2.png",
+  };
+  const [skillsData, setSkillsData] = React.useState([]);
+  const [isAboutEditing, setIsAboutEditing] = React.useState(false);
+  const [isSkillsEditing, setIsSkillsEditing] = React.useState(false);
+  const [aboutContent, setAboutContent] = React.useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper cursus risus in gravida. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis vitae sapien sit amet risus malesuada auctor."
+  );
+  const [modifiedSkillNames, setModifiedSkillNames] = React.useState<string[]>(
+    []
+  );
 
-    const handleAboutEdit = () => {
-        setIsAboutEditing(!isAboutEditing);
+  React.useEffect(() => {
+    const fetchSkills = async () => {
+      const fetchedData = await pb.collection("skills").getFullList({
+        $autoCancel: false,
+      });
+      setSkillsData(fetchedData);
     };
 
-    const handleAboutSave = () => {
-        // Effectuer les opérations d'enregistrement (par exemple, envoyer une demande de mise à jour au serveur)
-        setIsAboutEditing(false);
-    };
+    fetchSkills();
+  }, []);
 
-    const handleSkillsEdit = () => {
-        setIsSkillsEditing(!isSkillsEditing);
-    };
+  const [experiences, setExperiences] = React.useState([
+    {
+      id: 1,
+      title: "Développeur Web",
+      company: "ABC Company",
+      duration: "Janvier 2019 - Présent",
+      description:
+        "Responsable du développement et de la maintenance des applications web de l'entreprise.",
+    },
+    {
+      id: 2,
+      title: "Stagiaire en design UX",
+      company: "XYZ Agency",
+      duration: "Mai 2018 - Août 2018",
+      description:
+        "Travaillé sur des projets de conception d'interfaces utilisateur conviviales et attrayantes.",
+    },
+    {
+      id: 3,
+      title: "Ingénieur logiciel",
+      company: "DEF Corporation",
+      duration: "Septembre 2017 - Décembre 2018",
+      description:
+        "Conception et développement de logiciels pour des clients internationaux.",
+    },
+  ]);
 
-    const handleSkillsSave = () => {
-        // Effectuer les opérations d'enregistrement (par exemple, envoyer une demande de mise à jour au serveur)
-        setIsSkillsEditing(false);
-    };
+  const handleAboutEdit = () => {
+    setIsAboutEditing(!isAboutEditing);
+  };
 
-    const handleExperienceEdit = (index: number) => {
-        const updatedExperiences = [...experiences];
-        updatedExperiences[index].isEditing = true;
-        setExperiences(updatedExperiences);
-    };
+  const handleAboutSave = () => {
+    setIsAboutEditing(false);
+  };
 
-    const handleExperienceSave = (index: number) => {
-        const updatedExperiences = [...experiences];
-        updatedExperiences[index].isEditing = false;
-        setExperiences(updatedExperiences);
-    };
+  const handleSkillsEdit = () => {
+    setIsSkillsEditing(!isSkillsEditing);
+  };
+
+  const handleSkillsSave = () => {
+    skillsData.forEach(async (skill, index) => {
+      const modifiedSkillName = modifiedSkillNames[index];
+      await pb
+        .collection("skills")
+        .update(skill.id, { name: modifiedSkillName });
+    });
+
+    setIsSkillsEditing(false);
+  };
+
+  const handleExperienceEdit = (index: number) => {
+    const updatedExperiences = [...experiences];
+    updatedExperiences[index].isEditing = true;
+    setExperiences(updatedExperiences);
+  };
+
+  const handleExperienceSave = (index: number) => {
+    const updatedExperiences = [...experiences];
+    updatedExperiences[index].isEditing = false;
+    setExperiences(updatedExperiences);
+  };
 
     return (
         <div className="flex justify-start items-start h-screen flex-col mx-8 p-8 overflow-scroll">
@@ -174,7 +166,7 @@ export default function Page() {
                             {/* Afficher les champs de texte modifiables pour les compétences */}
                             {skillsContent.map((skill, index) => (
                                 <div key={index}>
-                                    <Input
+                                    <input
                                         className="w-full border rounded-md p-2"
                                         value={skill.stack}
                                         onChange={(e) => {
@@ -229,7 +221,7 @@ export default function Page() {
                                         <div className="flex flex-col gap-1 w-full">
                                             {experience.isEditing ? (
                                                 <>
-                                                    <Input
+                                                    <input
                                                         className="w-full mb-2 border rounded-md p-2"
                                                         value={experience.title}
                                                         onChange={(e) => {
@@ -238,7 +230,7 @@ export default function Page() {
                                                             setExperiences(updatedExperiences);
                                                         }}
                                                     />
-                                                    <Input
+                                                    <input
                                                         className="w-full mb-2 border rounded-md p-2"
                                                         value={experience.company}
                                                         onChange={(e) => {
@@ -247,7 +239,7 @@ export default function Page() {
                                                             setExperiences(updatedExperiences);
                                                         }}
                                                     />
-                                                    <Input
+                                                    <input
                                                         className="w-full mb-2 border rounded-md p-2"
                                                         value={experience.duration}
                                                         onChange={(e) => {
