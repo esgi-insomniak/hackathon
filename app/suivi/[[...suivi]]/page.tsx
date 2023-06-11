@@ -9,14 +9,22 @@ import { IoSchoolSharp } from "react-icons/io5";
 import { SiGooglemaps } from "react-icons/si";
 import { GrUserWorker } from "react-icons/gr";
 import { AiOutlineMail, AiFillPhone } from "react-icons/ai";
-import { CgWebsite } from "react-icons/cg";
 import Avis from "@/components/FollowUp/Avis";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 import Link from "next/link";
+import { useAuth } from "@/providers/auth";
+import { MdWebAsset } from "react-icons/md";
 
 export default function Page() {
   const id = useParams().suivi;
+  const router = useRouter();
+  const { record } = useAuth();
+  const userRole = record?.roles;
+
+  if (userRole !== "consultant" || record?.id !== id) {
+    router.push("/");
+  }
 
   const [data, setData] = React.useState<Array<any>>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -60,13 +68,19 @@ export default function Page() {
   }
 
   skills.map((skill: any) => {
-    if (data.defaultSkills.includes(skill.id) && !userSkills.includes(skill.id)) {
+    if (
+      data.defaultSkills.includes(skill.id) &&
+      !userSkills.includes(skill.id)
+    ) {
       setUserSkills((userSkills: any) => [...userSkills, skill.id]);
     }
   });
 
   missions.map((mission: any) => {
-    if (data.missions.includes(mission.id) && !userMissions.includes(mission.id)) {
+    if (
+      data.missions.includes(mission.id) &&
+      !userMissions.includes(mission.id)
+    ) {
       setUserMissions((userMissions: any) => [...userMissions, mission.id]);
     }
   });
@@ -136,7 +150,7 @@ export default function Page() {
                       010203040506
                     </p>
                     <p className="flex gap-4 items-center">
-                      <CgWebsite />
+                      <MdWebAsset />
                       https://www.test.fr
                     </p>
                   </div>
@@ -154,9 +168,11 @@ export default function Page() {
                   <BadgesSkills props={skill} key={index} />
                 ))}
               </div>
-              <Button className="flex items-center mx-auto my-5">
-                <Link href="/quizz">Se former sur une formation</Link>
-              </Button>
+              {userRole == "consultant" && (
+                <Button className="flex items-center mx-auto my-5">
+                  <Link href="/quizz">Se former sur une formation</Link>
+                </Button>
+              )}
             </div>
             <div className="w-1/3">
               <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
@@ -183,13 +199,15 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <hr />
-          <div className="mb-5 mx-auto">
-            <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
-              Avis client
-            </h2>
-            <Avis />
-          </div>
+          {userRole == "rh" ||
+            (userRole == "admin" && (
+              <div className="mb-5 mx-auto mt-5">
+                <h2 className="block font-sans text-2xl font-semibold leading-tight tracking-normal text-inherit antialiased text-center">
+                  Avis client
+                </h2>
+                <Avis />
+              </div>
+            ))}
         </div>
       ) : (
         <div className="flex justify-center items-center">

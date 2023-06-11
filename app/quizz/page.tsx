@@ -20,6 +20,7 @@ import { FaRocket } from "react-icons/fa";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
 import { useEffect, useState } from "react";
 import BadgesSkills from "@/components/FollowUp/BadgesSkills";
+import { useAuth } from "@/providers/auth";
 
 const TABS = [
   { label: "Tous", value: "all" },
@@ -50,8 +51,9 @@ export default function Page() {
   const router = useRouter();
   const [quizzes, setQuizzes] = useState([]);
   const [formations, setFormations] = useState([]);
-  const [parcours, setParcours] = useState([]);
   const [skills, setSkills] = useState([]);
+  const { record } = useAuth();
+  const userRole = record?.roles;
 
   useEffect(() => {
     pb.collection("skills")
@@ -108,25 +110,28 @@ export default function Page() {
                 Retrouvez ici la liste des quizz / formations
               </Typography>
             </div>
-            <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-              <Button
-                className="flex items-center gap-3"
-                color="blue"
-                size="sm"
-                onClick={() => router.push("/quizz/add")}
-              >
-                <BiPlus strokeWidth={2} className="h-4 w-4" /> Creer un quiz
-              </Button>
-              <Button
-                className="flex items-center gap-3"
-                color="blue"
-                size="sm"
-                onClick={() => router.push("/formation/add")}
-              >
-                <BiPlus strokeWidth={2} className="h-4 w-4" /> Creer une
-                formation
-              </Button>
-            </div>
+            {userRole == "admin" ||
+              (userRole == "rh" && (
+                <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+                  <Button
+                    className="flex items-center gap-3"
+                    color="blue"
+                    size="sm"
+                    onClick={() => router.push("/quizz/add")}
+                  >
+                    <BiPlus strokeWidth={2} className="h-4 w-4" /> Creer un quiz
+                  </Button>
+                  <Button
+                    className="flex items-center gap-3"
+                    color="blue"
+                    size="sm"
+                    onClick={() => router.push("/formation/add")}
+                  >
+                    <BiPlus strokeWidth={2} className="h-4 w-4" /> Creer une
+                    formation
+                  </Button>
+                </div>
+              ))}
           </div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <Tabs value="all" id="tabs" className="w-full">

@@ -13,7 +13,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ["localhost", "images.unsplash.com", "images.clerk.dev"],
+    domains: ["localhost", "images.unsplash.com", "images.clerk.dev", "w3schools.com"],
   },
   crossOrigin: "anonymous",
 };

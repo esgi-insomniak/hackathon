@@ -14,6 +14,7 @@ import Link from "next/link";
 import { BsSearch } from "react-icons/bs";
 import React from "react";
 import PocketbaseHelper from "@/helpers/pocketbase/pocketbase";
+import { useAuth } from "@/providers/auth";
 
 const TABLE_HEAD = ["Nom", "Poste", "Compétences principales", ""];
 
@@ -21,6 +22,9 @@ export default function TableSearch({ data }: any) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [skills, setSkills] = React.useState<string[]>([]);
   const pb = PocketbaseHelper.pocketbase;
+  const { record } = useAuth();
+  const userRole = record?.roles;
+  const userId = record?.id;
 
   React.useEffect(() => {
     const fetchSkills = async () => {
@@ -30,9 +34,7 @@ export default function TableSearch({ data }: any) {
           .getFullList({ $autoCancel: false });
         const skillIds = response.map((skill: any) => skill);
         setSkills(skillIds);
-      } catch (error) {
-
-      }
+      } catch (error) {}
     };
     fetchSkills();
   }, []);
@@ -165,12 +167,16 @@ export default function TableSearch({ data }: any) {
                     </td>
                     <td className={classes}>
                       <div className="w-max">
-                        <Button>
-                          <Link href={`/suivi/${data.id}`}>
-                            {/* <AiOutlinePlusCircle size={25} /> */}
-                            Voir le profil
-                          </Link>
-                        </Button>
+                        {userId == data.id || userRole != "consultant" ? (
+                          <Button>
+                            <Link href={`/suivi/${data.id}`}>
+                              {/* <AiOutlinePlusCircle size={25} /> */}
+                              Voir le profil
+                            </Link>
+                          </Button>
+                        ) : (
+                          <Button>Vous n'avez pas accès à ce profil</Button>
+                        )}
                       </div>
                     </td>
                   </tr>

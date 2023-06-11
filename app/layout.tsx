@@ -23,7 +23,6 @@ export default async function RootLayout({
       const userData = await getUSerData();
       return userData;
     } catch (error) {
-      console.error("Error fetching user data:", error);
     }
   };
 
