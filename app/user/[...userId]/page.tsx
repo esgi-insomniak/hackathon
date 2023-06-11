@@ -8,6 +8,7 @@ import {
     TimelineIcon,
     Typography,
     TimelineHeader,
+    Input,
 } from "@material-tailwind/react";
 import { BsBuilding, BsPencil } from "react-icons/bs";
 import { useAuth } from "@/providers/auth";
@@ -173,7 +174,7 @@ export default function Page() {
                             {/* Afficher les champs de texte modifiables pour les compétences */}
                             {skillsContent.map((skill, index) => (
                                 <div key={index}>
-                                    <input
+                                    <Input
                                         className="w-full border rounded-md p-2"
                                         value={skill.stack}
                                         onChange={(e) => {
@@ -228,7 +229,7 @@ export default function Page() {
                                         <div className="flex flex-col gap-1 w-full">
                                             {experience.isEditing ? (
                                                 <>
-                                                    <input
+                                                    <Input
                                                         className="w-full mb-2 border rounded-md p-2"
                                                         value={experience.title}
                                                         onChange={(e) => {
@@ -237,7 +238,7 @@ export default function Page() {
                                                             setExperiences(updatedExperiences);
                                                         }}
                                                     />
-                                                    <input
+                                                    <Input
                                                         className="w-full mb-2 border rounded-md p-2"
                                                         value={experience.company}
                                                         onChange={(e) => {
@@ -246,7 +247,7 @@ export default function Page() {
                                                             setExperiences(updatedExperiences);
                                                         }}
                                                     />
-                                                    <input
+                                                    <Input
                                                         className="w-full mb-2 border rounded-md p-2"
                                                         value={experience.duration}
                                                         onChange={(e) => {

@@ -25,16 +25,14 @@ export default function Home() {
     const router = useRouter();
     const userName = record?.name
 
-    if(!record){
-        router.push("/sign-in")
-    }
-
-    const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string) => {
+    const handleOpenModal = (title: string, event: 'off-work' | 'work', date: string, description: string, location: string) => {
         toggle()
         setData({
             title,
             event,
-            date
+            date,
+            description,
+            location
         })
     }
 
@@ -144,7 +142,7 @@ export default function Home() {
                             <div className="p-3 w-full space-y-3">
                                 {dataEvent.map((item) => (
                                     <EventItem key={item.id} title={item.title} type={item.type} date={item.date}
-                                        action={() => handleOpenModal(item.title, item.type, item.date)} />
+                                        action={() => handleOpenModal(item.title, item.type, item.date, item.description, item.location)} />
                                 ))}
                             </div>
                         </div>
@@ -168,11 +166,15 @@ export default function Home() {
                 isShowing={isShowing}
                 title={data?.title || ""}
                 content={
-                    <>
+                    <React.Fragment>
                         {data?.event}
                         <br />
                         {data?.date}
-                    </>
+                        <br />
+                        {data?.description}
+                        <br />
+                        <p className="text-xs">{data?.location}</p>
+                    </React.Fragment>
                 }
             />
             <Modal
